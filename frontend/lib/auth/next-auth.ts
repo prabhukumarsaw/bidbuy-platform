@@ -28,7 +28,7 @@ export const authOptions: NextAuthOptions = {
           providerId: account.providerAccountId,
           email: user.email!,
           name: user.name!,
-          image: user.image,
+          image: user.image ?? undefined,
         });
         return true;
       } catch (error) {

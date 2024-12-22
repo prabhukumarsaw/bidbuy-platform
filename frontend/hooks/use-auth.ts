@@ -14,7 +14,8 @@ export const useAuth = () => {
   const loginMutation = useMutation({
     mutationFn: (credentials: LoginCredentials) => authApi.login(credentials),
     onSuccess: (data) => {
-      setAuth(data.user, data.token);
+      console.log('Login response:', data); // Add a log to check response
+      setAuth(data.user, data.token, data.refreshToken);
       toast.success('Successfully logged in');
       router.push('/dashboard');
     },
@@ -61,6 +62,8 @@ export const useAuth = () => {
     router.push('/login');
     toast.success('Successfully logged out');
   };
+
+  
 
   return {
     login: loginMutation.mutate,
