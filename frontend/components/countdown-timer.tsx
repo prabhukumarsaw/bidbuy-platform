@@ -39,7 +39,7 @@ export function CountdownTimer({ endTime }: CountdownTimerProps) {
   }, []);
 
   return (
-    <div className="inline-flex gap-4 p-2 border shadow-lg bg-muted rounded-xl">
+    <div className="inline-flex gap-4 p-2 border p-4 bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-950 dark:to-blue-900 rounded-xl w-full items-center justify-center">
       <div className="text-center">
         <div className="font-bold text-sm">{timeLeft.days}</div>
         <div className="text-xs text-muted-foreground">Days</div>

@@ -1,0 +1,124 @@
+import { useState } from 'react';
+import { Sparkles, AlertCircle, TrendingUp } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Slider } from '@/components/ui/slider';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/components/ui/tooltip';
+
+interface BidFormProps {
+  currentPrice: number;
+  minIncrement: number;
+  onBidSubmit: (amount: number) => void;
+}
+
+export function BidForm({
+  currentPrice,
+  minIncrement,
+  onBidSubmit,
+}: BidFormProps) {
+  const [bidAmount, setBidAmount] = useState(currentPrice + minIncrement);
+  const maxBid = currentPrice * 2; // Example max bid limit
+
+  const handleSliderChange = (value: number[]) => {
+    setBidAmount(value[0]);
+  };
+
+  const quickBids = [
+    { label: 'Next Bid', amount: currentPrice + minIncrement },
+    { label: 'Jump Bid', amount: currentPrice + minIncrement * 2 },
+    { label: 'Power Bid', amount: currentPrice + minIncrement * 5 },
+  ];
+
+  return (
+    <div className="space-y-6">
+      {/* Quick Bid Options */}
+      <div className="grid grid-cols-3 gap-3">
+        {quickBids.map((bid) => (
+          <Button
+            key={bid.label}
+            variant="outline"
+            className="flex flex-col py-3 h-auto hover:bg-violet-50"
+            onClick={() => setBidAmount(bid.amount)}
+          >
+            <span className="text-sm font-medium">{bid.label}</span>
+            <span className="text-lg font-bold">
+              ${bid.amount.toLocaleString()}
+            </span>
+          </Button>
+        ))}
+      </div>
+
+      {/* Custom Bid Input */}
+      <div className="space-y-4">
+        <div className="flex items-center gap-4">
+          <div className="flex-1">
+            <label className="text-sm font-medium mb-1.5 block">
+              Your Bid Amount
+            </label>
+            <Input
+              type="number"
+              value={bidAmount}
+              onChange={(e) => setBidAmount(Number(e.target.value))}
+              className="text-lg font-medium"
+            />
+          </div>
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button variant="ghost" size="icon" className="mt-7">
+                  <AlertCircle className="h-4 w-4" />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Minimum increment: ${minIncrement.toLocaleString()}</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+        </div>
+
+        {/* Bid Slider */}
+        <div className="space-y-2">
+          <Slider
+            value={[bidAmount]}
+            min={currentPrice + minIncrement}
+            max={maxBid}
+            step={minIncrement}
+            onValueChange={handleSliderChange}
+            className="py-4"
+          />
+          <div className="flex justify-between text-sm text-muted-foreground">
+            <span>Min: ${(currentPrice + minIncrement).toLocaleString()}</span>
+            <span>Max: ${maxBid.toLocaleString()}</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Submit Button */}
+      <Button
+        className="w-full h-12 text-lg bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700"
+        onClick={() => onBidSubmit(bidAmount)}
+      >
+        <TrendingUp className="w-5 h-5 mr-2" />
+        Place Bid: ${bidAmount.toLocaleString()}
+      </Button>
+
+      {/* AI Recommendation */}
+      <div className="bg-violet-50 rounded-lg p-4 flex items-start gap-3">
+        <Sparkles className="w-5 h-5 text-violet-600 mt-0.5" />
+        <div>
+          <p className="font-medium text-sm">AI Recommendation</p>
+          <p className="text-sm text-muted-foreground">
+            Based on market analysis, we recommend bidding $
+            {(currentPrice + minIncrement * 3).toLocaleString()}
+            to increase your chances of winning.
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}

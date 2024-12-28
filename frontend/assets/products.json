@@ -1,0 +1,115 @@
+{
+    "categories": [
+      "Electronics",
+      "Fashion",
+      "Home & Garden",
+      "Sports",
+      "Collectibles",
+      "Art",
+      "Jewelry"
+    ],
+    "conditions": ["New", "Like New", "Used", "Refurbished"],
+    "sellers": [
+      {"id": 1, "name": "TechGadgets", "rating": 4.8, "avatar": "/avatars/seller1.jpg"},
+      {"id": 2, "name": "VintageFinds", "rating": 4.5, "avatar": "/avatars/seller2.jpg"},
+      {"id": 3, "name": "LuxuryItems", "rating": 4.9, "avatar": "/avatars/seller3.jpg"},
+      {"id": 4, "name": "SportsMaster", "rating": 4.7, "avatar": "/avatars/seller4.jpg"},
+      {"id": 5, "name": "ArtisanCrafts", "rating": 4.6, "avatar": "/avatars/seller5.jpg"}
+    ],
+    "products": [
+        {
+          "id": 1,
+          "title": "2023 Hyundai Exter - Limited Edition",
+          "image": "/image/cars/hyundai-exter.jpg",
+          "currentBid": 28980.0,
+          "lotNumber": "137684",
+          "seller": {
+            "name": "Premium Motors",
+            "avatar": "/placeholder.svg"
+          },
+          "endTime": "2024-12-06T17:31:48.000Z",
+          "bidders": 23,
+          "category": "SUV",
+          "description": "Experience luxury and performance with this limited edition Hyundai Exter. Packed with advanced features and a sleek design, this SUV is perfect for both city driving and outdoor adventures."
+        },
+        {
+          "id": 2,
+          "title": "Mahindra XUV 3XO - Fully Loaded",
+          "image": "/image/cars/mahindra-xuv-3xo.jpg",
+          "currentBid": 34580.0,
+          "lotNumber": "576894",
+          "seller": {
+            "name": "AutoElite",
+            "avatar": "/image/cars/placeholder.svg"
+          },
+          "endTime": "2024-11-26T17:31:48.000Z",
+          "bidders": 31,
+          "category": "SUV",
+          "description": "The Mahindra XUV 3XO is a fully loaded SUV that combines power, comfort, and style. With its advanced safety features and spacious interior, it's the perfect vehicle for families and adventure enthusiasts alike."
+        },
+        {
+          "id": 3,
+          "title": "2023 Mahindra XUV700 - Top Spec",
+          "image": "/image/cars/mahindra-xuv700.jpg",
+          "currentBid": 43780.0,
+          "lotNumber": "289576",
+          "seller": {
+            "name": "LuxeDrive",
+            "avatar": "/placeholder.svg"
+          },
+          "endTime": "2024-12-16T17:31:48.000Z",
+          "bidders": 42,
+          "category": "SUV",
+          "description": "The top-spec Mahindra XUV700 offers unparalleled luxury and performance. With its powerful engine, advanced infotainment system, and premium interiors, this SUV sets a new standard in its class."
+        },
+        {
+          "id": 4,
+          "title": "Maruti Suzuki Alto K10 - City Edition",
+          "image": "/image/cars/maruti-suzuki-alto-k.jpg",
+          "currentBid": 15635.0,
+          "lotNumber": "379468",
+          "seller": {
+            "name": "Urban Wheels",
+            "avatar": "/placeholder.svg"
+          },
+          "endTime": "2024-11-06T17:31:48.000Z",
+          "bidders": 18,
+          "category": "Hatchback",
+          "description": "The Maruti Suzuki Alto K10 City Edition is the perfect compact car for urban driving. With its fuel-efficient engine and easy maneuverability, it's ideal for navigating busy city streets and tight parking spaces."
+        },
+        {
+          "id": 5,
+          "title": "2023 Maruti Suzuki Dzire - Luxury Variant",
+          "image": "/image/cars/maruti-suzuki-dzire.jpg",
+          "currentBid": 19635.0,
+          "lotNumber": "379469",
+          "seller": {
+            "name": "Swift Auctions",
+            "avatar": "/placeholder.svg"
+          },
+          "endTime": "2024-11-06T17:31:48.000Z",
+          "bidders": 27,
+          "category": "Sedan",
+          "description": "Experience luxury in a compact package with the 2023 Maruti Suzuki Dzire. This sedan offers premium features, a spacious interior, and excellent fuel efficiency, making it perfect for both city commutes and long drives."
+        },
+        {
+          "id": 6,
+          "title": "Renault Kwid - Adventure Edition",
+          "image": "/image/cars/renault-kwid.jpg",
+          "currentBid": 13635.0,
+          "lotNumber": "379470",
+          "seller": {
+            "name": "EcoRide",
+            "avatar": "/placeholder.svg"
+          },
+          "endTime": "2024-11-06T17:31:48.000Z",
+          "bidders": 15,
+          "category": "Hatchback",
+          "description": "The Renault Kwid Adventure Edition is designed for those who seek excitement in their daily drive. With its rugged looks, enhanced ground clearance, and feature-packed interior, it's ready for any urban adventure."
+        }
+      ]
+      
+
+  }
+  
+  

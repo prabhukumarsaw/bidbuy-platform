@@ -3,7 +3,7 @@
 
 import * as React from 'react';
 import Image from 'next/image';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, TrendingUp } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -110,8 +110,9 @@ export function UpcomingAuction() {
     <div className="w-full max-w-7xl mx-auto px-4 py-12">
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-4xl font-bold mb-2">
-            Live <span className="italic font-normal">Auction</span>
+          <h1 className="text-4xl font-bold mb-2 flex items-center">
+            Upcoming <TrendingUp className="ml-2 text-red-500" />
+            <span className="italic font-normal ml-2">Bids</span>
           </h1>
           <p className="text-muted-foreground">
             Feel free adapt this based on the specific managed services,

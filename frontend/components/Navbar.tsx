@@ -180,13 +180,13 @@ export default function EnhancedHeader() {
 
   return (
     <header className={`bg-background sticky top-0 z-40 w-full ${fadeIn}`}>
-      <div className=" mx-auto px-4 sm:px-6 lg:px-8">
+      <div className=" mx-auto px-0">
         <div className="flex flex-col">
-          <div className="flex items-center justify-center py-1 gap-4 md:gap-x-16">
+          <div className="flex items-center justify-between py-1 md:gap-x-16 sm:gap-x-0">
             {/* logo name */}
             <Link
               href="/"
-              className="flex items-center space-x-2 sm:space-x-4 "
+              className="flex items-center"
               onClick={() => handleNavigation('/')}
             >
               <Image
@@ -198,17 +198,15 @@ export default function EnhancedHeader() {
               />
               <div className="hidden sm:flex flex-col">
                 {/* Brand Name */}
-                <span className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-xl font-extrabold text-primary">
+                <span className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-xl font-extrabold text-primary m-0 lg:mr-8">
                   LazyPro
                 </span>
                 {/* Tagline */}
-                <span className="text-[10px]  text-muted-foreground">
-                  Bid High, Win Big, Smile Bigger
-                </span>
+                <span className="text-[10px]  text-muted-foreground"></span>
               </div>
             </Link>
 
-            <div className="flex w-full  ">
+            <div className="flex w-full   ">
               <FloatingSearchBar />
             </div>
 

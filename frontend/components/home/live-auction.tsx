@@ -8,7 +8,7 @@ import { CountdownTimer } from '../countdown-timer';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '../ui/button';
 import { useInView } from 'react-intersection-observer';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, TrendingUp } from 'lucide-react';
 import { BidCard } from '../bid-card';
 
 interface UpcomingAuctionItem {
@@ -160,7 +160,10 @@ export function LiveAuction() {
         >
           <div>
             <h1 className="text-4xl font-bold mb-2">
-              Upcoming <span className="italic font-normal">Auction</span>
+              <h1 className="text-4xl font-bold mb-2 flex items-center">
+                Live <TrendingUp className="ml-2 text-red-500" />
+                <span className="italic font-normal ml-2">Bids</span>
+              </h1>
             </h1>
             <p className="text-muted-foreground max-w-2xl">
               Discover our curated selection of premium vehicles set for

@@ -1,53 +1,71 @@
 //@typescript-eslint/no-explicit-any
 
-'use client'
+'use client';
 
-import React, { useState, useEffect } from "react"
-import { motion, AnimatePresence, useAnimation } from "framer-motion"
-import { Clock10, Mail, MapPin, Phone, ChevronDown, Facebook, Twitter, Instagram, Linkedin, ArrowRight, ChevronUp } from "lucide-react"
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { useInView } from "react-intersection-observer"
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence, useAnimation } from 'framer-motion';
+import {
+  Clock10,
+  Mail,
+  MapPin,
+  Phone,
+  ChevronDown,
+  Facebook,
+  Twitter,
+  Instagram,
+  Linkedin,
+  ArrowRight,
+  ChevronUp,
+} from 'lucide-react';
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { useInView } from 'react-intersection-observer';
 
 const quickLinks = [
-  { name: "About Us", href: "/about/aboutUs" },
-  { name: "Terms & Conditions", href: "/about/policy" },
-  { name: "Contact Us", href: "/contact" },
-  { name: "Careers", href: "/career/currentOpenings" },
-  { name: "Blogs", href: "/blog" },
-]
+  { name: 'About Us', href: '/about/aboutUs' },
+  { name: 'Terms & Conditions', href: '/about/policy' },
+  { name: 'Contact Us', href: '/contact' },
+  { name: 'Careers', href: '/career/currentOpenings' },
+  { name: 'Blogs', href: '/blog' },
+];
 
 const departments = [
-  { name: "1", href: "/departments/orthopedics" },
-  { name: "2", href: "/departments/neurology" },
-  { name: "3", href: "/departments/nephrology" },
-  { name: "4", href: "/departments/cardiology" },
-  { name: "5", href: "/departments/physiotherapy" },
-  { name: "6", href: "/departments" },
-]
+  { name: '1', href: '/departments/orthopedics' },
+  { name: '2', href: '/departments/neurology' },
+  { name: '3', href: '/departments/nephrology' },
+  { name: '4', href: '/departments/cardiology' },
+  { name: '5', href: '/departments/physiotherapy' },
+  { name: '6', href: '/departments' },
+];
 
-const FooterSection = ({ title, children }: { title: string; children: React.ReactNode }) => {
+const FooterSection = ({
+  title,
+  children,
+}: {
+  title: string;
+  children: React.ReactNode;
+}) => {
   const [isOpen, setIsOpen] = useState(true);
   const [isDesktop, setIsDesktop] = useState(false);
-  const controls = useAnimation()
-  const [ref, inView] = useInView()
+  const controls = useAnimation();
+  const [ref, inView] = useInView();
 
   useEffect(() => {
     const handleResize = () => setIsDesktop(window.innerWidth >= 768);
 
     handleResize(); // Set initial screen size
-    window.addEventListener("resize", handleResize);
+    window.addEventListener('resize', handleResize);
 
-    return () => window.removeEventListener("resize", handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   useEffect(() => {
     if (inView) {
-      controls.start("visible")
+      controls.start('visible');
     }
-  }, [controls, inView])
+  }, [controls, inView]);
 
   return (
     <motion.div
@@ -56,7 +74,7 @@ const FooterSection = ({ title, children }: { title: string; children: React.Rea
       animate={controls}
       variants={{
         visible: { opacity: 1, y: 0 },
-        hidden: { opacity: 0, y: 50 }
+        hidden: { opacity: 0, y: 50 },
       }}
       transition={{ duration: 0.5, delay: 0.2 }}
       className="space-y-4"
@@ -66,13 +84,16 @@ const FooterSection = ({ title, children }: { title: string; children: React.Rea
         className="flex items-center justify-between w-full text-lg font-medium border-b-2 border-blue-400 pb-2 md:cursor-default"
       >
         {title}
-        <ChevronDown className="h-5 w-5 md:hidden transition-transform duration-300" style={{ transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)' }} />
+        <ChevronDown
+          className="h-5 w-5 md:hidden transition-transform duration-300"
+          style={{ transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)' }}
+        />
       </button>
       <AnimatePresence>
-      {(isOpen || isDesktop) && (
+        {(isOpen || isDesktop) && (
           <motion.div
             initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
+            animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3 }}
             className="space-y-4 text-sm overflow-hidden"
@@ -82,30 +103,30 @@ const FooterSection = ({ title, children }: { title: string; children: React.Rea
         )}
       </AnimatePresence>
     </motion.div>
-  )
-}
+  );
+};
 
 const Footer = () => {
-  const [mapExpanded, setMapExpanded] = useState(false)
-  const [showScrollTop, setShowScrollTop] = useState(false)
+  const [mapExpanded, setMapExpanded] = useState(false);
+  const [showScrollTop, setShowScrollTop] = useState(false);
 
   const onSubmit = (data: any) => {
-    console.log(data)
+    console.log(data);
     // Handle form submission
-  }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
-      setShowScrollTop(window.pageYOffset > 300)
-    }
+      setShowScrollTop(window.pageYOffset > 300);
+    };
 
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' })
-  }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   return (
     <footer className="relative bg-gray-50 py-12 overflow-hidden">
@@ -117,25 +138,39 @@ const Footer = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               <FooterSection title="Contact Us">
                 <div className="space-y-4">
-                  <motion.div whileHover={{ scale: 1.05 }} className="flex items-start space-x-2">
+                  <motion.div
+                    whileHover={{ scale: 1.05 }}
+                    className="flex items-start space-x-2"
+                  >
                     <MapPin className="h-5 w-5 text-blue-500" />
                     <div>
                       <p className="font-semibold">PROBID</p>
                       <p className="text-gray-600">Ranchi, Jharkhand 834001</p>
                     </div>
                   </motion.div>
-                  <motion.div whileHover={{ scale: 1.05 }} className="flex items-start space-x-2">
+                  <motion.div
+                    whileHover={{ scale: 1.05 }}
+                    className="flex items-start space-x-2"
+                  >
                     <Phone className="h-5 w-5 text-blue-500" />
                     <div>
-                      <p className="text-gray-600">Mon to Fri : 08:30 - 18:00</p>
+                      <p className="text-gray-600">
+                        Mon to Fri : 08:30 - 18:00
+                      </p>
                       <p className="font-semibold">+91 1234567890</p>
                     </div>
                   </motion.div>
-                  <motion.div whileHover={{ scale: 1.05 }} className="flex items-start space-x-2">
+                  <motion.div
+                    whileHover={{ scale: 1.05 }}
+                    className="flex items-start space-x-2"
+                  >
                     <Mail className="h-5 w-5 text-blue-500" />
                     <p className="text-gray-600">probid@gmail.com</p>
                   </motion.div>
-                  <motion.div whileHover={{ scale: 1.05 }} className="flex items-start space-x-2">
+                  <motion.div
+                    whileHover={{ scale: 1.05 }}
+                    className="flex items-start space-x-2"
+                  >
                     <Clock10 className="h-5 w-5 text-blue-500" />
                     <div>
                       <p className="text-gray-600">Mon-Sat 6.00 - 22.00</p>
@@ -147,11 +182,18 @@ const Footer = () => {
 
               <FooterSection title="Quick Links">
                 <div className="grid grid-cols-1 gap-2">
-                {quickLinks.map((dept) => (
-                    <motion.div key={dept.href} whileHover={{ x: 5 }} className="flex items-center">
+                  {quickLinks.map((dept) => (
+                    <motion.div
+                      key={dept.href}
+                      whileHover={{ x: 5 }}
+                      className="flex items-center"
+                    >
                       <ArrowRight className="h-4 w-4 mr-2 text-primary" />
-                      <Link href={dept.href} className="hover:text-blue-500 transition-colors">
-                      {dept.name}
+                      <Link
+                        href={dept.href}
+                        className="hover:text-blue-500 transition-colors"
+                      >
+                        {dept.name}
                       </Link>
                     </motion.div>
                   ))}
@@ -161,9 +203,16 @@ const Footer = () => {
               <FooterSection title="Our Departments">
                 <div className="grid grid-cols-1 gap-2">
                   {departments.map((dept) => (
-                    <motion.div key={dept.href} whileHover={{ x: 5 }} className="flex items-center">
+                    <motion.div
+                      key={dept.href}
+                      whileHover={{ x: 5 }}
+                      className="flex items-center"
+                    >
                       <ArrowRight className="h-4 w-4 mr-2 text-primary" />
-                      <Link href={dept.href} className="hover:text-blue-500 transition-colors">
+                      <Link
+                        href={dept.href}
+                        className="hover:text-blue-500 transition-colors"
+                      >
                         {dept.name}
                       </Link>
                     </motion.div>
@@ -197,7 +246,9 @@ const Footer = () => {
           <div className="lg:col-span-1 xl:col-span-1">
             <FooterSection title="Our Location">
               <motion.div
-                className={`aspect-w-16 aspect-h-9 rounded-lg overflow-hidden transition-all duration-500 ease-in-out ${mapExpanded ? 'h-[60vh]' : 'h-[30vh]'}`}
+                className={`aspect-w-16 aspect-h-9 rounded-lg overflow-hidden transition-all duration-500 ease-in-out ${
+                  mapExpanded ? 'h-[60vh]' : 'h-[30vh]'
+                }`}
                 layout
               >
                 <iframe
@@ -218,8 +269,6 @@ const Footer = () => {
             </FooterSection>
           </div>
         </div>
-
-       
 
         <div className="mt-8 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
           <p className="text-sm text-gray-600">
@@ -256,7 +305,7 @@ const Footer = () => {
         )}
       </AnimatePresence>
     </footer>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;
