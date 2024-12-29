@@ -22,6 +22,34 @@ model User {
   updatedAt         DateTime  @updatedAt
   accounts          Account[]
   sessions          Session[]
+  seller            Seller?
+}
+
+model Seller {
+  id           String  @id @default(cuid())
+  userId       String  @unique
+  user         User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  businessName String?
+  phone        String?
+  address      String?
+  city         String?
+  state        String?
+  postalCode   String?
+  country      String
+  verified     Boolean @default(false)
+
+  // Legal documentation
+  gstNumber       String? @unique
+  gstDocument     String?
+  aadhaarNumber   String? @unique
+  aadhaarDocument String?
+  panNumber       String? @unique
+  panDocument     String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
 }
 
 model Account {
@@ -62,4 +90,5 @@ model VerificationToken {
 enum Role {
   USER
   ADMIN
+  SELLER
 }

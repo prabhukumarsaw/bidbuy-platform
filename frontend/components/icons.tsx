@@ -12,6 +12,14 @@ import {
   User2,
   ArrowBigLeft,
   MoveLeft,
+  Search,
+  ChevronLeft,
+  ChevronRight,
+  ArrowUpDown,
+  RefreshCcw,
+  ArrowUp,
+  ArrowDown,
+  MoreHorizontal,
 } from 'lucide-react';
 
 export type Icon = LucideIcon;
@@ -29,4 +37,12 @@ export const Icons = {
   shirt: Shirt,
   user: User2,
   backBtn: MoveLeft,
+  search: Search,
+  chevronLeft: ChevronLeft,
+  chevronRight: ChevronRight,
+  arrowUpDown: ArrowUpDown,
+  arrowUp: ArrowUp,
+  arrowDown: ArrowDown,
+  refresh: RefreshCcw,
+  moreHorizontal: MoreHorizontal,
 };

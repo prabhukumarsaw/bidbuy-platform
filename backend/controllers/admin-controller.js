@@ -69,8 +69,46 @@ const deleteUser = async (req, res, next) => {
   }
 };
 
+
+const getSellerApplications = async (req, res, next) => {
+  try {
+    const sellers = await prisma.seller.findMany({
+      where: { verified: false },
+      include: { user: true },
+    });
+
+    res.status(200).json({
+      status: 'success',
+      data: sellers,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+const verifySeller = async (req, res, next) => {
+  try {
+    const { sellerId } = req.params;
+    const { verified } = req.body;
+
+    const seller = await prisma.seller.update({
+      where: { id: sellerId },
+      data: { verified },
+    });
+
+    res.status(200).json({
+      status: 'success',
+      data: seller,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   getUsers,
   updateUserRole,
   deleteUser,
+  getSellerApplications,
+  verifySeller,
 };

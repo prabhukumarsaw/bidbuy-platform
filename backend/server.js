@@ -7,25 +7,22 @@ const rateLimit = require('express-rate-limit');
 const { connectDB } = require('./config/database');
 const { errorHandler } = require('./middleware/error-handler');
 const authRoutes = require('./routes/auth-routes');
+const sellerRoutes = require('./routes/seller-routes');
 const adminRoutes = require('./routes/admin-routes');
-
 
 const app = express();
 
 // Security middleware
 app.use(helmet());
-app.use(cors({
-  origin: process.env.FRONTEND_URL,
-  credentials: true,
-}));
 
-// app.use(cors({
-//   origin: process.env.FRONTEND_URL,
-//   credentials: true,
-//   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-//   allowedHeaders: ['Content-Type', 'Authorization'],
-// }));
-
+app.use(
+  cors({
+    origin: process.env.FRONTEND_URL,
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+  })
+);
 
 // Rate limiting
 const limiter = rateLimit({
@@ -42,9 +39,9 @@ app.get('/', (req, res) => {
   res.send('Hello, World!');
 });
 
-
 // Routes
 app.use('/api/auth', authRoutes);
+app.use('/api/seller', sellerRoutes);
 app.use('/api/admin', adminRoutes);
 
 // Error handling

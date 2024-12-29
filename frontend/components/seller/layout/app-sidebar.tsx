@@ -41,27 +41,27 @@ const data = {
   navMain: [
     {
       title: 'Dashboard',
-      url: '/seller/dashboard',
+      url: '/seller',
       icon: LayoutDashboard,
     },
     {
       title: 'Ongoing Auctions',
-      url: '/seller/bids',
+      url: '/seller/ongoing-auctions',
       icon: Package,
     },
     {
       title: 'Closed Auctions',
-      url: '/seller/wishlist',
+      url: '/seller/closed-auctions',
       icon: ShoppingCart,
     },
     {
       title: 'Scheduled Auctions',
-      url: '/seller/wishlist',
+      url: '/seller/scheduled-auctions',
       icon: ShoppingCart,
     },
     {
       title: 'Sold',
-      url: '/seller/wishlist',
+      url: '/seller/sold-auctions',
       icon: ShoppingCart,
     },
     {
@@ -72,12 +72,12 @@ const data = {
 
     {
       title: 'Account',
-      url: '#',
+      url: 'account-seller',
       icon: User,
       items: [
         {
           title: 'Profile',
-          url: '#',
+          url: 'account-seller',
         },
         {
           title: 'General',
