@@ -45,6 +45,11 @@ const data = {
       icon: LayoutDashboard,
     },
     {
+      title: 'Personalized Auctions',
+      url: '/seller/personalized-auctions',
+      icon: LayoutDashboard,
+    },
+    {
       title: 'Ongoing Auctions',
       url: '/seller/ongoing-auctions',
       icon: Package,
@@ -62,6 +67,11 @@ const data = {
     {
       title: 'Sold',
       url: '/seller/sold-auctions',
+      icon: ShoppingCart,
+    },
+    {
+      title: 'Payment',
+      url: '/seller/payment',
       icon: ShoppingCart,
     },
     {
@@ -88,6 +98,11 @@ const data = {
           url: '#',
         },
       ],
+    },
+    {
+      title: 'Support & Help',
+      url: '/seller/support',
+      icon: Inbox,
     },
   ],
 

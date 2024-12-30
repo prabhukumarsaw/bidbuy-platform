@@ -45,8 +45,8 @@ const data = {
       icon: LayoutDashboard,
     },
     {
-      title: 'Personalize Auctions',
-      url: '/admin/personalize-auctions',
+      title: 'Auction Management',
+      url: '/admin/auction-management',
       icon: Package,
     },
     {
@@ -60,13 +60,23 @@ const data = {
       icon: ShoppingCart,
     },
     {
-      title: 'Sold',
-      url: '/seller/sold-auctions',
+      title: 'Winner Management',
+      url: '/seller/winner-management',
       icon: ShoppingCart,
+    },
+    {
+      title: 'Notification',
+      url: '/seller/notification',
+      icon: Inbox,
     },
     {
       title: 'Inbox',
       url: '/seller/inbox',
+      icon: Inbox,
+    },
+    {
+      title: 'Report',
+      url: '/seller/report',
       icon: Inbox,
     },
 
@@ -80,11 +90,65 @@ const data = {
           url: 'account-seller',
         },
         {
-          title: 'General',
-          url: '#',
+          title: 'Change Password',
+          url: 'change-password',
         },
         {
           title: 'Settings',
+          url: '#',
+        },
+      ],
+    },
+    {
+      title: 'Master',
+      url: 'master-seller',
+      icon: User,
+      items: [
+        {
+          title: 'My Auction',
+          url: 'my-auction',
+        },
+        {
+          title: 'Category',
+          url: 'category-seller',
+        },
+        {
+          title: 'Advertisement',
+          url: 'advertisement',
+        },
+        {
+          title: 'Featured Image',
+          url: 'featured-image',
+        },
+        {
+          title: 'Blogs',
+          url: 'blogs',
+        },
+        {
+          title: 'Privacy & Policy',
+          url: 'privacy-policy',
+        },
+        {
+          title: 'Terms & Conditions',
+          url: 'terms-conditions',
+        },
+      ],
+    },
+    {
+      title: 'Setting',
+      url: 'account-seller',
+      icon: User,
+      items: [
+        {
+          title: 'General',
+          url: 'general-setting',
+        },
+        {
+          title: 'Admin Setting',
+          url: '',
+        },
+        {
+          title: 'Backup',
           url: '#',
         },
       ],
