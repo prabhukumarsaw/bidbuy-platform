@@ -8,7 +8,7 @@ import { Separator } from '@/components/ui/separator';
 import { AppSidebar } from '@/components/seller/layout/app-sidebar';
 import { ThemeToggle } from './dashboard/theme-toggle';
 import { NotificationCenter } from './dashboard/notification-center';
-import { QuickActions } from './dashboard/quick-actions';
+import { CreateAuction } from './dashboard/create-auction';
 
 export default function SellerLayout({
   children,
@@ -24,7 +24,7 @@ export default function SellerLayout({
           <div className="flex items-center gap-4">
             <SidebarTrigger className="md:hidden" />
             <div className="text-xl font-bold text-gray-800 dark:text-gray-200">
-              Logo
+              Welcome, <span className="font-semibold">John Doe</span>
             </div>
           </div>
 
@@ -32,7 +32,7 @@ export default function SellerLayout({
           <div className="flex items-center gap-4">
             <ThemeToggle />
             <NotificationCenter />
-            <QuickActions />
+            <CreateAuction />
           </div>
         </header>
 

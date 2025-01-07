@@ -6,9 +6,7 @@ const compression = require('compression');
 const rateLimit = require('express-rate-limit');
 const { connectDB } = require('./config/database');
 const { errorHandler } = require('./middleware/error-handler');
-const authRoutes = require('./routes/auth-routes');
-const sellerRoutes = require('./routes/seller-routes');
-const adminRoutes = require('./routes/admin-routes');
+const routes = require('./routes/index');
 
 const app = express();
 
@@ -40,9 +38,7 @@ app.get('/', (req, res) => {
 });
 
 // Routes
-app.use('/api/auth', authRoutes);
-app.use('/api/seller', sellerRoutes);
-app.use('/api/admin', adminRoutes);
+app.use('/api', routes);
 
 // Error handling
 app.use(errorHandler);

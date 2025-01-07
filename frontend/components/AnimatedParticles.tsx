@@ -32,7 +32,7 @@ export const AnimatedParticles = () => {
   }, [])
 
   return (
-    <div ref={containerRef} className="absolute inset-0">
+    <div ref={containerRef} className="absolute inset-0 opacity-50">
       {particles.map((particle, index) => (
         <Particle key={index} x={particle.x} y={particle.y} />
       ))}

@@ -19,10 +19,10 @@ export function SocialAuth() {
 
   const handleSocialLogin = async (provider: 'google' | 'facebook') => {
     try {
-      setIsLoading(prev => ({ ...prev, [provider]: true }));
-      
+      setIsLoading((prev) => ({ ...prev, [provider]: true }));
+
       const result = await signIn(provider, {
-        callbackUrl: '/dashboard',
+        callbackUrl: '/',
         redirect: false,
       });
 
@@ -38,7 +38,7 @@ export function SocialAuth() {
       console.error('Social login error:', error);
       toast.error(error.message || `Failed to sign in with ${provider}`);
     } finally {
-      setIsLoading(prev => ({ ...prev, [provider]: false }));
+      setIsLoading((prev) => ({ ...prev, [provider]: false }));
     }
   };
 

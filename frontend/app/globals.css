@@ -178,3 +178,34 @@
     @apply bg-background text-foreground;
   }
 }
+
+@keyframes wave {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-10deg);
+  }
+  75% {
+    transform: rotate(10deg);
+  }
+}
+
+@keyframes pattern-slide {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 40px 40px;
+  }
+}
+
+.animate-wave {
+  animation: wave 2s infinite;
+  transform-origin: 70% 70%;
+}
+
+.animate-pattern-slide {
+  animation: pattern-slide 20s linear infinite;
+}

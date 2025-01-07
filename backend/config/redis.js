@@ -1,5 +1,5 @@
-import Redis from 'ioredis';
-import logger from './logger.js';
+const Redis = require('ioredis');
+const logger = require('./logger');
 
 // Configure Redis connection
 const redis = new Redis({
@@ -10,7 +10,7 @@ const redis = new Redis({
     const delay = Math.min(times * 50, 2000);
     logger.warn(`Redis reconnecting attempt #${times}, retrying in ${delay}ms`);
     return delay;
-  }
+  },
 });
 
 // Log Redis connection events
@@ -34,4 +34,4 @@ redis.on('end', () => {
   logger.info('Redis connection ended');
 });
 
-export default redis;
+module.exports = redis;

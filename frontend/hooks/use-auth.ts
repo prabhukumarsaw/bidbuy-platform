@@ -15,9 +15,10 @@ export const useAuth = () => {
     mutationFn: (credentials: LoginCredentials) => authApi.login(credentials),
     onSuccess: (data) => {
       console.log('Login response:', data); // Add a log to check response
-      setAuth(data.user, data.token, data.refreshToken);
+      setAuth(data.data.user, data.data.token, data.data.refreshToken);
+      
       toast.success('Successfully logged in');
-      router.push('/dashboard');
+      router.push('/');
     },
     onError: (error: Error) => {
       toast.error(error.message || 'Failed to login');

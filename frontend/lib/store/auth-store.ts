@@ -5,7 +5,8 @@ interface User {
   id: string;
   email: string;
   name: string | null;
-  role: 'USER' | 'ADMIN';
+  role: 'USER' | 'SELLER' | 'ADMIN';
+  image?: string;
 }
 
 interface AuthState {
@@ -24,10 +25,12 @@ export const useAuthStore = create<AuthState>()(
       token: null,
       refreshToken: null,
       isAuthenticated: false,
-      setAuth: (user, token, refreshToken) =>
-        set({ user, token, refreshToken, isAuthenticated: true }),
-      logout: () =>
-        set({ user: null, token: null, refreshToken: null, isAuthenticated: false }),
+      setAuth: (user, token, refreshToken) => {
+        set({ user, token, refreshToken, isAuthenticated: true });
+      },
+      logout: () => {
+        set({ user: null, token: null, refreshToken: null, isAuthenticated: false });
+      },
     }),
     {
       name: 'auth-storage',

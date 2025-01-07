@@ -8,46 +8,183 @@ datasource db {
 }
 
 model User {
-  id                String    @id @default(cuid())
-  email             String    @unique
+  id                String         @id @default(cuid())
+  email             String         @unique
   password          String
   name              String?
-  role              Role      @default(USER)
-  emailVerified     Boolean   @default(false)
+  role              Role           @default(USER)
+  emailVerified     Boolean        @default(false)
   verificationToken String?
   image             String?
   resetToken        String?
   resetTokenExpires DateTime?
-  createdAt         DateTime  @default(now())
-  updatedAt         DateTime  @updatedAt
+  createdAt         DateTime       @default(now())
+  updatedAt         DateTime       @updatedAt
   accounts          Account[]
   sessions          Session[]
+  bids              Bid[]
+  notifications     Notification[]
+  inboxMessages     InboxMessage[]
+  actionLogs        ActionLog[]
   seller            Seller?
+  auctions          Auction[]
+  reports           Report[]
+  categories        Category[] // Admin can manage categories
 }
 
 model Seller {
-  id           String  @id @default(cuid())
-  userId       String  @unique
-  user         User    @relation(fields: [userId], references: [id], onDelete: Cascade)
-  businessName String?
-  phone        String?
-  address      String?
-  city         String?
-  state        String?
-  postalCode   String?
-  country      String
-  verified     Boolean @default(false)
-
-  // Legal documentation
-  gstNumber       String? @unique
+  id              String      @id @default(cuid())
+  userId          String      @unique
+  user            User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  businessName    String?
+  phone           String?
+  address         String?
+  city            String?
+  state           String?
+  postalCode      String?
+  country         String
+  verified        Boolean     @default(false)
+  gstNumber       String?     @unique
   gstDocument     String?
-  aadhaarNumber   String? @unique
+  aadhaarNumber   String?     @unique
   aadhaarDocument String?
-  panNumber       String? @unique
+  panNumber       String?     @unique
   panDocument     String?
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+  auctions        Auction[]
+  reports         Report[]
+  actionLogs      ActionLog[]
 
+  @@index([userId])
+}
+
+model Category {
+  id          String     @id @default(cuid())
+  name        String     @unique
+  description String?
+  icon        String?
+  parentId    String?
+  parent      Category?  @relation("SubCategories", fields: [parentId], references: [id])
+  children    Category[] @relation("SubCategories")
+  auctions    Auction[] // Relation to Auction model
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  isActive    Boolean    @default(true)
+  User        User?      @relation(fields: [userId], references: [id])
+  userId      String?
+
+  @@index([parentId])
+}
+
+model Auction {
+  id              String         @id @default(cuid())
+  title           String
+  description     String?
+  startingPrice   Float
+  currentPrice    Float          @default(0)
+  minBidIncrement Float          @default(1)
+  reservePrice    Float?
+  startTime       DateTime
+  endTime         DateTime
+  creatorId       String
+  user            User           @relation(fields: [creatorId], references: [id])
+  bids            Bid[]
+  status          AuctionStatus  @default(SCHEDULED)
+  auctionState    AuctionState   @default(RUNNING)
+  categoryId      String
+  category        Category       @relation(fields: [categoryId], references: [id])
+  featuredImage   String?
+  images          String[]
+  tags            String[]
+  paymentStatus   PaymentStatus  @default(PENDING)
+  winnerId        String?
+  notifications   Notification[]
+  reports         Report[]
+  views           Int            @default(0)
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+  metadata        Json?
+  Seller          Seller?        @relation(fields: [sellerId], references: [id])
+  sellerId        String?
+
+  @@index([creatorId])
+  @@index([status])
+  @@index([categoryId])
+  @@map("auctions")
+}
+
+model Bid {
+  id         String    @id @default(cuid())
+  amount     Float
+  auctionId  String
+  auction    Auction   @relation(fields: [auctionId], references: [id], onDelete: Cascade)
+  bidderId   String
+  bidder     User      @relation(fields: [bidderId], references: [id], onDelete: Cascade)
+  status     BidStatus @default(PLACED)
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  bidHistory Json?
+
+  @@index([auctionId])
+  @@index([bidderId])
+}
+
+model Notification {
+  id        String           @id @default(cuid())
+  type      NotificationType
+  title     String
+  message   String
+  userId    String
+  user      User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  auctionId String?
+  auction   Auction?         @relation(fields: [auctionId], references: [id], onDelete: SetNull)
+  read      Boolean          @default(false)
+  createdAt DateTime         @default(now())
+  expiresAt DateTime?
+
+  @@index([userId])
+  @@index([auctionId])
+}
+
+model Report {
+  id          String       @id @default(cuid())
+  type        ReportType
+  description String
+  auctionId   String
+  auction     Auction      @relation(fields: [auctionId], references: [id], onDelete: Cascade)
+  reporterId  String
+  reporter    User         @relation(fields: [reporterId], references: [id], onDelete: Cascade)
+  status      ReportStatus @default(PENDING)
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  seller      Seller?      @relation(fields: [sellerId], references: [id])
+  sellerId    String?
+
+  @@index([auctionId])
+  @@index([reporterId])
+}
+
+model InboxMessage {
+  id        String   @id @default(cuid())
+  content   String
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  read      Boolean  @default(false)
+
+  @@index([userId])
+}
+
+model ActionLog {
+  id          String   @id @default(cuid())
+  action      String
+  description String
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt   DateTime @default(now())
+  seller      Seller?  @relation(fields: [sellerId], references: [id])
+  sellerId    String?
 
   @@index([userId])
 }
@@ -85,6 +222,64 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+enum AuctionStatus {
+  DRAFT
+  SCHEDULED
+  ACTIVE
+  ENDED
+  CANCELLED
+  SOLD
+}
+
+enum AuctionState {
+  RUNNING
+  PAUSED
+  RESUMED
+  STOPPED
+}
+
+enum PaymentStatus {
+  PENDING
+  PROCESSING
+  COMPLETED
+  FAILED
+  REFUNDED
+}
+
+enum BidStatus {
+  PLACED
+  OUTBID
+  WINNING
+  WON
+  LOST
+}
+
+enum NotificationType {
+  BID_PLACED
+  BID_OUTBID
+  AUCTION_STARTING
+  AUCTION_ENDING
+  AUCTION_WON
+  AUCTION_LOST
+  PAYMENT_RECEIVED
+  PAYMENT_FAILED
+  SYSTEM
+}
+
+enum ReportType {
+  FRAUD
+  INAPPROPRIATE_CONTENT
+  COUNTERFEIT
+  OTHER
+}
+
+enum ReportStatus {
+  PENDING
+  INVESTIGATING
+  RESOLVED
+  DISMISSED
 }
 
 enum Role {

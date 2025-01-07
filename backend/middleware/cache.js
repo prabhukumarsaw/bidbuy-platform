@@ -1,24 +1,39 @@
-import redis from '../config/redis.js';
+const redis = require('../config/redis');
+const logger = require('../config/logger');
 
-export const cacheMiddleware = (duration) => {
+const cache = (options = {}) => {
+  const {
+    ttl = 3600,
+    prefix = 'cache',
+    keyGenerator = (req) => `${prefix}:${req.originalUrl}`,
+    condition = () => true,
+  } = options;
+
   return async (req, res, next) => {
-    const key = `cache:${req.originalUrl}`;
-    
+    if (!condition(req)) {
+      return next();
+    }
+
+    const cacheKey = keyGenerator(req);
+
     try {
-      const cachedResponse = await redis.get(key);
-      if (cachedResponse) {
-        return res.json(JSON.parse(cachedResponse));
+      const cachedData = await redis.get(cacheKey);
+      if (cachedData) {
+        return res.json(JSON.parse(cachedData));
       }
-      
-      res.originalJson = res.json;
-      res.json = (body) => {
-        redis.setex(key, duration, JSON.stringify(body));
-        return res.originalJson(body);
+
+      const originalJson = res.json;
+      res.json = function (data) {
+        redis.setex(cacheKey, ttl, JSON.stringify(data));
+        return originalJson.call(this, data);
       };
-      
+
       next();
     } catch (error) {
+      logger.error('Cache middleware error:', error);
       next();
     }
   };
 };
+
+module.exports = { cache };

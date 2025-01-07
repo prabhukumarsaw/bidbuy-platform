@@ -18,7 +18,7 @@ export const useSocialAuth = () => {
       setIsLoading(prev => ({ ...prev, [provider]: true }));
 
       const result = await signIn(provider, {
-        callbackUrl: '/dashboard',
+        callbackUrl: '/',
         redirect: false,
       });
 

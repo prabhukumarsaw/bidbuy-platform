@@ -20,6 +20,8 @@ import {
   ArrowUp,
   ArrowDown,
   MoreHorizontal,
+  Asterisk,
+  ArrowBigLeftDash,
 } from 'lucide-react';
 
 export type Icon = LucideIcon;
@@ -45,4 +47,7 @@ export const Icons = {
   arrowDown: ArrowDown,
   refresh: RefreshCcw,
   moreHorizontal: MoreHorizontal,
+  asterisk: Asterisk,
+  ArrowBigLeftDash: ArrowBigLeftDash,
+  moveLeft: MoveLeft,
 };

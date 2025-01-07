@@ -179,10 +179,7 @@ export const BidCard: React.FC<BidCardProps> = ({ item, index }) => {
                   </DialogContent>
                 </Dialog>
 
-                <Button
-                  variant="default"
-                  className="bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800 text-white transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
-                >
+                <Button variant="action">
                   Place Bid <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </div>
