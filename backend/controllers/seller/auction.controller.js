@@ -180,15 +180,17 @@ class SellerAuctionController {
   async getActiveAuctions(req, res) {
     try {
       const { role, seller } = req.user;
-  
+
       // Ensure the request is coming from a seller
       if (role !== 'SELLER') {
         throw new AppError(403, 'Only sellers can access this endpoint');
       }
-  
+
       // Fetch active auctions for the seller
-      const auctions = await auctionService.getActiveAuctionsForSeller(seller.id);
-  
+      const auctions = await auctionService.getActiveAuctionsForSeller(
+        seller.id
+      );
+
       res.json({
         status: 'success',
         data: auctions,
@@ -198,7 +200,6 @@ class SellerAuctionController {
       throw new AppError(error.statusCode || 500, error.message);
     }
   }
-  
 
   async getDashboardStats(req, res) {
     try {

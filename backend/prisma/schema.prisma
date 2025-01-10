@@ -16,6 +16,7 @@ model User {
   emailVerified     Boolean        @default(false)
   verificationToken String?
   image             String?
+  active            Boolean        @default(true)
   resetToken        String?
   resetTokenExpires DateTime?
   createdAt         DateTime       @default(now())
@@ -33,28 +34,33 @@ model User {
 }
 
 model Seller {
-  id              String      @id @default(cuid())
-  userId          String      @unique
-  user            User        @relation(fields: [userId], references: [id], onDelete: Cascade)
-  businessName    String?
-  phone           String?
-  address         String?
-  city            String?
-  state           String?
-  postalCode      String?
-  country         String
-  verified        Boolean     @default(false)
-  gstNumber       String?     @unique
-  gstDocument     String?
-  aadhaarNumber   String?     @unique
-  aadhaarDocument String?
-  panNumber       String?     @unique
-  panDocument     String?
-  createdAt       DateTime    @default(now())
-  updatedAt       DateTime    @updatedAt
-  auctions        Auction[]
-  reports         Report[]
-  actionLogs      ActionLog[]
+  id               String      @id @default(cuid())
+  userId           String      @unique
+  user             User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  businessName     String?
+  phone            String?
+  address          String?
+  city             String?
+  state            String?
+  postalCode       String?
+  country          String
+  status           String?     @default("PENDING")
+  verified         Boolean     @default(false)
+  verifiedAt       DateTime?
+  suspended        Boolean     @default(false)
+  suspendedAt      DateTime?
+  suspensionReason String?
+  gstNumber        String?     @unique
+  gstDocument      String?
+  aadhaarNumber    String?     @unique
+  aadhaarDocument  String?
+  panNumber        String?     @unique
+  panDocument      String?
+  createdAt        DateTime    @default(now())
+  updatedAt        DateTime    @updatedAt
+  auctions         Auction[]
+  reports          Report[]
+  actionLogs       ActionLog[]
 
   @@index([userId])
 }

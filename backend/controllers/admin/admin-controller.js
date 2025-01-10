@@ -1,19 +1,9 @@
-const { prisma } = require('../../config/database');
-const { AppError } = require('../../middleware/error-handler');
+const { adminService } = require('../../services/admin-service');
 
-const getUsers = async (req, res, next) => {
+// User Management Controllers
+exports.getUsers = async (req, res, next) => {
   try {
-    const users = await prisma.user.findMany({
-      select: {
-        id: true,
-        email: true,
-        name: true,
-        role: true,
-        emailVerified: true,
-        createdAt: true,
-      },
-    });
-
+    const users = await adminService.getAllUsers();
     res.status(200).json({
       status: 'success',
       data: users,
@@ -23,26 +13,10 @@ const getUsers = async (req, res, next) => {
   }
 };
 
-const updateUserRole = async (req, res, next) => {
+exports.deactivateUser = async (req, res, next) => {
   try {
     const { userId } = req.params;
-    const { role } = req.body;
-
-    if (!['USER', 'ADMIN'].includes(role)) {
-      return next(new AppError('Invalid role', 400));
-    }
-
-    const user = await prisma.user.update({
-      where: { id: userId },
-      data: { role },
-      select: {
-        id: true,
-        email: true,
-        name: true,
-        role: true,
-      },
-    });
-
+    const user = await adminService.deactivateUser(userId);
     res.status(200).json({
       status: 'success',
       data: user,
@@ -52,30 +26,23 @@ const updateUserRole = async (req, res, next) => {
   }
 };
 
-const deleteUser = async (req, res, next) => {
+exports.reactivateUser = async (req, res, next) => {
   try {
     const { userId } = req.params;
-
-    await prisma.user.delete({
-      where: { id: userId },
-    });
-
-    res.status(204).json({
+    const user = await adminService.reactivateUser(userId);
+    res.status(200).json({
       status: 'success',
-      data: null,
+      data: user,
     });
   } catch (error) {
     next(error);
   }
 };
 
-const getSellerApplications = async (req, res, next) => {
+// Seller Management Controllers
+exports.getAllSellers = async (req, res, next) => {
   try {
-    const sellers = await prisma.seller.findMany({
-      where: { verified: false },
-      include: { user: true },
-    });
-
+    const sellers = await adminService.getAllSellers();
     res.status(200).json({
       status: 'success',
       data: sellers,
@@ -85,50 +52,92 @@ const getSellerApplications = async (req, res, next) => {
   }
 };
 
-const verifySeller = async (req, res, next) => {
+exports.getSellerApplications = async (req, res, next) => {
   try {
-    const { sellerId } = req.params;
-    const { verified } = req.body;
-
-    // Step 1: Fetch the seller to ensure the seller exists
-    const seller = await prisma.seller.findUnique({
-      where: { id: sellerId },
-      include: {
-        user: true, // Include user details to change their role
-      },
-    });
-
-    if (!seller) {
-      return next(new AppError('Seller not found', 404));
-    }
-
-    // Step 2: Update the seller's verification status
-    const updatedSeller = await prisma.seller.update({
-      where: { id: sellerId },
-      data: { verified },
-    });
-
-    // Step 3: If the seller is verified, update their role to "SELLER"
-    if (verified) {
-      await prisma.user.update({
-        where: { id: seller.user.id },
-        data: { role: 'SELLER' },
-      });
-    }
-
+    const applications = await adminService.getSellerApplications();
     res.status(200).json({
       status: 'success',
-      data: updatedSeller,
+      data: applications,
     });
   } catch (error) {
     next(error);
   }
 };
 
-module.exports = {
-  getUsers,
-  updateUserRole,
-  deleteUser,
-  getSellerApplications,
-  verifySeller,
+exports.verifySeller = async (req, res, next) => {
+  try {
+    const { sellerId } = req.params;
+    const { verified } = req.body;
+    const seller = await adminService.verifySeller(sellerId, verified);
+    res.status(200).json({
+      status: 'success',
+      data: seller,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.suspendSeller = async (req, res, next) => {
+  try {
+    const { sellerId } = req.params;
+    const { reason } = req.body;
+    const seller = await adminService.suspendSeller(sellerId, reason);
+    res.status(200).json({
+      status: 'success',
+      data: seller,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.reactivateSeller = async (req, res, next) => {
+  try {
+    const { sellerId } = req.params;
+    const seller = await adminService.reactivateSeller(sellerId);
+    res.status(200).json({
+      status: 'success',
+      data: seller,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+// Statistics and Analytics Controllers
+exports.getUserStats = async (req, res, next) => {
+  try {
+    const stats = await adminService.getUserStats();
+    res.status(200).json({
+      status: 'success',
+      data: stats,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.getSellerStats = async (req, res, next) => {
+  try {
+    const stats = await adminService.getSellerStats();
+    res.status(200).json({
+      status: 'success',
+      data: stats,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.getAdminDashboardStats = async (req, res, next) => {
+  try {
+    const stats = await adminService.getDashboardStats();
+    res.status(200).json({
+      status: 'success',
+      data: stats,
+    });
+  } catch (error) {
+    next(error);
+  }
 };

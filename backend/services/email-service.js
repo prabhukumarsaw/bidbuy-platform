@@ -57,6 +57,107 @@ class EmailService {
       throw error;
     }
   }
+
+  async sendAccountDeactivationEmail(email) {
+    try {
+      await this.transporter.sendMail({
+        from: process.env.EMAIL_FROM,
+        to: email,
+        subject: 'Account Deactivated',
+        html: `
+          <h1>Account Deactivated</h1>
+          <p>Your account has been deactivated by an administrator.</p>
+          <p>If you believe this was done in error, please contact support.</p>
+        `,
+      });
+
+      logger.info(`Account deactivation email sent to ${email}`);
+    } catch (error) {
+      logger.error('Error sending account deactivation email:', error);
+      throw error;
+    }
+  }
+
+  async sendAccountReactivationEmail(email) {
+    try {
+      await this.transporter.sendMail({
+        from: process.env.EMAIL_FROM,
+        to: email,
+        subject: 'Account Reactivated',
+        html: `
+          <h1>Account Reactivated</h1>
+          <p>Your account has been reactivated. You can now log in again.</p>
+        `,
+      });
+
+      logger.info(`Account reactivation email sent to ${email}`);
+    } catch (error) {
+      logger.error('Error sending account reactivation email:', error);
+      throw error;
+    }
+  }
+
+  async sendSellerVerificationEmail(email) {
+    try {
+      await this.transporter.sendMail({
+        from: process.env.EMAIL_FROM,
+        to: email,
+        subject: 'Seller Account Verified',
+        html: `
+          <h1>Seller Account Verified</h1>
+          <p>Congratulations! Your seller account has been verified.</p>
+          <p>You can now access the seller dashboard and start selling.</p>
+        `,
+      });
+
+      logger.info(`Seller verification email sent to ${email}`);
+    } catch (error) {
+      logger.error('Error sending seller verification email:', error);
+      throw error;
+    }
+  }
+
+  async sendSellerSuspensionEmail(email, reason) {
+    try {
+      await this.transporter.sendMail({
+        from: process.env.EMAIL_FROM,
+        to: email,
+        subject: 'Seller Account Suspended',
+        html: `
+          <h1>Seller Account Suspended</h1>
+          <p>Your seller account has been suspended for the following reason:</p>
+          <p><strong>${reason}</strong></p>
+          <p>If you believe this was done in error, please contact support.</p>
+        `,
+      });
+
+      logger.info(`Seller suspension email sent to ${email}`);
+    } catch (error) {
+      logger.error('Error sending seller suspension email:', error);
+      throw error;
+    }
+  }
+
+  async sendSellerReactivationEmail(email) {
+    try {
+      await this.transporter.sendMail({
+        from: process.env.EMAIL_FROM,
+        to: email,
+        subject: 'Seller Account Reactivated',
+        html: `
+          <h1>Seller Account Reactivated</h1>
+          <p>Your seller account has been reactivated.</p>
+          <p>You can now access your seller dashboard and resume selling.</p>
+        `,
+      });
+
+      logger.info(`Seller reactivation email sent to ${email}`);
+    } catch (error) {
+      logger.error('Error sending seller reactivation email:', error);
+      throw error;
+    }
+  }
+
 }
 
 module.exports = new EmailService();

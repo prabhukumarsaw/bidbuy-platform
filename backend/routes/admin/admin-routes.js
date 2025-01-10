@@ -2,10 +2,16 @@ const express = require('express');
 const { protect, restrictTo } = require('../../middleware/index');
 const {
   getUsers,
-  updateUserRole,
-  deleteUser,
   getSellerApplications,
   verifySeller,
+  deactivateUser,
+  reactivateUser,
+  getAllSellers,
+  suspendSeller,
+  reactivateSeller,
+  getUserStats,
+  getSellerStats,
+  getAdminDashboardStats,
 } = require('../../controllers/admin/admin-controller');
 
 const router = express.Router();
@@ -14,14 +20,21 @@ const router = express.Router();
 router.use(protect);
 router.use(restrictTo('ADMIN'));
 
-// Route to get all unverified seller applications
-router.get('/seller-applications', getSellerApplications);
-
-// Route to verify a seller application
-router.patch('/verify-seller/:sellerId', verifySeller);
-
+// User Management Routes
 router.get('/users', getUsers);
-router.patch('/users/:userId/role', updateUserRole);
-router.delete('/users/:userId', deleteUser);
+router.patch('/users/:userId/deactivate', deactivateUser);
+router.patch('/users/:userId/reactivate', reactivateUser);
+
+// Seller Management Routes
+router.get('/sellers', getAllSellers);
+router.get('/seller-applications', getSellerApplications);
+router.patch('/sellers/:sellerId/verify', verifySeller);
+router.patch('/sellers/:sellerId/suspend', suspendSeller);
+router.patch('/sellers/:sellerId/reactivate', reactivateSeller);
+
+// Statistics and Analytics Routes
+router.get('/stats/users', getUserStats);
+router.get('/stats/sellers', getSellerStats);
+router.get('/stats/dashboard', getAdminDashboardStats);
 
 module.exports = router;
