@@ -5,48 +5,38 @@ const { calculateNextMinimumBid } = require('../../utils/auction.utils');
 const { AppError } = require('../../middleware/error-handler');
 
 class AuctionService {
-  async createAuction(data) {
+  async createAuction(auctionData) {
     try {
-      const auction = await prisma.$transaction(async (prisma) => {
-        // Validate category exists
-        // const category = await prisma.category.findUnique({
-        //   where: { id: data.categoryId },
-        // });
-
-        // if (!category) {
-        //   throw new AppError(400, 'Invalid category');
-        // }
-
-        // Create the auction
-        const auction = await prisma.auction.create({
-          data: {
-            ...data,
-            currentPrice: data.startingPrice,
-            status: 'DRAFT',
-            auctionState: 'RUNNING',
-          },
-          include: {
-            category: true,
-            user: true,
-            Seller: true,
-          },
-        });
-
-        return auction;
+      const auction = await prisma.auction.create({
+        data: {
+          title: auctionData.title,
+          description: auctionData.description,
+          startingPrice: auctionData.startingPrice,
+          minBidIncrement: auctionData.minBidIncrement,
+          reservePrice: auctionData.reservePrice,
+          startTime: new Date(auctionData.startTime),
+          endTime: new Date(auctionData.endTime),
+          categoryId: auctionData.categoryId,
+          tags: auctionData.tags,
+          featuredImage: auctionData.featuredImage,
+          images: auctionData.images,
+          sellerId: auctionData.sellerId,
+          creatorId: auctionData.creatorId,
+          currentPrice: auctionData.startingPrice,
+          status: 'DRAFT',
+          auctionState: 'RUNNING',
+        },
+        include: {
+          category: true,
+          user: true,
+          Seller: true,
+        },
       });
-
-      // Schedule auction events
-      if (auction.status === 'SCHEDULED') {
-        await this.scheduleAuctionEvents(auction);
-      }
-
-      // Invalidate relevant caches
-      await this.invalidateAuctionCaches(auction.categoryId);
 
       return auction;
     } catch (error) {
-      logger.error('Error creating auction:', error);
-      throw error;
+      logger.error('Error in createAuction service:', error);
+      throw new Error('Failed to create auction');
     }
   }
 

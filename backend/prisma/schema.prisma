@@ -96,8 +96,7 @@ model Auction {
   creatorId       String
   user            User           @relation(fields: [creatorId], references: [id])
   bids            Bid[]
-  status          AuctionStatus  @default(SCHEDULED)
-  auctionState    AuctionState   @default(RUNNING)
+  status          AuctionStatus  @default(DRAFT)
   categoryId      String
   category        Category       @relation(fields: [categoryId], references: [id])
   featuredImage   String?
@@ -239,12 +238,6 @@ enum AuctionStatus {
   SOLD
 }
 
-enum AuctionState {
-  RUNNING
-  PAUSED
-  RESUMED
-  STOPPED
-}
 
 enum PaymentStatus {
   PENDING

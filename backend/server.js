@@ -7,6 +7,7 @@ const rateLimit = require('express-rate-limit');
 const { connectDB } = require('./config/database');
 const { errorHandler } = require('./middleware/error-handler');
 const routes = require('./routes/index');
+const auctionQueue = require('./services/scheduler');
 
 const app = express();
 
@@ -29,6 +30,12 @@ const limiter = rateLimit({
 });
 app.use('/api', limiter);
 
+app.use((req, res, next) => {
+  req.setTimeout(60000); // 60 seconds
+  res.setTimeout(60000); // 60 seconds
+  next();
+});
+
 // Body parsing
 app.use(express.json({ limit: '10kb' }));
 app.use(compression());
@@ -49,6 +56,8 @@ const startServer = async () => {
   try {
     await connectDB();
     app.listen(PORT, () => {
+      console.log('🚀 BullMQ worker started');
+
       console.log(`🚀 Server running on port ${PORT}`);
     });
   } catch (error) {
