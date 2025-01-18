@@ -5,7 +5,11 @@ const { cache } = require('../../middleware/index');
 const router = express.Router();
 
 // Public routes
-router.get('/', cache({ ttl: 1800 }), auctionController.getAllAuctions);
+router.get(
+  '/',
+  // cache({ ttl: 1800 }),
+  auctionController.getAllAuctions
+);
 router.get('/active', auctionController.getActiveAuctions);
 router.get('/category/:categoryId', auctionController.getAuctionsByCategory);
 router.get('/:id', auctionController.getAuctionById);

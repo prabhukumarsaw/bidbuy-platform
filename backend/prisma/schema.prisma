@@ -238,7 +238,6 @@ enum AuctionStatus {
   SOLD
 }
 
-
 enum PaymentStatus {
   PENDING
   PROCESSING

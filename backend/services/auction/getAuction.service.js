@@ -4,57 +4,85 @@ const logger = require('../../config/logger');
 const { AppError } = require('../../middleware/error-handler');
 
 class AuctionService {
-  async getAllAuctions({ page, limit, sort, filters }) {
+  async getAllAuctions(filter, orderBy, page, limit) {
     try {
-      const { status, categoryId, userId, minPrice, maxPrice, search } =
-        filters;
-
-      // Parse sort field and direction
-      const [sortField, sortDirection] = sort.split(':');
-
-      // Build filter conditions
-      const where = {
-        ...(status && { status }),
-        ...(categoryId && { categoryId }),
-        ...(userId && { userId }),
-        ...(minPrice && { currentPrice: { gte: minPrice } }),
-        ...(maxPrice && { currentPrice: { lte: maxPrice } }),
-        ...(search && {
-          OR: [
-            { title: { contains: search, mode: 'insensitive' } },
-            { description: { contains: search, mode: 'insensitive' } },
-          ],
-        }),
-      };
-
-      // Calculate pagination
       const skip = (page - 1) * limit;
 
-      // Fetch auctions with total count
-      const [auctions, totalCount] = await Promise.all([
-        prisma.auction.findMany({
-          where,
-          take: limit,
-          skip,
-          orderBy: { [sortField]: sortDirection.toLowerCase() },
-          include: {
-            user: true,
-            category: true,
-            _count: {
-              select: { bids: true },
+      // Remove the status filter if it's set to "all"
+      const cleanedFilter = { ...filter };
+      if (
+        cleanedFilter.status &&
+        cleanedFilter.status.in &&
+        cleanedFilter.status.in.includes('all')
+      ) {
+        delete cleanedFilter.status; // Remove the status filter
+      }
+
+      // Log the cleaned filter for debugging
+      console.log('Cleaned Filter:', cleanedFilter);
+
+      // Fetch auctions with the applied filter, sorting, and pagination
+      const auctions = await prisma.auction.findMany({
+        where: cleanedFilter,
+        include: {
+          category: true,
+          bids: {
+            select: {
+              id: true,
+              amount: true,
+              bidder: { select: { id: true, name: true } },
+            },
+            orderBy: { amount: 'desc' },
+            take: 1,
+          },
+          Seller: true,
+          _count: {
+            select: {
+              bids: true,
             },
           },
-        }),
-        prisma.auction.count({ where }),
-      ]);
+        },
+        orderBy,
+        skip,
+        take: limit,
+      });
+
+      // Log the fetched auctions for debugging
+      console.log('Fetched Auctions:', auctions);
+
+      // Transform the response
+      const transformedAuctions = auctions.map((auction) => ({
+        id: auction.id,
+        title: auction.title,
+        description: auction.description,
+        startingPrice: auction.startingPrice,
+        currentPrice: auction.currentPrice,
+        status: auction.status,
+        startTime: auction.startTime,
+        endTime: auction.endTime,
+        featuredImage: auction.featuredImage,
+        images: auction.images,
+        category: auction.category,
+        highestBid: auction.bids.length > 0 ? auction.bids[0] : null,
+        totalBids: auction._count.bids,
+        totalViews: auction._count.views,
+        seller: auction.Seller,
+      }));
+
+      // Get the total count of auctions for pagination
+      const totalAuctions = await prisma.auction.count({
+        where: cleanedFilter,
+      });
 
       return {
-        items: auctions,
+        auctions: transformedAuctions,
         pagination: {
-          totalItems: totalCount,
-          totalPages: Math.ceil(totalCount / limit),
-          currentPage: page,
-          perPage: limit,
+          total: totalAuctions,
+          page,
+          limit,
+          totalPages: Math.ceil(totalAuctions / limit),
+          nextPage: page < Math.ceil(totalAuctions / limit) ? page + 1 : null,
+          prevPage: page > 1 ? page - 1 : null,
         },
       };
     } catch (error) {

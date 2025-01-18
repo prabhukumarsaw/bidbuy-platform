@@ -16,6 +16,7 @@ const {
 
 const router = express.Router();
 
+router.get('/sellers', getAllSellers);
 // Protect all routes after this middleware
 router.use(protect);
 router.use(restrictTo('ADMIN'));
@@ -26,7 +27,7 @@ router.patch('/users/:userId/deactivate', deactivateUser);
 router.patch('/users/:userId/reactivate', reactivateUser);
 
 // Seller Management Routes
-router.get('/sellers', getAllSellers);
+
 router.get('/seller-applications', getSellerApplications);
 router.patch('/sellers/:sellerId/verify', verifySeller);
 router.patch('/sellers/:sellerId/suspend', suspendSeller);
