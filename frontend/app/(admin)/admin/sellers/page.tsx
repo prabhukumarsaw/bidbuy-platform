@@ -31,9 +31,9 @@ const columns = [
     cell: ({ row }) => (
       <Button
         variant={row.original.verified ? 'destructive' : 'default'}
-        onClick={() =>
-          handleVerification(row.original.id, !row.original.verified)
-        }
+        // onClick={() =>
+        //   // handleVerification(row.original.id, !row.original.verified)
+        // }
       >
         {row.original.verified ? 'Revoke' : 'Verify'}
       </Button>

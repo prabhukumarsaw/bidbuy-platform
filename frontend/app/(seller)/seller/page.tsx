@@ -11,6 +11,7 @@ import { BidActivity } from './dashboard/bid-activity';
 import { MetricCard } from './dashboard/metric-card';
 import { RecentTransactions } from './dashboard/recent-transactions';
 import { TopBidders } from './dashboard/top-bidders';
+import { useQuery } from '@tanstack/react-query';
 
 import { PerformanceOverview } from './dashboard/performance-overview';
 import {
@@ -23,6 +24,7 @@ import {
   BarChart,
   FileText,
 } from 'lucide-react';
+import { sellerApi } from '@/lib/api/seller';
 
 export default function Dashboard() {
   const [selectedDateRange, setSelectedDateRange] = useState<
@@ -31,6 +33,19 @@ export default function Dashboard() {
     from: new Date(2023, 0, 1),
     to: new Date(),
   });
+
+  // const { data: auctions, isLoading } = useQuery({
+  //   queryKey: ['auctions'],
+  //   queryFn: () =>
+  //     sellerApi.getAllAuctions({ status: 'active', page: 1, limit: 10 }),
+  // });
+
+  const { data: categories } = useQuery({
+    queryKey: ['categories'],
+    queryFn: () => sellerApi.getAllCategories(),
+  });
+
+  console.log('all category', categories);
 
   return (
     <div className="flex-1 space-y-8 p-8 pt-6">

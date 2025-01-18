@@ -56,9 +56,13 @@ export function DataTable<T>({
   }, [filteredData, sortColumn, sortDirection]);
 
   const paginatedData = useMemo(() => {
+    // Ensure sortedData is an array
+    const dataArray = Array.isArray(sortedData) ? sortedData : [];
+
     const start = (currentPage - 1) * currentPageSize;
     const end = start + currentPageSize;
-    return sortedData.slice(start, end);
+
+    return dataArray.slice(start, end);
   }, [sortedData, currentPage, currentPageSize]);
 
   const totalPages = Math.ceil(sortedData.length / currentPageSize);

@@ -21,7 +21,7 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion';
 import Link from 'next/link';
-import BecomeSupplierButton from './become-supplier';
+import BecomeSupplierButton from './become-seller';
 
 type FAQ = {
   question: string;
@@ -154,9 +154,7 @@ export default function SellerFeature() {
                 empower sellers to showcase their products and help buyers
                 discover unique items through seamless and transparent auctions.
               </p>
-              <Link href="./become-supplier.tsx">
-                <BecomeSupplierButton />
-              </Link>
+              <BecomeSupplierButton />
             </motion.div>
             <motion.div
               initial={{ opacity: 0, x: 50 }}

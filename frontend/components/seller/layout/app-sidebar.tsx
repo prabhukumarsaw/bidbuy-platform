@@ -31,13 +31,10 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from '@/components/ui/sidebar';
+import { useAuthStore } from '@/lib/store/auth-store'; // Assuming auth-store is correctly set up
+import { useAuth } from '@/hooks/use-auth';
 
 const data = {
-  user: {
-    name: 'shadcn',
-    email: 'm@example.com',
-    avatar: '/avatars/shadcn.jpg',
-  },
   navMain: [
     {
       title: 'Dashboard',
@@ -45,30 +42,11 @@ const data = {
       icon: LayoutDashboard,
     },
     {
-      title: 'Personalized Auctions',
-      url: '/seller/personalized-auctions',
-      icon: LayoutDashboard,
-    },
-    {
-      title: 'Ongoing Auctions',
-      url: '/seller/ongoing-auctions',
+      title: 'Auction Management',
+      url: '/seller/auctions-management',
       icon: Package,
     },
-    {
-      title: 'Closed Auctions',
-      url: '/seller/closed-auctions',
-      icon: ShoppingCart,
-    },
-    {
-      title: 'Scheduled Auctions',
-      url: '/seller/scheduled-auctions',
-      icon: ShoppingCart,
-    },
-    {
-      title: 'Sold',
-      url: '/seller/sold-auctions',
-      icon: ShoppingCart,
-    },
+
     {
       title: 'Payment',
       url: '/seller/payment',
@@ -87,7 +65,7 @@ const data = {
       items: [
         {
           title: 'Profile',
-          url: 'account-seller',
+          url: '/seller/account-seller',
         },
         {
           title: 'General',
@@ -109,24 +87,35 @@ const data = {
   projects: [
     {
       name: 'Home',
-      url: '#',
+      url: '/',
       icon: Frame,
     },
     {
       name: 'Auctions',
-      url: '#',
+      url: '/auction',
       icon: PieChart,
     },
     {
       name: 'About',
-      url: '#',
+      url: '/',
       icon: Map,
     },
   ],
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-  return (
+  const { user, isAuthenticated } = useAuthStore();
+  const { logout } = useAuth();
+
+  // Redirect to login if not authenticated
+  React.useEffect(() => {
+    if (!isAuthenticated) {
+      // Example redirect logic if unauthenticated
+      window.location.href = '/login';
+    }
+  }, [isAuthenticated]);
+
+  return isAuthenticated && user ? (
     <Sidebar variant="inset" {...props}>
       <SidebarHeader>
         <SidebarMenu>
@@ -150,8 +139,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <NavProjects projects={data.projects} />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={data.user} />
+        <NavUser user={user} onLogout={logout} />
       </SidebarFooter>
     </Sidebar>
-  );
+  ) : null;
 }

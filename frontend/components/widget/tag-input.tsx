@@ -1,112 +1,124 @@
-'use client';
-
-import * as React from 'react';
-import { X } from 'lucide-react';
-import { Badge } from '@/components/ui/badge';
-import { Command, CommandGroup, CommandItem } from '@/components/ui/command';
-import { Command as CommandPrimitive } from 'cmdk';
+import { useState, useRef, KeyboardEvent } from 'react';
+import { X, Plus } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+} from '@/components/ui/command';
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover';
 
 interface TagInputProps {
-  placeholder?: string;
   tags: string[];
   setTags: (tags: string[]) => void;
   suggestions?: string[];
   maxTags?: number;
+  placeholder?: string;
 }
 
 export function TagInput({
-  placeholder = 'Add tag...',
   tags,
   setTags,
   suggestions = [],
   maxTags = 10,
+  placeholder = 'Add tag...',
 }: TagInputProps) {
-  const inputRef = React.useRef<HTMLInputElement>(null);
-  const [inputValue, setInputValue] = React.useState('');
-  const [isOpen, setIsOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const [inputValue, setInputValue] = useState('');
+  const inputRef = useRef<HTMLInputElement>(null);
 
-  const handleAddTag = (value: string) => {
-    const normalizedValue = value.trim().toLowerCase();
-    if (
-      normalizedValue !== '' &&
-      !tags.includes(normalizedValue) &&
-      tags.length < maxTags
-    ) {
-      setTags([...tags, normalizedValue]);
+  const addTag = (tag: string) => {
+    const trimmedTag = tag.trim().toLowerCase();
+    if (trimmedTag && !tags.includes(trimmedTag) && tags.length < maxTags) {
+      setTags([...tags, trimmedTag]);
       setInputValue('');
-      setIsOpen(false);
+      setOpen(false);
     }
   };
 
-  const handleRemoveTag = (index: number) => {
-    setTags(tags.filter((_, i) => i !== index));
+  const removeTag = (tagToRemove: string) => {
+    setTags(tags.filter((tag) => tag !== tagToRemove));
   };
 
-  const filteredSuggestions = suggestions.filter(
-    (suggestion) =>
-      suggestion.toLowerCase().includes(inputValue.toLowerCase()) &&
-      !tags.includes(suggestion.toLowerCase())
-  );
+  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter' && inputValue) {
+      e.preventDefault();
+      addTag(inputValue);
+    } else if (e.key === 'Backspace' && !inputValue && tags.length > 0) {
+      removeTag(tags[tags.length - 1]);
+    }
+  };
 
   return (
-    <div className="relative">
-      <div className="border rounded-lg p-2 flex flex-wrap gap-2">
-        {tags.map((tag, index) => (
-          <Badge key={index} variant="secondary" className="text-sm">
-            {tag}
-            <button
-              type="button"
-              className="ml-1 ring-offset-background rounded-full outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
-              onClick={() => handleRemoveTag(index)}
-            >
-              <X className="h-3 w-3" />
-              <span className="sr-only">Remove tag</span>
-            </button>
-          </Badge>
-        ))}
-        <CommandPrimitive
-          onKeyDown={(e) => {
-            if (e.key === 'Enter') {
-              e.preventDefault();
-              handleAddTag(inputValue);
-            }
-            if (e.key === 'Backspace' && inputValue === '' && tags.length > 0) {
-              e.preventDefault();
-              handleRemoveTag(tags.length - 1);
-            }
-          }}
+    <div className="border rounded-md p-2 flex flex-wrap gap-2">
+      {tags.map((tag) => (
+        <div
+          key={tag}
+          className="flex items-center gap-1 bg-secondary text-secondary-foreground px-2 py-1 rounded-md"
         >
-          <input
-            ref={inputRef}
-            value={inputValue}
-            onChange={(e) => {
-              setInputValue(e.target.value);
-              setIsOpen(true);
-            }}
-            placeholder={
-              tags.length < maxTags ? placeholder : `Maximum ${maxTags} tags`
-            }
-            disabled={tags.length >= maxTags}
-            className="flex-1 bg-transparent outline-none placeholder:text-muted-foreground min-w-[120px] disabled:cursor-not-allowed"
-          />
-        </CommandPrimitive>
-      </div>
-      {isOpen && filteredSuggestions.length > 0 && (
-        <div className="absolute w-full z-10 top-[100%] mt-2">
-          <Command className="rounded-lg border shadow-md">
-            <CommandGroup>
-              {filteredSuggestions.map((suggestion) => (
-                <CommandItem
-                  key={suggestion}
-                  onSelect={() => handleAddTag(suggestion)}
-                  className="cursor-pointer"
-                >
-                  {suggestion}
-                </CommandItem>
-              ))}
-            </CommandGroup>
-          </Command>
+          <span className="text-sm">{tag}</span>
+          <Button
+            type="button"
+            variant="ghost"
+            size="icon"
+            className="h-4 w-4 p-0 hover:bg-destructive hover:text-destructive-foreground"
+            onClick={() => removeTag(tag)}
+          >
+            <X className="h-3 w-3" />
+          </Button>
         </div>
+      ))}
+      {tags.length < maxTags && (
+        <Popover open={open} onOpenChange={setOpen}>
+          <PopoverTrigger asChild>
+            <Button
+              variant="outline"
+              role="combobox"
+              size="sm"
+              className="h-8 text-muted-foreground"
+            >
+              <Plus className="mr-2 h-4 w-4" />
+              Add Tag
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent className="w-64 p-0" align="start">
+            <Command>
+              <CommandInput
+                ref={inputRef}
+                value={inputValue}
+                onValueChange={setInputValue}
+                placeholder={placeholder}
+                onKeyDown={handleKeyDown}
+              />
+              <CommandEmpty>No suggestions found.</CommandEmpty>
+              <CommandGroup>
+                {suggestions
+                  .filter(
+                    (suggestion) =>
+                      !tags.includes(suggestion.toLowerCase()) &&
+                      suggestion
+                        .toLowerCase()
+                        .includes(inputValue.toLowerCase())
+                  )
+                  .map((suggestion) => (
+                    <CommandItem
+                      key={suggestion}
+                      value={suggestion}
+                      onSelect={() => addTag(suggestion)}
+                    >
+                      {suggestion}
+                    </CommandItem>
+                  ))}
+              </CommandGroup>
+            </Command>
+          </PopoverContent>
+        </Popover>
       )}
     </div>
   );

@@ -1,31 +1,33 @@
 import axios from 'axios';
-import { getSession } from 'next-auth/react';
+import { useAuthStore } from '@/lib/store/auth-store';
 
 const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
   withCredentials: true,
 });
 
-api.interceptors.request.use(async (config) => {
-  const session = await getSession();
-  if (session?.user) {
-    config.headers.Authorization = `Bearer ${session.accessToken}`;
+// Request interceptor
+api.interceptors.request.use((config) => {
+  // Get the auth token from the store
+  const token = useAuthStore.getState().token;
+  
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
   }
+  
   return config;
+}, (error) => {
+  return Promise.reject(error);
 });
 
+// Response interceptor
 api.interceptors.response.use(
   (response) => response,
   async (error) => {
-    const originalRequest = error.config;
-    if (error.response?.status === 401 && !originalRequest._retry) {
-      originalRequest._retry = true;
-      try {
-        // Implement refresh token logic here
-        return api(originalRequest);
-      } catch (refreshError) {
-        return Promise.reject(refreshError);
-      }
+    if (error.response?.status === 401) {
+      // Handle unauthorized error (e.g., redirect to login)
+      useAuthStore.getState().logout();
+      window.location.href = '/login';
     }
     return Promise.reject(error);
   }
