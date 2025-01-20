@@ -45,9 +45,6 @@ class AdminAuctionController {
         ...(sellerId && { sellerId }),
       };
 
-      // Log the filter for debugging
-      console.log('Filter:', filter);
-
       // Build the sorting object
       const orderBy = [];
       if (sortBy) {

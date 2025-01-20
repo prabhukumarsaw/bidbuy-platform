@@ -18,9 +18,6 @@ class AuctionService {
         delete cleanedFilter.status; // Remove the status filter
       }
 
-      // Log the cleaned filter for debugging
-      console.log('Cleaned Filter:', cleanedFilter);
-
       // Fetch auctions with the applied filter, sorting, and pagination
       const auctions = await prisma.auction.findMany({
         where: cleanedFilter,
@@ -46,9 +43,6 @@ class AuctionService {
         skip,
         take: limit,
       });
-
-      // Log the fetched auctions for debugging
-      console.log('Fetched Auctions:', auctions);
 
       // Transform the response
       const transformedAuctions = auctions.map((auction) => ({
