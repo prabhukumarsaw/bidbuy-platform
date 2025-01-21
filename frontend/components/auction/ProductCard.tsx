@@ -149,10 +149,12 @@ export default function ProductCard({
               <div className="flex items-center gap-2">
                 <Avatar className="w-5 h-5 sm:w-6 sm:h-6">
                   {/* <AvatarImage src={product.seller.avatar} /> */}
-                  <AvatarFallback>{product.seller.businessName}</AvatarFallback>
+                  <AvatarFallback>
+                    {product?.seller?.businessName}
+                  </AvatarFallback>
                 </Avatar>
                 <span className="text-xs sm:text-sm font-medium">
-                  {product.seller.businessName}
+                  {product?.seller?.businessName}
                 </span>
               </div>
               <Badge variant="secondary">
@@ -219,7 +221,7 @@ export default function ProductCard({
                         <p>Lot Number: {product.id}</p>
                         <p>Current Bid: ${product.totalBids}</p>
                         <p>Bidders: {product.totalBids}</p>
-                        <p>Seller: {product.seller.businessName}</p>
+                        <p>Seller: {product?.seller?.businessName}</p>
                         <p>Tag: {product.tags}</p>
                       </div>
                     </div>

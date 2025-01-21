@@ -163,24 +163,24 @@ const UserManagementTable = () => {
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         <StatsCard
           title="Total Users"
-          value={stats?.data.users.total}
+          value={stats?.data.total}
           icon={<Icons.users className="h-4 w-4" />}
         />
         <StatsCard
           title="Active Users"
-          value={stats?.data.users.active}
+          value={stats?.data.active}
           icon={<Icons.check className="h-4 w-4" />}
           description="Currently active users"
         />
         <StatsCard
           title="Inactive Users"
-          value={stats?.data.users.inactive}
+          value={stats?.data.inactive}
           icon={<Icons.x className="h-4 w-4" />}
           description="Currently inactive users"
         />
         <StatsCard
           title="New Users (Last 30 days)"
-          value={stats?.data.users.newToday}
+          value={stats?.data.newToday}
           icon={<Icons.userPlus className="h-4 w-4" />}
           description="Joined in the last 30 days"
         />

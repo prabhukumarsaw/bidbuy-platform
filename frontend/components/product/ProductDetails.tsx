@@ -123,10 +123,6 @@ export function ProductDetails({ auction }: ProductDetailsProps) {
                 patina adds character while preserving the piece's historical
                 integrity.
               </p>
-              <Button variant="outline" className="w-full mt-4 gap-2">
-                <FileDown className="h-4 w-4" />
-                Download Detailed Condition Report
-              </Button>
             </div>
           </AccordionContent>
         </AccordionItem>

@@ -5,6 +5,22 @@ export interface Bid {
   userName: string;
 }
 
+export interface AuctionFilters {
+  status?: string | string[];
+  categoryId?: string;
+  sortBy?: string;
+  sortOrder?: string;
+  page?: number;
+  limit?: number;
+  search?: string;
+  minPrice?: number;
+  maxPrice?: number;
+  startTime?: string;
+  endTime?: string;
+  sellerName?: string;
+  sellerId?: string;
+}
+
 export interface AuctionItem {
   id: string;
   title: string;

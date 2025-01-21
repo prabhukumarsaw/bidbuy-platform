@@ -32,8 +32,6 @@ export const backgroundApi = {
         params: cleanedFilters, // Pass only cleaned filters
       }
     );
-
-    console.log("real", data);
     return data.data;
   },
 

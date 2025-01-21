@@ -11,13 +11,7 @@ interface LayoutProps {
   onFilterChange?: (filters: any) => void;
 }
 
-export default function Layout({
-  children,
-  categories,
-  conditions,
-  sellers,
-  onFilterChange,
-}: LayoutProps) {
+export default function Layout({ children, onFilterChange }: LayoutProps) {
   return (
     <div className="min-h-screen mx-auto bg-gray-50">
       {/* <HeaderBanner
@@ -28,12 +22,7 @@ export default function Layout({
       <div className=" px-2 py-8">
         <div className="flex flex-col lg:flex-row gap-8">
           <aside className="hidden md:block w-full lg:w-1/4 xl:w-1/5">
-            <FilterSidebar
-              categories={categories}
-              conditions={conditions}
-              sellers={sellers}
-              onFilterChange={onFilterChange}
-            />
+            <FilterSidebar onFilterChange={onFilterChange} />
           </aside>
           <main className="w-full lg:w-3/4 xl:w-4/5">{children}</main>
         </div>

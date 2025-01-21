@@ -1,47 +1,45 @@
 'use client';
-
-import { Suspense, useState } from 'react';
-import Layout from '@/components/auction/Layout';
+import { useState, useCallback } from 'react';
+import { useAdvancedFilters } from '@/hooks/useAdvancedFilters';
 import ProductGrid from '@/components/auction/ProductGrid';
 import MobileActionBar from '@/components/auction/MobileActionBar';
-import { AuctionItem, Category } from '@/types/types';
-import {
-  useAuctions,
-  useCategories,
-  AuctionFilters,
-  useSellers,
-} from '@/hooks/useBackground';
+import Layout from '@/components/auction/Layout';
 
 export default function Home() {
-  const [filters, setFilters] = useState<AuctionFilters>({});
-  const [sortBy, setSortBy] = useState<string>('createdAt:desc');
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const [sortBy, setSortBy] = useState<string>('createdAt:desc');
 
-  const { data: auctionsResponse, isLoading: isAuctionsLoading } = useAuctions({
-    ...filters,
-    sortBy,
-    page: currentPage,
-    limit: 10,
-  });
+  const {
+    filters,
+    setFilter,
+    auctionsResponse,
+    categories,
+    sellers,
+    isLoading,
+  } = useAdvancedFilters(currentPage, 10);
 
-  const { data: categories, isLoading: isCategoriesLoading } = useCategories();
-  const { data: sellers, isLoading: isSellersLoading } = useSellers();
+  const handleFilterChange = useCallback(
+    (newFilters: any) => {
+      Object.entries(newFilters).forEach(([key, value]) => {
+        setFilter(key as keyof typeof filters, value);
+      });
+    },
+    [setFilter]
+  );
 
-  const handleFilterChange = (newFilters: AuctionFilters) => {
-    setFilters(newFilters);
-    // setCurrentPage(1);
-  };
+  const handleSort = useCallback(
+    (sortOption: string) => {
+      setSortBy(sortOption);
+      setFilter('sortBy', sortOption);
+    },
+    [setFilter]
+  );
 
-  const handleSort = (sortOption: string) => {
-    setSortBy(sortOption);
-    // setCurrentPage(1);
-  };
-
-  const handlePageChange = (pageNumber: number) => {
+  const handlePageChange = useCallback((pageNumber: number) => {
     setCurrentPage(pageNumber);
-  };
+  }, []);
 
-  if (isAuctionsLoading || isCategoriesLoading || isSellersLoading) {
+  if (isLoading) {
     return <div>Loading...</div>;
   }
 
@@ -62,16 +60,14 @@ export default function Home() {
       onFilterChange={handleFilterChange}
     >
       <div className="">
-        <Suspense fallback={<div>Loading...</div>}>
-          <ProductGrid
-            initialProducts={{
-              auctions: auctionProducts,
-              pagination: pagination,
-            }}
-            onPageChange={handlePageChange}
-            onSort={handleSort}
-          />
-        </Suspense>
+        <ProductGrid
+          initialProducts={{
+            auctions: auctionProducts,
+            pagination: pagination,
+          }}
+          onPageChange={handlePageChange}
+          onSort={handleSort}
+        />
       </div>
       <MobileActionBar
         categories={categories}

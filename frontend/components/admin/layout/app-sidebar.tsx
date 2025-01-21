@@ -37,7 +37,7 @@ const data = {
     },
     {
       title: 'Auction Management',
-      url: '/admin/auction-management',
+      url: '/admin/auctions-management',
       icon: Package,
     },
     {
