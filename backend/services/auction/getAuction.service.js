@@ -15,7 +15,7 @@ class AuctionService {
         cleanedFilter.status.in &&
         cleanedFilter.status.in.includes('all')
       ) {
-        delete cleanedFilter.status; // Remove the status filter
+        delete cleanedFilter.status;
       }
 
       // Fetch auctions with the applied filter, sorting, and pagination
@@ -142,7 +142,6 @@ class AuctionService {
         orderBy: { endTime: 'asc' },
       });
 
-      // Cache for 5 minutes
       await redis.setex(cacheKey, 300, JSON.stringify(auctions));
       return auctions;
     } catch (error) {
@@ -191,6 +190,50 @@ class AuctionService {
     } catch (error) {
       logger.error('Error fetching auction:', error);
       throw error;
+    }
+  }
+
+  async validateAuctionForBidding(id) {
+    try {
+      const auction = await prisma.auction.findUnique({
+        where: { id },
+        include: {
+          bids: {
+            orderBy: { amount: 'desc' },
+            take: 1,
+          },
+        },
+      });
+
+      if (!auction) {
+        throw new AppError(404, 'Auction not found');
+      }
+
+      // Check if auction is active
+      if (auction.status !== 'ACTIVE') {
+        throw new AppError(400, 'Auction is not active');
+      }
+
+      // Check if auction has ended
+      if (new Date() > new Date(auction.endTime)) {
+        throw new AppError(400, 'Auction has ended');
+      }
+
+      // Check if auction has started
+      if (new Date() < new Date(auction.startTime)) {
+        throw new AppError(400, 'Auction has not started yet');
+      }
+
+      return {
+        ...auction,
+        currentPrice: auction.currentPrice || auction.startingPrice,
+        minBidIncrement: auction.minBidIncrement || 1, // Default increment if not set
+      };
+    } catch (error) {
+      logger.error('Error validating auction:', error);
+      throw error instanceof AppError
+        ? error
+        : new AppError(500, 'Failed to validate auction');
     }
   }
 }

@@ -1,4 +1,5 @@
 require('dotenv').config();
+const http = require('http');
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
@@ -8,8 +9,11 @@ const { connectDB } = require('./config/database');
 const { errorHandler } = require('./middleware/error-handler');
 const routes = require('./routes/index');
 const auctionQueue = require('./services/scheduler');
+const socketService = require('./services/socket-service');
 
 const app = express();
+const server = http.createServer(app);
+socketService.initialize(server);
 
 // Security middleware
 app.use(helmet());
@@ -55,7 +59,7 @@ const PORT = process.env.PORT || 5000;
 const startServer = async () => {
   try {
     await connectDB();
-    app.listen(PORT, () => {
+    server.listen(PORT, () => {
       console.log('🚀 BullMQ worker started');
 
       console.log(`🚀 Server running on port ${PORT}`);

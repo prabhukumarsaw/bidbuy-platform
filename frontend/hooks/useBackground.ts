@@ -1,5 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { backgroundApi } from '@/lib/api/background';
+import { BidsResponse, TopBidder, Category, Pagination, Bid } from '@/types/types';
+
 
 export interface AuctionFilters {
   status?: string | string[];
@@ -47,13 +49,24 @@ export function useAuctionById(id: string) {
 
 // Fetch bids for an auction
 export function useAuctionBids(auctionId: string) {
-  return useQuery({
+  return useQuery<BidsResponse, Error, TopBidder[]>({
     queryKey: ['auction-bids', auctionId],
     queryFn: () => backgroundApi.getAuctionBids(auctionId),
     staleTime: 1000 * 60 * 5, // 5 minutes
+    select: (data) => {
+      return data.data.bids
+        .map((bid, index) => ({
+          rank: index + 1,
+          name: bid.bidder.name,
+          bid: bid.amount,
+          time: new Date(bid.createdAt).toLocaleString(), // Format the time
+        }))
+        .slice(0, 5); // Limit to top 5 bidders
+    },
   });
 }
 
+// Fetch all sellers
 export function useSellers() {
   return useQuery({
     queryKey: ['sellers'],
@@ -68,5 +81,55 @@ export function useCategories() {
     queryKey: ['categories'],
     queryFn: backgroundApi.getAllCategories,
     staleTime: 1000 * 60 * 60, // 1 hour
+  });
+}
+
+// Fetch auctions by category
+export function useAuctionsByCategory(categoryId: string) {
+  return useQuery({
+    queryKey: ['auctions-by-category', categoryId],
+    queryFn: () => backgroundApi.getAuctionsByCategory(categoryId),
+    staleTime: 1000 * 60 * 5, // 5 minutes
+  });
+}
+
+// Fetch winning bid for an auction
+export function useWinningBid(auctionId: string) {
+  return useQuery({
+    queryKey: ['winning-bid', auctionId],
+    queryFn: () => backgroundApi.getWinningBid(auctionId),
+    staleTime: 1000 * 60 * 5, // 5 minutes
+  });
+}
+
+// Place a bid on an auction
+export function usePlaceBid() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: ({ auctionId, bidAmount }: { auctionId: string; bidAmount: number }) =>
+      backgroundApi.placeBid(auctionId, bidAmount),
+    onSuccess: (data, variables) => {
+      // Invalidate relevant queries to refresh data
+      queryClient.invalidateQueries({ queryKey: ['auction-bids', variables.auctionId] });
+      queryClient.invalidateQueries({ queryKey: ['winning-bid', variables.auctionId] });
+    },
+  });
+}
+
+// Fetch active bids for the logged-in user
+export function useUserActiveBids() {
+  return useQuery({
+    queryKey: ['user-active-bids'],
+    queryFn: backgroundApi.getUserActiveBids,
+    staleTime: 1000 * 60 * 5, // 5 minutes
+  });
+}
+
+// Fetch a specific bid by ID
+export function useBidById(bidId: string) {
+  return useQuery({
+    queryKey: ['bid', bidId],
+    queryFn: () => backgroundApi.getBidById(bidId),
+    staleTime: 1000 * 60 * 5, // 5 minutes
   });
 }

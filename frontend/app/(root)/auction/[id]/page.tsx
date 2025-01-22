@@ -13,10 +13,77 @@ import { useParams } from 'next/navigation';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, Heart, Share2 } from 'lucide-react';
+import { CountdownTimer } from '@/components/countdown-timer';
+import { useEffect, useState } from 'react';
+import { Bid, Auction } from '@/types/types'; // Adjust the import path
+import { socketService } from '@/lib/socketService';
 
 export default function AuctionDetailsPage() {
   const { id } = useParams(); // Get the `id` from the URL
-  const { data: auction, isLoading, isError } = useAuctionById(id as string);
+  const {
+    data: initialAuction,
+    isLoading,
+    isError,
+  } = useAuctionById(id as string);
+  const [auction, setAuction] = useState<Auction | null>(
+    initialAuction || null
+  );
+  const [latestBid, setLatestBid] = useState<Bid | null>(null);
+
+  // Initialize WebSocket connection and join auction room
+  useEffect(() => {
+    if (id) {
+      // Connect to the WebSocket server
+      socketService.connect();
+
+      // Join the auction room
+      socketService.joinAuctionRoom(id as string);
+
+      // Listen for new bids
+      socketService.onNewBid((bid: Bid) => {
+        if (bid.auctionId === id) {
+          setLatestBid(bid);
+          // Update the auction's current price
+          setAuction((prevAuction) =>
+            prevAuction
+              ? { ...prevAuction, currentPrice: bid.amount }
+              : prevAuction
+          );
+        }
+      });
+
+      // Listen for auction updates
+      socketService.onAuctionUpdate((update: any) => {
+        if (update.auctionId === id) {
+          setAuction((prevAuction) =>
+            prevAuction ? { ...prevAuction, ...update } : prevAuction
+          );
+        }
+      });
+
+      // Listen for outbid notifications
+      socketService.onOutbid((notification) => {
+        if (notification.auctionId === id) {
+          alert(
+            `You have been outbid! The new bid is $${notification.newBidAmount.toLocaleString()}`
+          );
+        }
+      });
+    }
+
+    // Cleanup: Disconnect and remove listeners when the component unmounts
+    return () => {
+      socketService.disconnect();
+      socketService.removeListeners();
+    };
+  }, [id]);
+
+  // Update auction state when initial data is fetched
+  useEffect(() => {
+    if (initialAuction) {
+      setAuction(initialAuction);
+    }
+  }, [initialAuction]);
 
   if (isLoading) {
     return (
@@ -97,17 +164,28 @@ export default function AuctionDetailsPage() {
 
               {/* Auction Status */}
               <AuctionStatus
-                currentBid={125}
-                startingPrice={100}
-                timeRemaining="3 days, 4 hours remaining"
+                currentBid={auction.currentPrice}
+                startingPrice={auction.startingPrice}
+                timeRemaining={auction.endTime}
                 progress={66}
               />
 
+              {/* Display the latest bid */}
+              {latestBid && (
+                <div className="bg-green-50 p-4 rounded-lg">
+                  <p className="text-sm font-medium">New Bid Placed:</p>
+                  <p className="text-lg font-bold">
+                    ${latestBid.amount.toLocaleString()} by{' '}
+                    {latestBid.bidder.name}
+                  </p>
+                </div>
+              )}
+
               {/* Bid Form */}
               <BidForm
-                currentPrice={125}
-                minIncrement={5}
-                onBidSubmit={(amount) => console.log('Bid submitted:', amount)}
+                currentPrice={auction.currentPrice}
+                minIncrement={auction.minBidIncrement}
+                auctionId={id as string}
               />
 
               <Separator />
@@ -120,9 +198,10 @@ export default function AuctionDetailsPage() {
           {/* Right Column - Analytics & Rankings */}
           <div className="lg:col-span-2">
             <div className="space-y-6 lg:sticky lg:top-24">
-              <AuctionMetrics />
-              <BidderRanking />
-              <PriceAnalytics />
+              <CountdownTimer endTime={auction.endTime} />
+              <AuctionMetrics auction={auction} />
+              <BidderRanking auction={auction} />
+              <PriceAnalytics auction={auction} />
             </div>
           </div>
         </div>

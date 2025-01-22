@@ -9,20 +9,23 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
+import { usePlaceBid } from '@/hooks/useBackground';
 
 interface BidFormProps {
   currentPrice: number;
   minIncrement: number;
-  onBidSubmit: (amount: number) => void;
+  auctionId: string;
 }
 
 export function BidForm({
   currentPrice,
   minIncrement,
-  onBidSubmit,
+  auctionId,
 }: BidFormProps) {
   const [bidAmount, setBidAmount] = useState(currentPrice + minIncrement);
   const maxBid = currentPrice * 2; // Example max bid limit
+
+  const { mutate: placeBid, isLoading, isError, error } = usePlaceBid();
 
   const handleSliderChange = (value: number[]) => {
     setBidAmount(value[0]);
@@ -33,6 +36,17 @@ export function BidForm({
     { label: 'Jump Bid', amount: currentPrice + minIncrement * 2 },
     { label: 'Power Bid', amount: currentPrice + minIncrement * 5 },
   ];
+
+  const handleBidSubmit = () => {
+    const minBid = currentPrice + minIncrement;
+
+    if (bidAmount < minBid) {
+      alert(`Bid amount must be at least $${minBid.toLocaleString()}`);
+      return;
+    }
+
+    placeBid({ auctionId, bidAmount });
+  };
 
   return (
     <div className="space-y-6">
@@ -101,11 +115,19 @@ export function BidForm({
       {/* Submit Button */}
       <Button
         className="w-full h-12 text-lg bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700"
-        onClick={() => onBidSubmit(bidAmount)}
+        onClick={handleBidSubmit}
+        disabled={isLoading}
       >
         <TrendingUp className="w-5 h-5 mr-2" />
         Place Bid: ${bidAmount.toLocaleString()}
       </Button>
+
+      {isError && (
+        <div className="text-red-500 text-sm mt-2">
+          Error:{' '}
+          {error instanceof Error ? error.message : 'Failed to place bid'}
+        </div>
+      )}
 
       {/* AI Recommendation */}
       <div className="bg-violet-50 rounded-lg p-4 flex items-start gap-3">

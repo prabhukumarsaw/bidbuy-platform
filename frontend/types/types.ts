@@ -1,8 +1,71 @@
+export interface BidHistory {
+  bidTime: string;
+  previousPrice: number;
+}
+
+export interface Bidder {
+  id: string;
+  name: string;
+  email: string;
+}
+
+export interface AuctionUpdate {
+  auctionId: string;
+  currentPrice: number;
+  timeRemaining: number;
+  timestamp: string;
+}
+
+export interface OutbidNotification {
+  auctionId: string;
+  newBidAmount: number;
+  message: string;
+  timestamp: string;
+}
+
 export interface Bid {
+  id: string;
   amount: number;
-  timestamp: Date;
-  userId: string;
-  userName: string;
+  auctionId: string;
+  bidderId: string;
+  status: BidStatus;
+  createdAt: string;
+  updatedAt: string;
+  bidHistory?: BidHistory;
+  bidder: {
+    id: string;
+    name: string;
+    email: string;
+  };
+  
+}
+
+export enum BidStatus {
+  PLACED = 'PLACED',
+  OUTBID = 'OUTBID',
+  WINNING = 'WINNING',
+  WON = 'WON',
+  LOST = 'LOST',
+}
+
+export interface BidsResponse {
+  success: boolean;
+  data: {
+    bids: Bid[];
+    pagination: {
+      total: number;
+      page: number;
+      pages: number;
+    };
+  };
+  message: string;
+}
+
+export interface TopBidder {
+  rank: number;
+  name: string;
+  bid: number;
+  time: string;
 }
 
 export interface AuctionFilters {
