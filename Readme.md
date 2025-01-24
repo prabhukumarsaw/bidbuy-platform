@@ -63,7 +63,7 @@ An innovative platform redefining the online auction experience, combining hybri
 ### Installation
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/Advanced-Hybrid-Auction-Bidding-Platform.git
+   git clone https://github.com/prabhukumarsaw/bidbuy-platform.git
 
 
 ### 💖 Support This Project
