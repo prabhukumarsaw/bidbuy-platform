@@ -47,14 +47,13 @@ export function UserNotifications() {
         <Button variant="ghost" size="icon" className="relative">
           <Bell className="h-5 w-5" />
           {unreadCount > 0 && (
-            <Badge className="absolute -top-1 -right-1 px-1 min-w-[1.25rem] h-5 flex items-center justify-center">
+            <Badge className="absolute  -top-1 -right-1 px-1 min-w-[1.25rem] h-5 flex items-center justify-center">
               {unreadCount}
             </Badge>
           )}
-          <span className="sr-only">View notifications</span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-80">
+      <DropdownMenuContent className="w-[200px] p-2">
         <DropdownMenuLabel>Notifications</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup className="max-h-[300px] overflow-auto">

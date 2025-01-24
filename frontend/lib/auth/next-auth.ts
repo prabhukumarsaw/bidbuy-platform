@@ -23,14 +23,26 @@ export const authOptions: NextAuthOptions = {
       if (!account || !profile) return false;
       
       try {
-        await authApi.socialLogin({
+        const response = await authApi.socialLogin({
           provider: account.provider,
           providerId: account.providerAccountId,
           email: user.email!,
           name: user.name!,
           image: user.image ?? undefined,
         });
+
+        // Update user object with data from your backend
+        user.id = response.data.user.id;
+        user.role = response.data.user.role;
+        user.name = response.data.user.name;
+        
+        // Store tokens in account object
+        account.access_token = response.data.token;
+        account.refresh_token = response.data.refreshToken;
+
+        console.log('Social login API response:', response);
         return true;
+        
       } catch (error) {
         console.error('Social login error:', error);
         return false;
@@ -38,19 +50,27 @@ export const authOptions: NextAuthOptions = {
     },
     async jwt({ token, user, account }) {
       if (account && user) {
-        token.accessToken = account.access_token;
-        token.userId = user.id;
-        token.role = user.role;
+        return {
+          ...token,
+          accessToken: account.access_token,
+          refreshToken: account.refresh_token,
+          userId: user.id,
+          role: user.role,
+          name: user.name,
+        };
       }
       return token;
     },
     async session({ session, token }) {
       return {
         ...session,
+        accessToken: token.accessToken,
+        refreshToken: token.refreshToken,
         user: {
           ...session.user,
           id: token.userId,
           role: token.role,
+          name: token.name,
         },
       };
     },

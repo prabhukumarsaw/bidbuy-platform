@@ -30,11 +30,11 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
-import { Product } from '@/types/product';
+import { AuctionItem } from '@/types/types';
 import Link from 'next/link';
 
 interface ProductCardProps {
-  product: Product;
+  product: AuctionItem;
   index: number;
   view: 'grid' | 'list';
 }
@@ -46,13 +46,7 @@ export default function ProductCard({
 }: ProductCardProps) {
   const [isLiked, setIsLiked] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
-  // Assume we have multiple images for each product
-  const images = [
-    product.image,
-    '/placeholder.svg?height=400&width=600',
-    '/placeholder.svg?height=400&width=600',
-  ];
+  const images = [product.featuredImage, ...product.images];
 
   const nextImage = () => {
     setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
@@ -91,16 +85,16 @@ export default function ProductCard({
             className="object-cover transition-transform duration-300 hover:scale-105"
           />
           <div className="absolute top-2 left-2 flex space-x-2">
-            <Badge variant="destructive" className="bg-red-600">
-              Live
+            <Badge variant="outline" className="bg-slate-400">
+              {product.status}
             </Badge>
             <Badge variant="secondary" className="bg-blue-600 text-white">
-              {product.category}
+              {product.category.name}
             </Badge>
           </div>
           <div className="absolute bottom-2 left-2 bg-black bg-opacity-70 text-white px-2 py-1 rounded-full text-xs sm:text-sm">
             <Users className="w-3 h-3 sm:w-4 sm:h-4 inline mr-1" />
-            <span>{product.bidders} bidders</span>
+            <span>{product.totalBids || 28} bidders</span>
           </div>
           {images.length > 1 && (
             <>
@@ -110,7 +104,7 @@ export default function ProductCard({
                 className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white rounded-full p-1 sm:p-2"
                 onClick={prevImage}
               >
-                <ChevronLeft className="h-4 w-4 sm:h-6 sm:w-6" />
+                <ChevronLeft className="h-4 w-4 sm:h-4 sm:w-4" />
               </Button>
               <Button
                 variant="ghost"
@@ -118,7 +112,7 @@ export default function ProductCard({
                 className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white rounded-full p-1 sm:p-2"
                 onClick={nextImage}
               >
-                <ChevronRight className="h-4 w-4 sm:h-6 sm:w-6" />
+                <ChevronRight className="h-4 w-4 sm:h-4 sm:w-4" />
               </Button>
             </>
           )}
@@ -132,20 +126,21 @@ export default function ProductCard({
             }`}
           >
             <div>
-              <h3 className="text-base sm:text-lg font-semibold line-clamp-2 mb-1 sm:mb-2 group-hover:text-blue-600 transition-colors duration-300">
+              <h3 className="text-base sm:text-md font-semibold line-clamp-2 mb-1 sm:mb-2 group-hover:text-blue-600 transition-colors duration-300">
                 {product.title}
               </h3>
               <div className="flex justify-between items-center mb-1 sm:mb-2">
                 <div>
-                  <p className="text-xs sm:text-sm text-muted-foreground">
-                    Current bid:
+                  <p className="text-xs  text-gray-600 font-medium">
+                    Current bid:{' '}
+                    <span className="font-semibold text-black">
+                      {product.currentPrice} $
+                    </span>
                   </p>
-                  <p className="text-base sm:text-lg font-bold">
-                    ${product.currentBid.toLocaleString()}
-                  </p>
+                  {/* <p className="text-base sm:text-lg font-bold"></p> */}
                 </div>
                 <Badge variant="outline" className="text-xs sm:text-sm">
-                  {product.condition}
+                  {product.tags}
                 </Badge>
               </div>
               <CountdownTimer endTime={new Date(product.endTime)} />
@@ -153,20 +148,17 @@ export default function ProductCard({
             <div className="flex items-center justify-between mt-2 sm:mt-4">
               <div className="flex items-center gap-2">
                 <Avatar className="w-5 h-5 sm:w-6 sm:h-6">
-                  <AvatarImage src={product.seller.avatar} />
+                  {/* <AvatarImage src={product.seller.avatar} /> */}
                   <AvatarFallback>
-                    {product.seller.name.charAt(0)}
+                    {product?.seller?.businessName}
                   </AvatarFallback>
                 </Avatar>
                 <span className="text-xs sm:text-sm font-medium">
-                  {product.seller.name}
+                  {product?.seller?.businessName}
                 </span>
               </div>
               <Badge variant="secondary">
-                Rating:{' '}
-                {product?.seller?.rating != null
-                  ? product.seller.rating.toFixed(1)
-                  : 'N/A'}
+                {product?.seller?.status || 'N/A'}
               </Badge>
             </div>
           </CardContent>
@@ -214,7 +206,7 @@ export default function ProductCard({
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="relative aspect-video">
                       <Image
-                        src={product.image}
+                        src={product.featuredImage}
                         alt={product.title}
                         fill
                         className="object-cover rounded-lg"
@@ -226,13 +218,11 @@ export default function ProductCard({
                       </DialogDescription>
                       <div className="mt-4">
                         <h4 className="font-semibold mb-2">Auction Details:</h4>
-                        <p>Lot Number: {product.lotNumber}</p>
-                        <p>
-                          Current Bid: ${product.currentBid.toLocaleString()}
-                        </p>
-                        <p>Bidders: {product.bidders}</p>
-                        <p>Seller: {product.seller.name}</p>
-                        <p>Condition: {product.condition}</p>
+                        <p>Lot Number: {product.id}</p>
+                        <p>Current Bid: ${product.totalBids}</p>
+                        <p>Bidders: {product.totalBids}</p>
+                        <p>Seller: {product?.seller?.businessName}</p>
+                        <p>Tag: {product.tags}</p>
                       </div>
                     </div>
                   </div>

@@ -18,13 +18,78 @@ class EmailService {
 
     try {
       await this.transporter.sendMail({
-        from: process.env.EMAIL_FROM,
+        from: `BIDBUY <${process.env.EMAIL_FROM}>`,
         to: email,
-        subject: 'Verify your email address',
+        subject: 'Verify Your Email Address',
         html: `
-          <h1>Email Verification</h1>
-          <p>Please click the link below to verify your email address:</p>
-          <a href="${verificationUrl}">Verify Email</a>
+          <!DOCTYPE html>
+          <html lang="en">
+          <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Email Verification</title>
+            <style>
+              body {
+                font-family: Arial, sans-serif;
+                line-height: 1.6;
+                color: #333;
+                max-width: 600px;
+                margin: 0 auto;
+                padding: 20px;
+              }
+              .logo {
+                text-align: center;
+                margin-bottom: 20px;
+              }
+              .logo img {
+                max-width: 150px;
+              }
+              .container {
+                background-color: #f9f9f9;
+                border-radius: 5px;
+                padding: 30px;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+              }
+              h1 {
+                color: #2c3e50;
+                margin-top: 0;
+              }
+              .button {
+                display: inline-block;
+                background-color: #3498db;
+                color: #ffffff;
+                text-decoration: none;
+                padding: 12px 24px;
+                border-radius: 5px;
+                font-weight: bold;
+                margin-top: 20px;
+              }
+              .footer {
+                margin-top: 30px;
+                text-align: center;
+                font-size: 0.9em;
+                color: #7f8c8d;
+              }
+            </style>
+          </head>
+          <body>
+            <div class="logo">
+              <img src="${process.env.LOGO_URL}" alt="Company Logo">
+            </div>
+            <div class="container">
+              <h1>Welcome to ${process.env.COMPANY_NAME}!</h1>
+              <p>Thank you for joining our community. To get started, please verify your email address by clicking the button below:</p>
+              <a href="${verificationUrl}" class="button">Verify Email</a>
+              <p>If you didn't create an account with us, you can safely ignore this email.</p>
+            </div>
+            <div class="footer">
+              <p>&copy; ${new Date().getFullYear()} ${
+          process.env.COMPANY_NAME
+        }. All rights reserved.</p>
+              <p>123 Main St, Anytown, AT 12345</p>
+            </div>
+          </body>
+          </html>
         `,
       });
 
@@ -157,7 +222,6 @@ class EmailService {
       throw error;
     }
   }
-
 }
 
 module.exports = new EmailService();

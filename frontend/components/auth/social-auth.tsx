@@ -30,10 +30,8 @@ export function SocialAuth() {
         throw new Error(result.error);
       }
 
-      if (result?.url) {
-        router.push(result.url);
-        toast.success(`Successfully signed in with ${provider}`);
-      }
+      toast.success(`Successfully signed in with ${provider}`);
+      router.push('/');
     } catch (error: any) {
       console.error('Social login error:', error);
       toast.error(error.message || `Failed to sign in with ${provider}`);

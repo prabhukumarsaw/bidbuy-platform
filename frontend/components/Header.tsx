@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Navbar from './Navbar';
-import { CategoryNav } from './category-nav';
+import CategoryNavPage from './category-nav';
 
 const Header = () => {
   return (
@@ -13,7 +13,7 @@ const Header = () => {
         <Navbar />
       </header>
 
-      <CategoryNav />
+      <CategoryNavPage />
     </>
   );
 };

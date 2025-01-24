@@ -1,5 +1,3 @@
-'use client';
-
 import React from 'react';
 import {
   Select,
@@ -13,19 +11,26 @@ interface SortDropdownProps {
   onSort: (sortOption: string) => void;
 }
 
-export default function SortDropdown({ onSort }: SortDropdownProps) {
+const SortDropdown: React.FC<SortDropdownProps> = ({ onSort }) => {
+  const handleSortChange = (value: string) => {
+    onSort(value);
+  };
+
   return (
-    <Select onValueChange={onSort}>
+    <Select onValueChange={handleSortChange}>
       <SelectTrigger className="w-[180px]">
         <SelectValue placeholder="Sort by" />
       </SelectTrigger>
       <SelectContent>
-        <SelectItem value="default">Default</SelectItem>
-        <SelectItem value="price-asc">Price: Low to High</SelectItem>
-        <SelectItem value="price-desc">Price: High to Low</SelectItem>
-        <SelectItem value="time-asc">Time Left: Ending Soon</SelectItem>
-        <SelectItem value="time-desc">Time Left: Newly Listed</SelectItem>
+        <SelectItem value="createdAt:desc">Newest</SelectItem>
+        <SelectItem value="createdAt:asc">Oldest</SelectItem>
+        <SelectItem value="currentPrice:asc">Price: Low to High</SelectItem>
+        <SelectItem value="currentPrice:desc">Price: High to Low</SelectItem>
+        <SelectItem value="endTime:asc">Ending Soon</SelectItem>
+        <SelectItem value="startTime:desc">Recently Started</SelectItem>
       </SelectContent>
     </Select>
   );
-}
+};
+
+export default SortDropdown;

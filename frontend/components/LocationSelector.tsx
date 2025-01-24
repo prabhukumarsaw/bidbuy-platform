@@ -1,12 +1,23 @@
-'use client'
+'use client';
 
-import React from 'react'
-import { Button } from "@/components/ui/button"
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
-import { Command, CommandInput, CommandList, CommandEmpty, CommandGroup, CommandItem } from "@/components/ui/command"
-import { Check, ChevronDown, MapPin } from 'lucide-react'
-import { useLocationContext } from '@/contexts/LocationContext'
-import { cn } from "@/lib/utils"
+import React from 'react';
+import { Button } from '@/components/ui/button';
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover';
+import {
+  Command,
+  CommandInput,
+  CommandList,
+  CommandEmpty,
+  CommandGroup,
+  CommandItem,
+} from '@/components/ui/command';
+import { Check, ChevronDown, MapPin } from 'lucide-react';
+import { useLocationContext } from '@/contexts/LocationContext';
+import { cn } from '@/lib/utils';
 
 const locations = [
   { value: 'new-york', label: 'New York' },
@@ -19,16 +30,19 @@ const locations = [
   { value: 'san-diego', label: 'San Diego' },
   { value: 'dallas', label: 'Dallas' },
   { value: 'san-jose', label: 'San Jose' },
-]
+];
 
 export function LocationSelector() {
-  const [open, setOpen] = React.useState(false)
-  const { location, setLocation } = useLocationContext()
+  const [open, setOpen] = React.useState(false);
+  const { location, setLocation } = useLocationContext();
 
-  const handleSelect = React.useCallback((value: string) => {
-    setLocation(value)
-    setOpen(false)
-  }, [setLocation])
+  const handleSelect = React.useCallback(
+    (value: string) => {
+      setLocation(value);
+      setOpen(false);
+    },
+    [setLocation]
+  );
 
   const handleGPSLocation = React.useCallback(() => {
     if ('geolocation' in navigator) {
@@ -36,17 +50,17 @@ export function LocationSelector() {
         (position) => {
           // Here you would typically send these coordinates to your backend
           // to get the nearest location. For this example, we'll just set a dummy value.
-          setLocation('gps-location')
-          setOpen(false)
+          setLocation('gps-location');
+          setOpen(false);
         },
         (error) => {
-          console.error("Error getting location: ", error)
+          console.error('Error getting location: ', error);
         }
-      )
+      );
     } else {
-      console.log("Geolocation is not supported by this browser.")
+      console.log('Geolocation is not supported by this browser.');
     }
-  }, [setLocation])
+  }, [setLocation]);
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -55,10 +69,12 @@ export function LocationSelector() {
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className="w-[200px] justify-between bg-background border-transparent"
+          className="w-[200px] justify-between bg-background border-transparent hidden md:flex"
         >
           <MapPin className="mr-2 h-4 w-4" />
-          {location ? locations.find(l => l.value === location)?.label : 'Select location'}
+          {location
+            ? locations.find((l) => l.value === location)?.label
+            : 'Select location'}
           <ChevronDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
@@ -68,10 +84,7 @@ export function LocationSelector() {
           <CommandList>
             <CommandEmpty>No location found.</CommandEmpty>
             <CommandGroup>
-              <CommandItem
-                onSelect={handleGPSLocation}
-                className="text-sm"
-              >
+              <CommandItem onSelect={handleGPSLocation} className="text-sm">
                 <MapPin className="mr-2 h-4 w-4" />
                 Use current location
               </CommandItem>
@@ -85,8 +98,8 @@ export function LocationSelector() {
                 >
                   <Check
                     className={cn(
-                      "mr-2 h-4 w-4",
-                      location === loc.value ? "opacity-100" : "opacity-0"
+                      'mr-2 h-4 w-4',
+                      location === loc.value ? 'opacity-100' : 'opacity-0'
                     )}
                   />
                   {loc.label}
@@ -97,6 +110,5 @@ export function LocationSelector() {
         </Command>
       </PopoverContent>
     </Popover>
-  )
+  );
 }
-

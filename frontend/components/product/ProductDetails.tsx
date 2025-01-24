@@ -8,6 +8,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
+import { AuctionItem } from '@/types/types';
 
 const specifications = {
   'Item Condition': 'Excellent - Museum Quality',
@@ -40,29 +41,29 @@ const features = [
   },
 ];
 
-export function ProductDetails() {
+interface ProductDetailsProps {
+  auction: AuctionItem;
+}
+
+export function ProductDetails({ auction }: ProductDetailsProps) {
   return (
     <div className="space-y-6">
       <div>
         <div className="flex items-center gap-2 mb-2">
           <Badge variant="secondary">Lot #137684</Badge>
-          <Badge variant="outline" className="text-violet-600">
-            Featured
-          </Badge>
-          <Badge variant="outline" className="text-emerald-600">
-            Museum Quality
-          </Badge>
+          <div className="flex flex-wrap gap-1">
+            {auction.tags.map((tag, index) => (
+              <Badge key={index} variant="outline" className="text-emerald-600">
+                {tag}
+              </Badge>
+            ))}
+          </div>
         </div>
         <h1 className="text-xl sm:text-lg md:text-xl lg:text-2xl  font-semibold tracking-tight ">
-          Exceptional Victorian Aladdin's Lamp: A Masterpiece of 19th Century
-          Craftsmanship
+          {auction.title}
         </h1>
         <p className="mt-4 text-sm sm:text-sm md:text-md lg:text-base text-muted-foreground leading-relaxed">
-          An extraordinary example of late Victorian decorative arts, this
-          exquisite Aladdin's lamp represents the pinnacle of 19th-century
-          metalwork. Its intricate engravings and superior craftsmanship
-          exemplify the artistic excellence of the Ottoman Empire's master
-          artisans.
+          {auction.description}
         </p>
       </div>
 
@@ -122,10 +123,6 @@ export function ProductDetails() {
                 patina adds character while preserving the piece's historical
                 integrity.
               </p>
-              <Button variant="outline" className="w-full mt-4 gap-2">
-                <FileDown className="h-4 w-4" />
-                Download Detailed Condition Report
-              </Button>
             </div>
           </AccordionContent>
         </AccordionItem>
