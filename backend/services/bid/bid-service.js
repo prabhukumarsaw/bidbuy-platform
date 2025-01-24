@@ -4,6 +4,12 @@ const logger = require('../../config/logger');
 const { AppError } = require('../../middleware/error-handler');
 const socketService = require('../../services/socket-service');
 
+const CACHE_PREFIX = {
+  BIDS_AUCTION: 'bids:auction',
+  BIDS_USER: 'bids:user',
+  BID_WINNING: 'bid:winning',
+};
+
 class BidService {
   constructor() {
     this.prisma = prisma;
@@ -99,14 +105,13 @@ class BidService {
     }
 
     // Invalidate relevant caches
-    await this.invalidateBidCache(auctionId);
+    await this.invalidateBidCache(auctionId, bidderId);
 
     return newBid;
   }
 
-  async getAuctionBids(auctionId, page = 1, limit = 10) {
-    const skip = (page - 1) * limit;
-    const cacheKey = `bids:auction:${auctionId}:${page}:${limit}`;
+  async getAuctionBids(auctionId, sort = 'desc') {
+    const cacheKey = `${CACHE_PREFIX.BIDS_AUCTION}:${auctionId}:${sort}`;
 
     try {
       // Try to get from cache
@@ -115,32 +120,22 @@ class BidService {
         return JSON.parse(cached);
       }
 
-      const [bids, total] = await Promise.all([
-        this.prisma.bid.findMany({
-          where: { auctionId },
-          include: {
-            bidder: {
-              select: {
-                id: true,
-                name: true,
-                email: true,
-              },
+      const bids = await this.prisma.bid.findMany({
+        where: { auctionId },
+        include: {
+          bidder: {
+            select: {
+              id: true,
+              name: true,
+              email: true,
             },
           },
-          orderBy: { createdAt: 'desc' },
-          skip,
-          take: limit,
-        }),
-        this.prisma.bid.count({ where: { auctionId } }),
-      ]);
+        },
+        orderBy: { createdAt: sort === 'asc' ? 'asc' : 'desc' },
+      });
 
       const result = {
         bids,
-        pagination: {
-          total,
-          page,
-          pages: Math.ceil(total / limit),
-        },
       };
 
       // Cache the result for 5 minutes
@@ -152,7 +147,7 @@ class BidService {
     }
   }
 
-  async getUserBids(userId, status, page = 1, limit = 10) {
+  async getUserBids(userId, status, page = 1, limit = 50) {
     const skip = (page - 1) * limit;
     const cacheKey = `bids:user:${userId}:${status}:${page}:${limit}`;
 
@@ -336,11 +331,24 @@ class BidService {
     }
   }
 
-  async invalidateBidCache(bidId) {
+  async invalidateBidCache(auctionId, bidderId) {
     try {
-      const keys = await redis.keys(`bid:${bidId}*`);
-      if (keys.length) {
-        await redis.del(keys);
+      // Invalidate auction-related cache keys
+      const auctionKeys = await redis.keys(
+        `${CACHE_PREFIX.BIDS_AUCTION}:${auctionId}*`
+      );
+      if (auctionKeys.length) {
+        await redis.del(auctionKeys);
+      }
+
+      // Invalidate user-related cache keys
+      if (bidderId) {
+        const userKeys = await redis.keys(
+          `${CACHE_PREFIX.BIDS_USER}:${bidderId}*`
+        );
+        if (userKeys.length) {
+          await redis.del(userKeys);
+        }
       }
     } catch (error) {
       logger.error('Error invalidating bid cache:', error);

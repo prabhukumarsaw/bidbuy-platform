@@ -1,5 +1,5 @@
 const BidService = require('../../services/bid/bid-service');
-const NotificationService = require('../../services/notification/notification.service');
+const notificationService = require('../../services/notification/notification.service');
 const AuctionService = require('../../services/auction/getAuction.service');
 const socketService = require('../../services/socket-service');
 const logger = require('../../config/logger');
@@ -8,7 +8,7 @@ const { AppError } = require('../../middleware/error-handler');
 class BidController {
   constructor() {
     this.bidService = BidService;
-    this.notificationService = NotificationService;
+    this.notificationService = notificationService;
     this.auctionService = AuctionService;
   }
 
@@ -77,7 +77,7 @@ class BidController {
         auction.winnerId &&
         auction.winnerId !== bidderId
       ) {
-        await this.notificationService.create({
+        await this.notificationService.createNotification({
           type: 'BID_OUTBID',
           title: 'You have been outbid!',
           message: `Someone has placed a higher bid of ${amount} on ${auction.title}`,
@@ -124,18 +124,13 @@ class BidController {
   getAuctionBids = async (req, res) => {
     try {
       const { auctionId } = req.params;
-      const { page = 1, limit = 10, sort = 'desc' } = req.query;
+      const { sort = 'desc' } = req.query;
 
       if (!auctionId) {
         throw new AppError(400, 'Auction ID is required');
       }
 
-      const bids = await this.bidService.getAuctionBids(
-        auctionId,
-        Number(page),
-        Number(limit),
-        sort
-      );
+      const bids = await this.bidService.getAuctionBids(auctionId, sort);
 
       res.json({
         success: true,

@@ -1,5 +1,5 @@
 import { io, Socket } from 'socket.io-client';
-import { Bid, AuctionUpdate, OutbidNotification } from '@/types/types'; // Adjust the import path
+import { Bid, AuctionUpdate, OutbidNotification } from '@/types/types';
 
 const SOCKET_URL = process.env.NEXT_PUBLIC_SOCKET_URL || 'http://localhost:5000';
 
@@ -7,7 +7,6 @@ class SocketService {
   private socket: Socket | null = null;
   private isConnected: boolean = false;
 
-  // Connect to the WebSocket server
   connect() {
     if (this.socket) {
       console.warn('WebSocket is already connected.');
@@ -17,9 +16,11 @@ class SocketService {
     this.socket = io(SOCKET_URL, {
       withCredentials: true,
       transports: ['websocket'],
-      reconnection: true, // Enable automatic reconnection
-      reconnectionAttempts: 5, // Number of reconnection attempts
-      reconnectionDelay: 1000, // Delay between reconnection attempts in ms
+      reconnection: true,
+      reconnectionAttempts: 5,
+      reconnectionDelay: 1000,
+      reconnectionDelayMax: 5000,
+      randomizationFactor: 0.5,
     });
 
     this.socket.on('connect', () => {
@@ -27,9 +28,14 @@ class SocketService {
       console.log('Connected to WebSocket server');
     });
 
-    this.socket.on('disconnect', () => {
+    this.socket.on('disconnect', (reason) => {
       this.isConnected = false;
-      console.log('Disconnected from WebSocket server');
+      console.log('Disconnected from WebSocket server:', reason);
+
+      if (reason === 'io server disconnect') {
+        console.log('Server disconnected the client. Attempting to reconnect...');
+        this.socket?.connect();
+      }
     });
 
     this.socket.on('error', (error) => {
@@ -39,9 +45,16 @@ class SocketService {
     this.socket.on('reconnect_failed', () => {
       console.error('WebSocket reconnection failed');
     });
+
+    this.socket.on('reconnect', (attemptNumber: number) => {
+      console.log(`WebSocket reconnected after ${attemptNumber} attempts`);
+    });
+
+    this.socket.on('reconnecting', (attemptNumber: number) => {
+      console.log(`Attempting to reconnect (attempt ${attemptNumber})`);
+    });
   }
 
-  // Disconnect from the WebSocket server
   disconnect() {
     if (this.socket) {
       this.socket.disconnect();
@@ -51,12 +64,10 @@ class SocketService {
     }
   }
 
-  // Check if the WebSocket is connected
   get isSocketConnected(): boolean {
     return this.isConnected;
   }
 
-  // Join an auction room
   joinAuctionRoom(auctionId: string) {
     if (this.socket) {
       this.socket.emit('joinAuction', auctionId);
@@ -66,7 +77,6 @@ class SocketService {
     }
   }
 
-  // Leave an auction room
   leaveAuctionRoom(auctionId: string) {
     if (this.socket) {
       this.socket.emit('leaveAuction', auctionId);
@@ -76,7 +86,15 @@ class SocketService {
     }
   }
 
-  // Listen for new bids
+  emitNewBid(bid: Bid) {
+    if (this.socket) {
+      this.socket.emit('newBid', bid);
+      console.log('Emitted new bid:', bid);
+    } else {
+      console.warn('WebSocket is not connected. Cannot emit new bid.');
+    }
+  }
+
   onNewBid(callback: (bid: Bid) => void) {
     if (this.socket) {
       this.socket.on('newBid', callback);
@@ -85,7 +103,6 @@ class SocketService {
     }
   }
 
-  // Listen for auction updates
   onAuctionUpdate(callback: (update: AuctionUpdate) => void) {
     if (this.socket) {
       this.socket.on('auctionUpdate', callback);
@@ -94,7 +111,6 @@ class SocketService {
     }
   }
 
-  // Listen for outbid notifications
   onOutbid(callback: (notification: OutbidNotification) => void) {
     if (this.socket) {
       this.socket.on('outbid', callback);
@@ -103,7 +119,24 @@ class SocketService {
     }
   }
 
-  // Remove all listeners
+  offNewBid(callback: (bid: Bid) => void) {
+    if (this.socket) {
+      this.socket.off('newBid', callback);
+    }
+  }
+
+  offAuctionUpdate(callback: (update: AuctionUpdate) => void) {
+    if (this.socket) {
+      this.socket.off('auctionUpdate', callback);
+    }
+  }
+
+  offOutbid(callback: (notification: OutbidNotification) => void) {
+    if (this.socket) {
+      this.socket.off('outbid', callback);
+    }
+  }
+
   removeListeners() {
     if (this.socket) {
       this.socket.off('newBid');
@@ -114,5 +147,4 @@ class SocketService {
   }
 }
 
-// Singleton instance
 export const socketService = new SocketService();

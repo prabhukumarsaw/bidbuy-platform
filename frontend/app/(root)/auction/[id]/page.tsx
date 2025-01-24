@@ -15,20 +15,22 @@ import { Button } from '@/components/ui/button';
 import { ArrowLeft, Heart, Share2 } from 'lucide-react';
 import { CountdownTimer } from '@/components/countdown-timer';
 import { useEffect, useState } from 'react';
-import { Bid, Auction } from '@/types/types'; // Adjust the import path
+import type { Bid, AuctionItem } from '@/types/types'; // Adjust the import path
 import { socketService } from '@/lib/socketService';
+import { ToastAction } from '@/components/ui/toast';
+import { useToast } from '@/hooks/use-toast';
 
 export default function AuctionDetailsPage() {
-  const { id } = useParams(); // Get the `id` from the URL
+  const { id } = useParams();
   const {
     data: initialAuction,
     isLoading,
     isError,
   } = useAuctionById(id as string);
-  const [auction, setAuction] = useState<Auction | null>(
+  const [auction, setAuction] = useState<AuctionItem | null>(
     initialAuction || null
   );
-  const [latestBid, setLatestBid] = useState<Bid | null>(null);
+  const { toast } = useToast(); // Add useToast hook
 
   // Initialize WebSocket connection and join auction room
   useEffect(() => {
@@ -42,13 +44,24 @@ export default function AuctionDetailsPage() {
       // Listen for new bids
       socketService.onNewBid((bid: Bid) => {
         if (bid.auctionId === id) {
-          setLatestBid(bid);
-          // Update the auction's current price
           setAuction((prevAuction) =>
             prevAuction
               ? { ...prevAuction, currentPrice: bid.amount }
               : prevAuction
           );
+
+          // Show toast for new bid
+          toast({
+            title: 'New Bid Placed!',
+            description: (
+              <div className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+                <p className="text-white">
+                  ${bid.amount.toLocaleString()} by {bid.bidder.name}
+                </p>
+              </div>
+            ),
+            action: <ToastAction altText="View">View</ToastAction>,
+          });
         }
       });
 
@@ -76,7 +89,7 @@ export default function AuctionDetailsPage() {
       socketService.disconnect();
       socketService.removeListeners();
     };
-  }, [id]);
+  }, [id, toast]); // Add toast to the dependency array
 
   // Update auction state when initial data is fetched
   useEffect(() => {
@@ -161,25 +174,9 @@ export default function AuctionDetailsPage() {
 
               {/* Product Details */}
               <ProductDetails auction={auction} />
-
+              <PriceAnalytics auctionId={id as string} />
               {/* Auction Status */}
-              <AuctionStatus
-                currentBid={auction.currentPrice}
-                startingPrice={auction.startingPrice}
-                timeRemaining={auction.endTime}
-                progress={66}
-              />
-
-              {/* Display the latest bid */}
-              {latestBid && (
-                <div className="bg-green-50 p-4 rounded-lg">
-                  <p className="text-sm font-medium">New Bid Placed:</p>
-                  <p className="text-lg font-bold">
-                    ${latestBid.amount.toLocaleString()} by{' '}
-                    {latestBid.bidder.name}
-                  </p>
-                </div>
-              )}
+              <AuctionStatus auction={auction} />
 
               {/* Bid Form */}
               <BidForm
@@ -198,10 +195,12 @@ export default function AuctionDetailsPage() {
           {/* Right Column - Analytics & Rankings */}
           <div className="lg:col-span-2">
             <div className="space-y-6 lg:sticky lg:top-24">
-              <CountdownTimer endTime={auction.endTime} />
+              <CountdownTimer
+                endTime={auction.endTime || new Date().toISOString()}
+              />{' '}
+              {/* Fallback to current time if undefined */}
               <AuctionMetrics auction={auction} />
-              <BidderRanking auction={auction} />
-              <PriceAnalytics auction={auction} />
+              <BidderRanking auctionId={id as string} />
             </div>
           </div>
         </div>

@@ -33,7 +33,7 @@ export function AuctionMetrics({ auction, isLoading }: ProductDetailsProps) {
       value: isLoading ? (
         <Skeleton className="h-6 w-16" />
       ) : (
-        `${auction?.bids?.length || 0} Bids`
+        `${auction?._count?.bids || 0} Bids`
       ),
       description: 'Total number of bids placed on this auction.',
     },

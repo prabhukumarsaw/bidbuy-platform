@@ -49,19 +49,19 @@ export function useAuctionById(id: string) {
 
 // Fetch bids for an auction
 export function useAuctionBids(auctionId: string) {
-  return useQuery<BidsResponse, Error, TopBidder[]>({
+  return useQuery<{ bids: Bid[]; pagination: Pagination }, Error, Bid[]>({
     queryKey: ['auction-bids', auctionId],
     queryFn: () => backgroundApi.getAuctionBids(auctionId),
-    staleTime: 1000 * 60 * 5, // 5 minutes
-    select: (data) => {
-      return data.data.bids
-        .map((bid, index) => ({
-          rank: index + 1,
-          name: bid.bidder.name,
-          bid: bid.amount,
-          time: new Date(bid.createdAt).toLocaleString(), // Format the time
-        }))
-        .slice(0, 5); // Limit to top 5 bidders
+    // staleTime: 1000 * 60 * 5, // 5 minutes
+    select: (response) => {
+      // Ensure the response has the expected structure
+      if (!response || !Array.isArray(response.bids)) {
+        console.error('Invalid API response:', response);
+        return [];
+      }
+
+      // Sort bids by amount in descending order
+      return response.bids.sort((a, b) => b.amount - a.amount);
     },
   });
 }
