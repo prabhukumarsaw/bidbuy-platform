@@ -36,6 +36,11 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { AuctionItem } from '@/types/types';
+
+interface AuctionProps {
+  auctions: AuctionItem;
+}
 
 interface TrendingBidItem {
   id: number;
@@ -192,7 +197,9 @@ const TrendingBidItems: TrendingBidItem[] = [
   },
 ];
 
-export function TrendingAuction() {
+export function TrendingAuction({ auctions }: AuctionProps) {
+  console.log(auctions, 'auctionss');
+
   const [visibleItems, setVisibleItems] = useState(4);
   const [ref, inView] = useInView({
     triggerOnce: true,

@@ -141,7 +141,7 @@ class AdminAuctionController {
       const auction = await auctionService.updateAuctionStatus(
         id,
         status,
-        req.user.seller.id // Pass the seller ID for authorization
+        req.user.id // Pass the seller ID for authorization
       );
 
       // Log the action and send notifications
@@ -150,7 +150,6 @@ class AdminAuctionController {
           action: 'UPDATE_AUCTION_STATUS',
           description: `Updated auction status to ${status}: ${auction.title}`,
           userId: req.user.id,
-          sellerId: req.user.seller.id,
         }),
         notificationService.createNotification({
           type: 'SYSTEM',
@@ -171,7 +170,7 @@ class AdminAuctionController {
         error: error.message,
         auctionId: req.params.id,
         status: req.body.status,
-        sellerId: req.user.seller.id,
+        sellerId: req.user.id,
       });
 
       // Send error response
