@@ -51,6 +51,20 @@ export function PriceAnalytics({ auctionId }: BidderRankingProps) {
       </Card>
     );
 
+  // Handle no bids case
+  if (!bidsData || bidsData.length === 0) {
+    return (
+      <Card className="bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 shadow-lg">
+        <CardHeader>
+          <CardDescription>No bids have been placed yet</CardDescription>
+        </CardHeader>
+        <CardContent className="h-[300px] flex items-center justify-center text-muted-foreground">
+          Be the first to place a bid!
+        </CardContent>
+      </Card>
+    );
+  }
+
   const now = new Date().getTime();
   const timeRanges = {
     '1h': now - 3600000,
@@ -70,6 +84,36 @@ export function PriceAnalytics({ auctionId }: BidderRankingProps) {
       amount: bid.amount,
       bidder: bid.bidder,
     }));
+
+  // Handle case where filtered data is empty
+  if (chartData.length === 0) {
+    return (
+      <Card className="bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 shadow-lg">
+        <CardHeader>
+          <CardDescription>
+            No bids found in selected time range
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <Tabs
+            value={timeRange}
+            onValueChange={(value) => setTimeRange(value as typeof timeRange)}
+            className="mb-4"
+          >
+            <TabsList className="grid w-full grid-cols-4 bg-muted/50">
+              <TabsTrigger value="1h">1h</TabsTrigger>
+              <TabsTrigger value="24h">24h</TabsTrigger>
+              <TabsTrigger value="7d">7d</TabsTrigger>
+              <TabsTrigger value="all">All</TabsTrigger>
+            </TabsList>
+          </Tabs>
+          <div className="h-[300px] flex items-center justify-center text-muted-foreground">
+            Try selecting a different time range
+          </div>
+        </CardContent>
+      </Card>
+    );
+  }
 
   const latestBid = chartData[chartData.length - 1];
   const initialBid = chartData[0];
@@ -110,7 +154,7 @@ export function PriceAnalytics({ auctionId }: BidderRankingProps) {
               color: 'hsl(var(--primary))',
             },
           }}
-          className="h-[300px] mt-4"
+          className="h-full mt-2 w-full"
         >
           <ResponsiveContainer width="100%" height="100%">
             <AreaChart data={chartData}>

@@ -73,6 +73,7 @@ export default function Home() {
         categories={categories}
         onFilterChange={handleFilterChange}
         sellers={sellers}
+        onSort={handleSort}
       />
     </Layout>
   );

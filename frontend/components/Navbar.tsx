@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import {
@@ -97,20 +97,11 @@ export default function Navbar() {
   const pathname = usePathname();
   const router = useRouter();
 
-  const handleLogout = () => {
+  const handleLogout = useCallback(() => {
     logout();
-  };
+  }, [logout]);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 0);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const navigateToDashboard = () => {
+  const navigateToDashboard = useCallback(() => {
     const routes = {
       USER: '/user',
       SELLER: '/seller',
@@ -121,7 +112,16 @@ export default function Navbar() {
     } else {
       router.push('/');
     }
-  };
+  }, [user?.role, router]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 0);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
     <header
@@ -132,98 +132,100 @@ export default function Navbar() {
           : 'bg-transparent'
       )}
     >
-      <div className="container mx-auto flex h-16 items-center px-4">
-        <Sheet>
-          <SheetTrigger asChild>
-            <Button
-              variant="ghost"
-              size="icon"
-              className="mr-4 shrink-0 md:hidden"
-            >
-              <Menu className="h-5 w-5" />
-              <span className="sr-only">Toggle menu</span>
-            </Button>
-          </SheetTrigger>
-          <SheetContent side="left" className="w-[300px] p-0">
-            <div className="grid gap-6 p-6">
-              <div className="flex items-center justify-between">
-                <Link href="/" className="flex items-center gap-2">
-                  <span className="font-bold">AuctionHub</span>
-                </Link>
-              </div>
-              <LocationSelector />
-              <nav className="grid gap-4">
-                {mobileMenuItems.map((item) => (
-                  <Link
-                    key={item.title}
-                    href={item.href}
-                    className={cn(
-                      'flex items-center justify-between text-base transition-colors hover:text-primary',
-                      pathname === item.href && 'font-medium text-primary'
-                    )}
-                  >
-                    {item.title}
-                    {item.badge && (
-                      <span className="rounded-full bg-primary px-2 py-0.5 text-xs text-primary-foreground">
-                        {item.badge}
-                      </span>
-                    )}
+      <div className="container mx-auto flex h-16 items-center justify-between px-4">
+        <div className="flex items-center">
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="mr-2 shrink-0 md:hidden"
+              >
+                <Menu className="h-5 w-5" />
+                <span className="sr-only">Toggle menu</span>
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="left" className="w-[300px] p-0">
+              <div className="grid gap-6 p-6">
+                <div className="flex items-center justify-between">
+                  <Link href="/" className="flex items-center gap-2">
+                    <span className="font-bold">AuctionHub</span>
                   </Link>
-                ))}
-              </nav>
-              <div className="grid gap-4 border-t pt-6">
-                <Link
-                  href="/settings"
-                  className="flex items-center gap-2 hover:text-primary transition-colors"
-                >
-                  <Settings className="h-4 w-4" />
-                  Settings
-                </Link>
-                <Link
-                  href="/help"
-                  className="flex items-center gap-2 hover:text-primary transition-colors"
-                >
-                  <Globe className="h-4 w-4" />
-                  Help
-                </Link>
+                </div>
+                <LocationSelector />
+                <nav className="grid gap-4">
+                  {mobileMenuItems.map((item) => (
+                    <Link
+                      key={item.title}
+                      href={item.href}
+                      className={cn(
+                        'flex items-center justify-between text-base transition-colors hover:text-primary',
+                        pathname === item.href && 'font-medium text-primary'
+                      )}
+                    >
+                      {item.title}
+                      {item.badge && (
+                        <span className="rounded-full bg-primary px-2 py-0.5 text-xs text-primary-foreground">
+                          {item.badge}
+                        </span>
+                      )}
+                    </Link>
+                  ))}
+                </nav>
+                <div className="grid gap-4 border-t pt-6">
+                  <Link
+                    href="/settings"
+                    className="flex items-center gap-2 hover:text-primary transition-colors"
+                  >
+                    <Settings className="h-4 w-4" />
+                    Settings
+                  </Link>
+                  <Link
+                    href="/help"
+                    className="flex items-center gap-2 hover:text-primary transition-colors"
+                  >
+                    <Globe className="h-4 w-4" />
+                    Help
+                  </Link>
+                </div>
+                {isAuthenticated ? (
+                  <div className="px-4 py-6 border-t">
+                    <Button
+                      className="w-full mb-2"
+                      onClick={() => router.push('/profile')}
+                    >
+                      My Account
+                    </Button>
+                    <Button
+                      className="w-full"
+                      variant="outline"
+                      onClick={handleLogout}
+                    >
+                      Logout
+                    </Button>
+                  </div>
+                ) : (
+                  <div className="pt-6 border-t">
+                    <Button
+                      className="w-full"
+                      variant="outline"
+                      onClick={() => router.push('/login')}
+                    >
+                      Login
+                    </Button>
+                  </div>
+                )}
               </div>
-              {isAuthenticated ? (
-                <div className="px-4 py-6 border-t">
-                  <Button
-                    className="w-full mb-2"
-                    onClick={() => router.push('/profile')}
-                  >
-                    My Account
-                  </Button>
-                  <Button
-                    className="w-full"
-                    variant="outline"
-                    onClick={handleLogout}
-                  >
-                    Logout
-                  </Button>
-                </div>
-              ) : (
-                <div className="pt-6 border-t">
-                  <Button
-                    className="w-full"
-                    variant="outline"
-                    onClick={() => router.push('/login')}
-                  >
-                    Login
-                  </Button>
-                </div>
-              )}
-            </div>
-          </SheetContent>
-        </Sheet>
+            </SheetContent>
+          </Sheet>
 
-        <Link href="/" className=" flex items-center space-x-2">
-          <span className="hidden font-bold sm:inline-block">AuctionHub</span>
-        </Link>
+          <Link href="/" className="flex items-center space-x-2">
+            <span className="hidden font-bold sm:inline-block">AuctionHub</span>
+          </Link>
+        </div>
 
-        <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end ">
-          <NavigationMenu className="hidden md:flex">
+        <div className="flex flex-1 items-center justify-end space-x-2">
+          <NavigationMenu className="hidden lg:flex">
             <NavigationMenuList>
               {navigationItems.map((item) => (
                 <NavigationMenuItem key={item.title}>
@@ -273,12 +275,12 @@ export default function Navbar() {
             </NavigationMenuList>
           </NavigationMenu>
 
-          <div className="flex w-full items-center gap-2 md:w-auto ">
+          <div className="flex items-center gap-2">
             <LocationSelector />
 
             <Button
               variant="ghost"
-              className="flex-1 justify-start text-base md:w-[260px]"
+              className=" flex md:flex-1 md:justify-start md:text-base lg:w-[260px]"
               onClick={() => setShowSearch(true)}
             >
               <Search className="mr-2 h-4 w-4" />
@@ -287,11 +289,11 @@ export default function Navbar() {
           </div>
 
           <div className="flex items-center gap-2">
-            <Button variant="ghost" size="icon" className="hidden md:flex">
+            <Button variant="ghost" size="icon" className="hidden lg:flex">
               <MessageSquare className="h-5 w-5" />
               <span className="sr-only">Messages</span>
             </Button>
-            <Button variant="ghost" size="icon" className="hidden md:flex">
+            <Button variant="ghost" size="icon" className="hidden lg:flex">
               <Heart className="h-5 w-5" />
               <span className="sr-only">Favorites</span>
             </Button>
@@ -308,10 +310,10 @@ export default function Navbar() {
                       />
                       <AvatarFallback>{user?.name?.[0] || 'U'}</AvatarFallback>
                     </Avatar>
-                    <span className="ml-2 hidden md:inline-block">
+                    <span className="ml-2 hidden lg:inline-block">
                       {user?.name}
                     </span>
-                    <ChevronDown className="h-4 w-4 hidden md:inline-block" />
+                    <ChevronDown className="h-4 w-4 hidden lg:inline-block" />
                   </Button>
                 </DropdownMenuTrigger>
 
@@ -319,13 +321,11 @@ export default function Navbar() {
                   <DropdownMenuLabel>My Account</DropdownMenuLabel>
                   <DropdownMenuSeparator />
 
-                  {/* Profile Navigation */}
                   <DropdownMenuItem onClick={() => router.push('/profile')}>
                     <User className="mr-2 h-4 w-4" />
                     Profile
                   </DropdownMenuItem>
 
-                  {/* Role-Based Dashboard Navigation */}
                   <DropdownMenuItem onClick={navigateToDashboard}>
                     <Settings className="mr-2 h-4 w-4" />
                     Dashboard
@@ -333,7 +333,6 @@ export default function Navbar() {
 
                   <DropdownMenuSeparator />
 
-                  {/* Logout Action */}
                   <DropdownMenuItem onClick={handleLogout}>
                     <Icons.logout className="mr-2 h-4 w-4" />
                     Logout
@@ -342,7 +341,6 @@ export default function Navbar() {
               </DropdownMenu>
             ) : (
               <Button variant="ghost" onClick={() => router.push('/login')}>
-                {/* <User className="w-4 h-4 mr-2" /> */}
                 Login
               </Button>
             )}

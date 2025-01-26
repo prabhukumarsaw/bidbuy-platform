@@ -8,7 +8,7 @@ const Header = () => {
   return (
     <>
       <header
-        className={`sticky top-0 z-50 bg-background transition-transform duration-300 `}
+        className={`sticky top-0 z-50 bg-background transition-transform duration-300 w-full`}
       >
         <Navbar />
       </header>
