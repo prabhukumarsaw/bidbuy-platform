@@ -85,7 +85,7 @@ export interface AuctionFilters {
 }
 
 export interface AuctionItem {
-  id: string;
+  id: number;
   title: string;
   description?: string;
   startingPrice: number;
@@ -105,6 +105,7 @@ export interface AuctionItem {
   paymentStatus: 'PENDING' | 'PROCESSING' | 'COMPLETED' | 'FAILED' | 'REFUNDED';
   winnerId?: string;
   views: number;
+  seller: Seller;
   totalBids: number;
   createdAt: string;
   updatedAt: string;

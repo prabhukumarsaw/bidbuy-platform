@@ -2,9 +2,6 @@
 CREATE TYPE "AuctionStatus" AS ENUM ('DRAFT', 'SCHEDULED', 'ACTIVE', 'ENDED', 'CANCELLED', 'SOLD');
 
 -- CreateEnum
-CREATE TYPE "AuctionState" AS ENUM ('RUNNING', 'PAUSED', 'RESUMED', 'STOPPED');
-
--- CreateEnum
 CREATE TYPE "PaymentStatus" AS ENUM ('PENDING', 'PROCESSING', 'COMPLETED', 'FAILED', 'REFUNDED');
 
 -- CreateEnum
@@ -32,6 +29,7 @@ CREATE TABLE "User" (
     "emailVerified" BOOLEAN NOT NULL DEFAULT false,
     "verificationToken" TEXT,
     "image" TEXT,
+    "active" BOOLEAN NOT NULL DEFAULT true,
     "resetToken" TEXT,
     "resetTokenExpires" TIMESTAMP(3),
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -51,7 +49,12 @@ CREATE TABLE "Seller" (
     "state" TEXT,
     "postalCode" TEXT,
     "country" TEXT NOT NULL,
+    "status" TEXT DEFAULT 'PENDING',
     "verified" BOOLEAN NOT NULL DEFAULT false,
+    "verifiedAt" TIMESTAMP(3),
+    "suspended" BOOLEAN NOT NULL DEFAULT false,
+    "suspendedAt" TIMESTAMP(3),
+    "suspensionReason" TEXT,
     "gstNumber" TEXT,
     "gstDocument" TEXT,
     "aadhaarNumber" TEXT,
@@ -69,18 +72,19 @@ CREATE TABLE "Category" (
     "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "description" TEXT,
+    "icon" TEXT,
     "parentId" TEXT,
-    "createdBy" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "isActive" BOOLEAN NOT NULL DEFAULT true,
+    "userId" TEXT,
 
     CONSTRAINT "Category_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "auctions" (
-    "id" TEXT NOT NULL,
+    "id" SERIAL NOT NULL,
     "title" TEXT NOT NULL,
     "description" TEXT,
     "startingPrice" DOUBLE PRECISION NOT NULL,
@@ -90,9 +94,7 @@ CREATE TABLE "auctions" (
     "startTime" TIMESTAMP(3) NOT NULL,
     "endTime" TIMESTAMP(3) NOT NULL,
     "creatorId" TEXT NOT NULL,
-    "sellerId" TEXT NOT NULL,
-    "status" "AuctionStatus" NOT NULL DEFAULT 'SCHEDULED',
-    "auctionState" "AuctionState" NOT NULL DEFAULT 'RUNNING',
+    "status" "AuctionStatus" NOT NULL DEFAULT 'DRAFT',
     "categoryId" TEXT NOT NULL,
     "featuredImage" TEXT,
     "images" TEXT[],
@@ -103,6 +105,7 @@ CREATE TABLE "auctions" (
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "metadata" JSONB,
+    "sellerId" TEXT,
 
     CONSTRAINT "auctions_pkey" PRIMARY KEY ("id")
 );
@@ -111,7 +114,7 @@ CREATE TABLE "auctions" (
 CREATE TABLE "Bid" (
     "id" TEXT NOT NULL,
     "amount" DOUBLE PRECISION NOT NULL,
-    "auctionId" TEXT NOT NULL,
+    "auctionId" INTEGER NOT NULL,
     "bidderId" TEXT NOT NULL,
     "status" "BidStatus" NOT NULL DEFAULT 'PLACED',
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -128,7 +131,7 @@ CREATE TABLE "Notification" (
     "title" TEXT NOT NULL,
     "message" TEXT NOT NULL,
     "userId" TEXT NOT NULL,
-    "auctionId" TEXT,
+    "auctionId" INTEGER,
     "read" BOOLEAN NOT NULL DEFAULT false,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "expiresAt" TIMESTAMP(3),
@@ -141,7 +144,7 @@ CREATE TABLE "Report" (
     "id" TEXT NOT NULL,
     "type" "ReportType" NOT NULL,
     "description" TEXT NOT NULL,
-    "auctionId" TEXT NOT NULL,
+    "auctionId" INTEGER NOT NULL,
     "reporterId" TEXT NOT NULL,
     "status" "ReportStatus" NOT NULL DEFAULT 'PENDING',
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -234,13 +237,7 @@ CREATE UNIQUE INDEX "Category_name_key" ON "Category"("name");
 CREATE INDEX "Category_parentId_idx" ON "Category"("parentId");
 
 -- CreateIndex
-CREATE INDEX "Category_createdBy_idx" ON "Category"("createdBy");
-
--- CreateIndex
 CREATE INDEX "auctions_creatorId_idx" ON "auctions"("creatorId");
-
--- CreateIndex
-CREATE INDEX "auctions_sellerId_idx" ON "auctions"("sellerId");
 
 -- CreateIndex
 CREATE INDEX "auctions_status_idx" ON "auctions"("status");
@@ -291,16 +288,16 @@ ALTER TABLE "Seller" ADD CONSTRAINT "Seller_userId_fkey" FOREIGN KEY ("userId") 
 ALTER TABLE "Category" ADD CONSTRAINT "Category_parentId_fkey" FOREIGN KEY ("parentId") REFERENCES "Category"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Category" ADD CONSTRAINT "Category_createdBy_fkey" FOREIGN KEY ("createdBy") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Category" ADD CONSTRAINT "Category_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "auctions" ADD CONSTRAINT "auctions_sellerId_fkey" FOREIGN KEY ("sellerId") REFERENCES "Seller"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "auctions" ADD CONSTRAINT "auctions_creatorId_fkey" FOREIGN KEY ("creatorId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "auctions" ADD CONSTRAINT "auctions_categoryId_fkey" FOREIGN KEY ("categoryId") REFERENCES "Category"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "auctions" ADD CONSTRAINT "auctions_creatorId_fkey" FOREIGN KEY ("creatorId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "auctions" ADD CONSTRAINT "auctions_sellerId_fkey" FOREIGN KEY ("sellerId") REFERENCES "Seller"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Bid" ADD CONSTRAINT "Bid_auctionId_fkey" FOREIGN KEY ("auctionId") REFERENCES "auctions"("id") ON DELETE CASCADE ON UPDATE CASCADE;

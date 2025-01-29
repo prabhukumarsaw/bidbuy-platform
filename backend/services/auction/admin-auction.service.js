@@ -91,6 +91,16 @@ class AuctionService {
       // Schedule events if the auction is SCHEDULED
       if (initialStatus === 'SCHEDULED') {
         await this.scheduleAuctionEvents(auction);
+        await auctionQueue.add(
+          'update-auction-status',
+          {
+            auctionId: auction.id,
+            startTime: auctionData.startTime,
+          },
+          {
+            delay: new Date(auctionData.startTime) - Date.now(), // Delay job until the start time
+          }
+        );
       }
 
       return auction;
@@ -344,7 +354,7 @@ class AuctionService {
     }
   }
 
-  async updateAuctionStatus(id, status, sellerId) {
+  async updateAuctionStatus(id, status) {
     try {
       console.log(`Updating auction status. ID: ${id}, Status: ${status}`);
 

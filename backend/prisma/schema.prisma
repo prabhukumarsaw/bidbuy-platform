@@ -84,7 +84,7 @@ model Category {
 }
 
 model Auction {
-  id              String         @id @default(cuid())
+  id              Int            @id @default(autoincrement())
   title           String
   description     String?
   startingPrice   Float
@@ -122,7 +122,7 @@ model Auction {
 model Bid {
   id         String    @id @default(cuid())
   amount     Float
-  auctionId  String
+  auctionId  Int
   auction    Auction   @relation(fields: [auctionId], references: [id], onDelete: Cascade)
   bidderId   String
   bidder     User      @relation(fields: [bidderId], references: [id], onDelete: Cascade)
@@ -142,7 +142,7 @@ model Notification {
   message   String
   userId    String
   user      User             @relation(fields: [userId], references: [id], onDelete: Cascade)
-  auctionId String?
+  auctionId Int?
   auction   Auction?         @relation(fields: [auctionId], references: [id], onDelete: SetNull)
   read      Boolean          @default(false)
   createdAt DateTime         @default(now())
@@ -156,7 +156,7 @@ model Report {
   id          String       @id @default(cuid())
   type        ReportType
   description String
-  auctionId   String
+  auctionId   Int
   auction     Auction      @relation(fields: [auctionId], references: [id], onDelete: Cascade)
   reporterId  String
   reporter    User         @relation(fields: [reporterId], references: [id], onDelete: Cascade)

@@ -18,7 +18,7 @@ interface AuctionProps {
 // Function to map AuctionItem to UpcomingAuctionItem
 const mapAuctionToActiveItem = (auction: AuctionItem): AuctionProps => {
   return {
-    id: parseInt(auction.id.replace(/\D/g, ''), 10), // Convert ID to a number
+    id: auction.id, // Convert ID to a number
     title: auction.title,
     image: auction.featuredImage,
     currentBid: auction.currentPrice,

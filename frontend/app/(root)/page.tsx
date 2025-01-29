@@ -19,7 +19,7 @@ export default function Home() {
     (auction) => auction.status === 'ACTIVE'
   );
   const upcomingAuctions = auctions.filter(
-    (auction) => new Date(auction.startTime) > new Date()
+    (auction) => new Date(auction.startTime).getTime() > new Date().getTime()
   );
   const trendingAuctions = auctions.filter((auction) => auction.totalBids > 0); // Example logic for trending auctions
 
@@ -27,6 +27,8 @@ export default function Home() {
     return <div>Loading...</div>;
   }
   console.log('activeAuctions', activeAuctions);
+  console.log('trendingAuctions', trendingAuctions);
+  console.log('upcomingAuctions', upcomingAuctions);
 
   return (
     <>
@@ -58,7 +60,7 @@ export default function Home() {
 
       {/* Upcoming Auctions */}
       <section className="">
-        {/* <UpcomingAuction auctions={upcomingAuctions} /> */}
+        <UpcomingAuction auctions={upcomingAuctions} />
       </section>
     </>
   );
