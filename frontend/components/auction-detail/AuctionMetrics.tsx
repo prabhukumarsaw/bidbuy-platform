@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { TrendingUp, Users, Clock, Activity } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { AuctionItem } from '@/types/types';

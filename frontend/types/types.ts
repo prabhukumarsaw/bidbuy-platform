@@ -95,6 +95,7 @@ export interface AuctionItem {
   startTime: string;
   endTime: string;
   creatorId: string;
+  category: Category;
   status: 'DRAFT' | 'SCHEDULED' | 'ACTIVE' | 'ENDED' | 'CANCELLED' | 'SOLD';
   auctionState: 'RUNNING' | 'PAUSED' | 'RESUMED' | 'STOPPED';
   categoryId: string;

@@ -116,7 +116,8 @@ export default function CreateAuctionForm() {
     queryFn: () => sellerApi.getAllCategories(),
   });
 
-  const categories = categoriesData?.categories ?? [];
+  // const categories = categoriesData?.categories ?? [];
+  const categories = categoriesData?.data ?? [];
 
   const form = useForm<CreateAuctionValues>({
     resolver: zodResolver(createAuctionSchema),

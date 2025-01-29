@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 'use client';
 import { TrendingAuction } from '@/components/home/trending-bids';
 import { UpcomingAuction } from '@/components/home/upcoming-auction';

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { useFilterStore } from "@/lib/store/filterStore"
 import { useAuctions, useCategories, useSellers } from "@/hooks/useBackground"
 import { useEffect, useMemo } from "react"

@@ -41,14 +41,14 @@ export function ViewAuctionDialog({
               alt={auction.title}
               className="absolute inset-0 w-full h-full object-cover"
             />
-            {auction.premium && (
+            {/* {auction.premium && (
               <div className="absolute top-4 right-4">
                 <Badge variant="secondary" className="bg-yellow-500">
                   <Icons.star className="h-4 w-4 mr-1" />
                   Premium
                 </Badge>
               </div>
-            )}
+            )} */}
           </div>
 
           <div className="grid gap-4">
@@ -72,11 +72,11 @@ export function ViewAuctionDialog({
                 </p>
                 <Badge
                   variant={
-                    auction.status === 'active'
+                    auction.status === 'ACTIVE'
                       ? 'success'
-                      : auction.status === 'ended'
+                      : auction.status === 'ENDED'
                       ? 'destructive'
-                      : 'warning'
+                      : 'destructive'
                   }
                 >
                   {auction.status}

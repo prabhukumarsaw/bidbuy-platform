@@ -246,9 +246,9 @@ export function EditProfileDialog({ profile }: EditProfileDialogProps) {
               <Button
                 type="submit"
                 className="bg-blue-600 text-white hover:bg-blue-700"
-                disabled={mutation.isLoading}
+                disabled={mutation.isPending}
               >
-                {mutation.isLoading && (
+                {mutation.isPending && (
                   <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
                 )}
                 Save Changes
