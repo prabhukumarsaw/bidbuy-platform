@@ -48,6 +48,7 @@ export function LiveAuction({ auctions }: AuctionProps) {
 
   // Map active auctions to UpcomingAuctionItem structure
   const ActiveAuctionItems = activeAuctions.map(mapAuctionToActiveItem);
+  console.log(ActiveAuctionItems, 'egeknejn');
 
   const showMore = () => {
     setVisibleItems((prevVisible) =>

@@ -22,6 +22,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
+import Link from 'next/link';
 
 interface BidCardProps {
   item: {
@@ -179,9 +180,11 @@ export const BidCard: React.FC<BidCardProps> = ({ item, index }) => {
                   </DialogContent>
                 </Dialog>
 
-                <Button variant="action">
-                  Place Bid <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
+                <Link href={`/auction/${item.lotNumber}`}>
+                  <Button variant="action">
+                    Place Bid <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </Link>
               </div>
             </div>
           </CardContent>
