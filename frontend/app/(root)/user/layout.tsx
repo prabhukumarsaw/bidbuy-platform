@@ -1,14 +1,8 @@
-import { Metadata } from 'next';
 import Image from 'next/image';
 
 import { Separator } from '@/components/ui/separator';
 import { SidebarNav } from './components/sidebar-nav';
 import AuthGuard from '@/lib/auth/AuthGaurd';
-
-export const metadata: Metadata = {
-  title: 'Forms',
-  description: 'Advanced form example using react-hook-form and Zod.',
-};
 
 const sidebarNavItems = [
   {

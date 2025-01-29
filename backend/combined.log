@@ -533,3 +533,9 @@
 {"level":"info","message":"Client connected: Y8dPlEI5bcNFJquSAAAe","timestamp":"2025-01-26T16:15:29.908Z"}
 {"level":"info","message":"Client Y8dPlEI5bcNFJquSAAAe joined auction cm6c64j220001jrcb9s3ikg0p","timestamp":"2025-01-26T16:15:30.516Z"}
 {"level":"info","message":"Client disconnected: Y8dPlEI5bcNFJquSAAAe","timestamp":"2025-01-26T16:15:58.017Z"}
+{"level":"info","message":"Socket service initialized successfully","timestamp":"2025-01-28T16:28:00.858Z"}
+{"level":"info","message":"Connected to Redis server","timestamp":"2025-01-28T16:28:01.024Z"}
+{"level":"info","message":"Redis server is ready","timestamp":"2025-01-28T16:28:01.038Z"}
+{"level":"info","message":"Socket service initialized successfully","timestamp":"2025-01-29T06:51:21.724Z"}
+{"level":"info","message":"Connected to Redis server","timestamp":"2025-01-29T06:51:21.797Z"}
+{"level":"info","message":"Redis server is ready","timestamp":"2025-01-29T06:51:21.801Z"}
