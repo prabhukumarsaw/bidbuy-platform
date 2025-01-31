@@ -27,6 +27,7 @@ export interface Bid {
   id: string;
   amount: number;
   auctionId: string;
+  auction: AuctionItem;
   bidderId: string;
   status: BidStatus;
   createdAt: string;
@@ -151,6 +152,10 @@ export interface User {
   name: string;
   image?: string;
   role: 'USER' | 'ADMIN' | 'SELLER';
+  emailVerified: boolean;
+  mobile?: string;
+  address?: string;
+  bio?: string;
   active: boolean;
   createdAt: string;
   updatedAt: string;
@@ -229,4 +234,20 @@ export interface SortingState {
   sortBy: string;
   sortOrder: SortOrder;
   onSort: (sortBy: string, sortOrder: SortOrder) => void;
+}
+
+export interface Notification {
+  id: string;
+  type: string;
+  title: string;
+  message: string;
+  read: boolean;
+  createdAt: Date;
+  expiresAt?: Date;
+}
+export interface InboxMessage {
+  id: string;
+  content: string;
+  read: boolean;
+  createdAt: Date;
 }

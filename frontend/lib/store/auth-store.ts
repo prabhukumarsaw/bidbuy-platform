@@ -1,3 +1,4 @@
+import { Bid } from '@/types/types';
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 
@@ -7,6 +8,9 @@ interface User {
   name: string | null;
   role: 'USER' | 'SELLER' | 'ADMIN';
   image?: string | null;
+  password?: string; 
+  bids: Bid,  // Include bids related to the user
+ 
 }
 
 interface AuthState {
@@ -20,7 +24,7 @@ interface AuthState {
 
 export const useAuthStore = create<AuthState>()(
   persist(
-    (set) => ({
+    (set, get) => ({
       user: null,
       token: null,
       refreshToken: null,

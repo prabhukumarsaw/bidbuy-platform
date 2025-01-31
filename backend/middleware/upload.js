@@ -35,8 +35,14 @@ const adminAuctionUpload = multer({
   { name: 'images', maxCount: 4 }, // Up to 4 files for additional images
 ]);
 
+const profileImageUpload = multer({
+  storage: createStorage('profile-images'),
+  limits: { fileSize: 2 * 1024 * 1024 }, // Limit file size to 2MB
+}).single('profileImage');
+
 // Export middleware for use in routes
 module.exports = {
   sellerAuctionUpload,
   adminAuctionUpload,
+  profileImageUpload,
 };

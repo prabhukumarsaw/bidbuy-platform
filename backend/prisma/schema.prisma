@@ -16,6 +16,9 @@ model User {
   emailVerified     Boolean        @default(false)
   verificationToken String?
   image             String?
+  mobile            String?        @default("")
+  address           String?        @default("")
+  bio               String?        @default("")
   active            Boolean        @default(true)
   resetToken        String?
   resetTokenExpires DateTime?

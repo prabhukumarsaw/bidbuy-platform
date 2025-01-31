@@ -82,7 +82,7 @@ class BidController {
           title: 'You have been outbid!',
           message: `Someone has placed a higher bid of ${amount} on ${auction.title}`,
           userId: auction.winnerId,
-          auctionId,
+          auctionId: parseInt(auctionId, 10),
         });
       }
 

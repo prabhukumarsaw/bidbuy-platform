@@ -33,12 +33,13 @@ const register = async (req, res, next) => {
 
     res.status(201).json({
       status: 'success',
-      message: "Registration successful. Please verify your email.",
+      message: 'Registration successful. Please verify your email.',
       data: {
         user: {
           id: user.id,
           email: user.email,
           name: user.name,
+          image: user.image,
         },
         token,
         refreshToken,
@@ -53,7 +54,9 @@ const login = async (req, res, next) => {
   try {
     const { email, password } = req.body;
 
-    const user = await prisma.user.findUnique({ where: { email } });
+    const user = await prisma.user.findUnique({
+      where: { email },
+    });
     if (!user || !(await bcrypt.compare(password, user.password))) {
       return next(new AppError('Invalid email or password', 401));
     }
@@ -73,6 +76,7 @@ const login = async (req, res, next) => {
           email: user.email,
           name: user.name,
           role: user.role,
+          image: user.image,
         },
         token,
         refreshToken,
@@ -123,7 +127,6 @@ const verifyEmail = async (req, res, next) => {
   }
 };
 
-
 const forgotPassword = async (req, res, next) => {
   try {
     const { email } = req.body;
@@ -157,15 +160,14 @@ const forgotPassword = async (req, res, next) => {
 
 // Social login/registration
 const socialLogin = async (req, res, next) => {
-  
   try {
     const { provider, providerId, email, name, image } = req.body;
 
-    const accountType = "oauth";
+    const accountType = 'oauth';
 
-    let user = await prisma.user.findUnique({ 
+    let user = await prisma.user.findUnique({
       where: { email },
-      include: { accounts: true }
+      include: { accounts: true },
     });
 
     if (!user) {
@@ -190,7 +192,8 @@ const socialLogin = async (req, res, next) => {
     } else {
       // Link account if user exists but hasn't linked this provider
       const existingAccount = user.accounts.find(
-        acc => acc.provider === provider && acc.providerAccountId === providerId
+        (acc) =>
+          acc.provider === provider && acc.providerAccountId === providerId
       );
 
       if (!existingAccount) {
@@ -220,7 +223,6 @@ const socialLogin = async (req, res, next) => {
     next(error);
   }
 };
-
 
 const resendVerification = async (req, res, next) => {
   try {

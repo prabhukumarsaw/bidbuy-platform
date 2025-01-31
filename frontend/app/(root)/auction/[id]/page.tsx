@@ -174,7 +174,7 @@ export default function AuctionDetailsPage() {
 
               {/* Product Details */}
               <ProductDetails auction={auction} />
-              <PriceAnalytics auctionId={id as string} />
+              <PriceAnalytics auctionId={id } />
               {/* Auction Status */}
               <AuctionStatus auction={auction} />
 
@@ -182,7 +182,7 @@ export default function AuctionDetailsPage() {
               <BidForm
                 currentPrice={auction.currentPrice}
                 minIncrement={auction.minBidIncrement}
-                auctionId={id as string}
+                auctionId={id}
               />
 
               <Separator />

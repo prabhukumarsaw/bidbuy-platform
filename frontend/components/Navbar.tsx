@@ -46,6 +46,10 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 const navigationItems = [
   {
+    title: 'Home',
+    href: '/',
+  },
+  {
     title: 'Explore',
     items: [
       {
@@ -69,14 +73,11 @@ const navigationItems = [
     title: 'Services',
     href: '/services',
   },
-  {
-    title: 'Need Help ?',
-    href: '/help',
-  },
+
   {
     title: 'Auction',
     href: '/auction',
-    badge: 'PRO',
+    badge: 'PLUS',
   },
 ];
 
@@ -132,7 +133,7 @@ export default function Navbar() {
           : 'bg-transparent'
       )}
     >
-      <div className="container mx-auto flex h-16 items-center justify-between px-4">
+      <div className="mx-auto flex h-[7vh] items-center justify-between px-4">
         <div className="flex items-center">
           <Sheet>
             <SheetTrigger asChild>
@@ -279,7 +280,7 @@ export default function Navbar() {
             <LocationSelector />
 
             <Button
-              variant="ghost"
+              variant="outline"
               className=" flex md:flex-1 md:justify-start md:text-base lg:w-[260px]"
               onClick={() => setShowSearch(true)}
             >
@@ -321,7 +322,7 @@ export default function Navbar() {
                   <DropdownMenuLabel>My Account</DropdownMenuLabel>
                   <DropdownMenuSeparator />
 
-                  <DropdownMenuItem onClick={() => router.push('/profile')}>
+                  <DropdownMenuItem onClick={() => router.push('/user')}>
                     <User className="mr-2 h-4 w-4" />
                     Profile
                   </DropdownMenuItem>

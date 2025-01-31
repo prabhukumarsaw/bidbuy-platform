@@ -996,3 +996,288 @@
 {"level":"info","message":"Client connected: trrUQUqVx-1qB-BTAAAD","timestamp":"2025-01-29T19:38:29.340Z"}
 {"level":"info","message":"Client trrUQUqVx-1qB-BTAAAD joined auction 4","timestamp":"2025-01-29T19:38:29.351Z"}
 {"isOperational":true,"level":"error","message":"Error validating auction: 400","stack":"Error: 400\n    at AuctionService.validateAuctionForBidding (F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\services\\auction\\getAuction.service.js:214:15)\n    at async placeBid (F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\controllers\\bid\\bid-controller.js:44:23)","status":"error","statusCode":"Auction is not active","timestamp":"2025-01-29T19:38:35.964Z"}
+{"level":"info","message":"Socket service initialized successfully","timestamp":"2025-01-29T19:42:19.239Z"}
+{"level":"info","message":"Connected to Redis server","timestamp":"2025-01-29T19:42:19.293Z"}
+{"level":"info","message":"Redis server is ready","timestamp":"2025-01-29T19:42:19.310Z"}
+{"level":"info","message":"Client connected: Cit-lBhVUqco-jT5AAAC","timestamp":"2025-01-29T19:42:38.882Z"}
+{"level":"info","message":"Client Cit-lBhVUqco-jT5AAAC joined auction 4","timestamp":"2025-01-29T19:42:38.906Z"}
+{"level":"info","message":"Client Cit-lBhVUqco-jT5AAAC joined auction 4","timestamp":"2025-01-29T19:42:39.336Z"}
+{"level":"info","message":"Client Cit-lBhVUqco-jT5AAAC left auction 4","timestamp":"2025-01-29T19:42:39.365Z"}
+{"level":"info","message":"Client disconnected: Cit-lBhVUqco-jT5AAAC","timestamp":"2025-01-29T19:42:39.370Z"}
+{"level":"info","message":"Client connected: -7lgZqlHtYbtcA19AAAE","timestamp":"2025-01-29T19:42:39.403Z"}
+{"level":"info","message":"Client -7lgZqlHtYbtcA19AAAE joined auction 4","timestamp":"2025-01-29T19:42:39.416Z"}
+{"level":"info","message":"Client disconnected: -7lgZqlHtYbtcA19AAAE","timestamp":"2025-01-29T19:42:58.855Z"}
+{"level":"info","message":"Client connected: fkXv-UIyvRzOr7mUAAAH","timestamp":"2025-01-29T19:45:25.632Z"}
+{"level":"info","message":"Client fkXv-UIyvRzOr7mUAAAH joined auction 2","timestamp":"2025-01-29T19:45:25.637Z"}
+{"level":"info","message":"Client fkXv-UIyvRzOr7mUAAAH joined auction 2","timestamp":"2025-01-29T19:45:25.748Z"}
+{"level":"info","message":"Client disconnected: fkXv-UIyvRzOr7mUAAAH","timestamp":"2025-01-29T19:45:25.764Z"}
+{"level":"info","message":"Client connected: YOjLTPSyiA1rYHXGAAAJ","timestamp":"2025-01-29T19:45:25.813Z"}
+{"level":"info","message":"Client YOjLTPSyiA1rYHXGAAAJ joined auction 2","timestamp":"2025-01-29T19:45:25.837Z"}
+{"level":"info","message":"Client disconnected: YOjLTPSyiA1rYHXGAAAJ","timestamp":"2025-01-29T19:45:54.740Z"}
+{"level":"info","message":"Socket service initialized successfully","timestamp":"2025-01-30T16:16:34.911Z"}
+{"level":"info","message":"Connected to Redis server","timestamp":"2025-01-30T16:16:35.076Z"}
+{"level":"info","message":"Redis server is ready","timestamp":"2025-01-30T16:16:35.089Z"}
+{"level":"info","message":"Client connected: Jz6ubE3P07mf8CxTAAAC","timestamp":"2025-01-30T16:41:41.205Z"}
+{"level":"info","message":"Client Jz6ubE3P07mf8CxTAAAC joined auction 2","timestamp":"2025-01-30T16:41:41.260Z"}
+{"level":"info","message":"Client Jz6ubE3P07mf8CxTAAAC joined auction 2","timestamp":"2025-01-30T16:41:41.760Z"}
+{"level":"info","message":"Client Jz6ubE3P07mf8CxTAAAC left auction 2","timestamp":"2025-01-30T16:41:41.773Z"}
+{"level":"info","message":"Client disconnected: Jz6ubE3P07mf8CxTAAAC","timestamp":"2025-01-30T16:41:41.775Z"}
+{"level":"info","message":"Client connected: uEr-1UOODXmuZ_rXAAAE","timestamp":"2025-01-30T16:41:41.802Z"}
+{"level":"info","message":"Client uEr-1UOODXmuZ_rXAAAE joined auction 2","timestamp":"2025-01-30T16:41:41.916Z"}
+{"level":"info","message":"Client disconnected: uEr-1UOODXmuZ_rXAAAE","timestamp":"2025-01-30T16:42:06.945Z"}
+{"isOperational":true,"level":"error","message":"Authentication error: Invalid token","stack":"Error: Invalid token\n    at verifyToken (F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\middleware\\auth.middleware.js:66:11)\n    at protect (F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\middleware\\auth.middleware.js:23:21)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)","status":"fail","statusCode":401,"timestamp":"2025-01-30T17:46:32.521Z"}
+{"level":"error","message":"Authentication failed","stack":"Error: Authentication failed\n    at protect (F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\middleware\\auth.middleware.js:35:10)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)","statusCode":401,"timestamp":"2025-01-30T17:46:32.532Z"}
+{"level":"info","message":"Fetching dashboard stats...","timestamp":"2025-01-30T17:47:06.719Z"}
+{"level":"info","message":"Fetching dashboard stats...","timestamp":"2025-01-30T17:47:24.035Z"}
+{"level":"info","message":"Fetching dashboard stats...","timestamp":"2025-01-30T17:47:45.120Z"}
+{"level":"info","message":"Fetching dashboard stats...","timestamp":"2025-01-30T18:04:49.758Z"}
+{"level":"info","message":"Fetching dashboard stats...","timestamp":"2025-01-30T18:13:57.023Z"}
+{"level":"info","message":"Processing status update for auction 4 to ACTIVE","timestamp":"2025-01-30T18:30:00.372Z"}
+{"clientVersion":"5.22.0","level":"error","message":"Error logging action: \nInvalid `prisma.actionLog.create()` invocation in\nF:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\services\\action-log.service.js:7:37\n\n  4 class ActionLogService {\n  5   async logAction(data) {\n  6     try {\n→ 7       return await prisma.actionLog.create({\n            data: {\n              action: \"UPDATE_AUCTION_STATUS\",\n              description: \"Updated auction status to ACTIVE: undefined\",\n              userId: undefined,\n              sellerId: undefined,\n          +   user: {\n          +     create: UserCreateWithoutActionLogsInput | UserUncheckedCreateWithoutActionLogsInput,\n          +     connectOrCreate: UserCreateOrConnectWithoutActionLogsInput,\n          +     connect: UserWhereUniqueInput\n          +   }\n            }\n          })\n\nArgument `user` is missing.","name":"PrismaClientValidationError","stack":"PrismaClientValidationError: \nInvalid `prisma.actionLog.create()` invocation in\nF:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\services\\action-log.service.js:7:37\n\n  4 class ActionLogService {\n  5   async logAction(data) {\n  6     try {\n→ 7       return await prisma.actionLog.create({\n            data: {\n              action: \"UPDATE_AUCTION_STATUS\",\n              description: \"Updated auction status to ACTIVE: undefined\",\n              userId: undefined,\n              sellerId: undefined,\n          +   user: {\n          +     create: UserCreateWithoutActionLogsInput | UserUncheckedCreateWithoutActionLogsInput,\n          +     connectOrCreate: UserCreateOrConnectWithoutActionLogsInput,\n          +     connect: UserWhereUniqueInput\n          +   }\n            }\n          })\n\nArgument `user` is missing.\n    at wn (F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\node_modules\\@prisma\\client\\runtime\\library.js:29:1363)\n    at $n.handleRequestError (F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\node_modules\\@prisma\\client\\runtime\\library.js:121:6958)\n    at $n.handleAndLogRequestError (F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\node_modules\\@prisma\\client\\runtime\\library.js:121:6623)\n    at $n.request (F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\node_modules\\@prisma\\client\\runtime\\library.js:121:6307)\n    at async l (F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\node_modules\\@prisma\\client\\runtime\\library.js:130:9633)\n    at async ActionLogService.logAction (F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\services\\action-log.service.js:7:14)\n    at async Promise.all (index 0)\n    at async Worker.connection.connection [as processFn] (F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\config\\queueProcessor.js:44:7)\n    at async F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\node_modules\\bullmq\\dist\\cjs\\classes\\worker.js:516:32\n    at async Worker.retryIfFailed (F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\node_modules\\bullmq\\dist\\cjs\\classes\\worker.js:743:24)","timestamp":"2025-01-30T18:30:00.782Z"}
+{"clientVersion":"5.22.0","level":"error","message":"Error processing auction 4 status update to ACTIVE: \nInvalid `prisma.actionLog.create()` invocation in\nF:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\services\\action-log.service.js:7:37\n\n  4 class ActionLogService {\n  5   async logAction(data) {\n  6     try {\n→ 7       return await prisma.actionLog.create({\n            data: {\n              action: \"UPDATE_AUCTION_STATUS\",\n              description: \"Updated auction status to ACTIVE: undefined\",\n              userId: undefined,\n              sellerId: undefined,\n          +   user: {\n          +     create: UserCreateWithoutActionLogsInput | UserUncheckedCreateWithoutActionLogsInput,\n          +     connectOrCreate: UserCreateOrConnectWithoutActionLogsInput,\n          +     connect: UserWhereUniqueInput\n          +   }\n            }\n          })\n\nArgument `user` is missing.","name":"PrismaClientValidationError","stack":"PrismaClientValidationError: \nInvalid `prisma.actionLog.create()` invocation in\nF:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\services\\action-log.service.js:7:37\n\n  4 class ActionLogService {\n  5   async logAction(data) {\n  6     try {\n→ 7       return await prisma.actionLog.create({\n            data: {\n              action: \"UPDATE_AUCTION_STATUS\",\n              description: \"Updated auction status to ACTIVE: undefined\",\n              userId: undefined,\n              sellerId: undefined,\n          +   user: {\n          +     create: UserCreateWithoutActionLogsInput | UserUncheckedCreateWithoutActionLogsInput,\n          +     connectOrCreate: UserCreateOrConnectWithoutActionLogsInput,\n          +     connect: UserWhereUniqueInput\n          +   }\n            }\n          })\n\nArgument `user` is missing.\n    at wn (F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\node_modules\\@prisma\\client\\runtime\\library.js:29:1363)\n    at $n.handleRequestError (F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\node_modules\\@prisma\\client\\runtime\\library.js:121:6958)\n    at $n.handleAndLogRequestError (F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\node_modules\\@prisma\\client\\runtime\\library.js:121:6623)\n    at $n.request (F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\node_modules\\@prisma\\client\\runtime\\library.js:121:6307)\n    at async l (F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\node_modules\\@prisma\\client\\runtime\\library.js:130:9633)\n    at async ActionLogService.logAction (F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\services\\action-log.service.js:7:14)\n    at async Promise.all (index 0)\n    at async Worker.connection.connection [as processFn] (F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\config\\queueProcessor.js:44:7)\n    at async F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\node_modules\\bullmq\\dist\\cjs\\classes\\worker.js:516:32\n    at async Worker.retryIfFailed (F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\node_modules\\bullmq\\dist\\cjs\\classes\\worker.js:743:24)","timestamp":"2025-01-30T18:30:00.786Z"}
+{"clientVersion":"5.22.0","level":"error","message":"Error creating notification: \nInvalid `prisma.notification.create()` invocation in\nF:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\services\\notification\\notification.service.js:9:54\n\n  6 class NotificationService {\n  7   async createNotification(data) {\n  8     try {\n→ 9       const notification = await prisma.notification.create({\n            data: {\n              type: \"SYSTEM\",\n              title: \"Auction Status Updated\",\n              message: \"Auction \\\"undefined\\\" status changed to ACTIVE\",\n              userId: undefined,\n              auctionId: 4,\n              expiresAt: new Date(\"2025-03-01T18:30:00.665Z\"),\n          +   user: {\n          +     create: UserCreateWithoutNotificationsInput | UserUncheckedCreateWithoutNotificationsInput,\n          +     connectOrCreate: UserCreateOrConnectWithoutNotificationsInput,\n          +     connect: UserWhereUniqueInput\n          +   }\n            }\n          })\n\nArgument `user` is missing.","name":"PrismaClientValidationError","stack":"PrismaClientValidationError: \nInvalid `prisma.notification.create()` invocation in\nF:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\services\\notification\\notification.service.js:9:54\n\n  6 class NotificationService {\n  7   async createNotification(data) {\n  8     try {\n→ 9       const notification = await prisma.notification.create({\n            data: {\n              type: \"SYSTEM\",\n              title: \"Auction Status Updated\",\n              message: \"Auction \\\"undefined\\\" status changed to ACTIVE\",\n              userId: undefined,\n              auctionId: 4,\n              expiresAt: new Date(\"2025-03-01T18:30:00.665Z\"),\n          +   user: {\n          +     create: UserCreateWithoutNotificationsInput | UserUncheckedCreateWithoutNotificationsInput,\n          +     connectOrCreate: UserCreateOrConnectWithoutNotificationsInput,\n          +     connect: UserWhereUniqueInput\n          +   }\n            }\n          })\n\nArgument `user` is missing.\n    at wn (F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\node_modules\\@prisma\\client\\runtime\\library.js:29:1363)\n    at $n.handleRequestError (F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\node_modules\\@prisma\\client\\runtime\\library.js:121:6958)\n    at $n.handleAndLogRequestError (F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\node_modules\\@prisma\\client\\runtime\\library.js:121:6623)\n    at $n.request (F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\node_modules\\@prisma\\client\\runtime\\library.js:121:6307)\n    at async l (F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\node_modules\\@prisma\\client\\runtime\\library.js:130:9633)\n    at async NotificationService.createNotification (F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\services\\notification\\notification.service.js:9:28)\n    at async Promise.all (index 1)","timestamp":"2025-01-30T18:30:00.824Z"}
+{"clientVersion":"5.22.0","level":"error","message":"Job 23 failed: \nInvalid `prisma.actionLog.create()` invocation in\nF:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\services\\action-log.service.js:7:37\n\n  4 class ActionLogService {\n  5   async logAction(data) {\n  6     try {\n→ 7       return await prisma.actionLog.create({\n            data: {\n              action: \"UPDATE_AUCTION_STATUS\",\n              description: \"Updated auction status to ACTIVE: undefined\",\n              userId: undefined,\n              sellerId: undefined,\n          +   user: {\n          +     create: UserCreateWithoutActionLogsInput | UserUncheckedCreateWithoutActionLogsInput,\n          +     connectOrCreate: UserCreateOrConnectWithoutActionLogsInput,\n          +     connect: UserWhereUniqueInput\n          +   }\n            }\n          })\n\nArgument `user` is missing.","name":"PrismaClientValidationError","stack":"PrismaClientValidationError: \nInvalid `prisma.actionLog.create()` invocation in\nF:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\services\\action-log.service.js:7:37\n\n  4 class ActionLogService {\n  5   async logAction(data) {\n  6     try {\n→ 7       return await prisma.actionLog.create({\n            data: {\n              action: \"UPDATE_AUCTION_STATUS\",\n              description: \"Updated auction status to ACTIVE: undefined\",\n              userId: undefined,\n              sellerId: undefined,\n          +   user: {\n          +     create: UserCreateWithoutActionLogsInput | UserUncheckedCreateWithoutActionLogsInput,\n          +     connectOrCreate: UserCreateOrConnectWithoutActionLogsInput,\n          +     connect: UserWhereUniqueInput\n          +   }\n            }\n          })\n\nArgument `user` is missing.\n    at wn (F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\node_modules\\@prisma\\client\\runtime\\library.js:29:1363)\n    at $n.handleRequestError (F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\node_modules\\@prisma\\client\\runtime\\library.js:121:6958)\n    at $n.handleAndLogRequestError (F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\node_modules\\@prisma\\client\\runtime\\library.js:121:6623)\n    at $n.request (F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\node_modules\\@prisma\\client\\runtime\\library.js:121:6307)\n    at async l (F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\node_modules\\@prisma\\client\\runtime\\library.js:130:9633)\n    at async ActionLogService.logAction (F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\services\\action-log.service.js:7:14)\n    at async Promise.all (index 0)\n    at async Worker.connection.connection [as processFn] (F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\config\\queueProcessor.js:44:7)\n    at async F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\node_modules\\bullmq\\dist\\cjs\\classes\\worker.js:516:32\n    at async Worker.retryIfFailed (F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\node_modules\\bullmq\\dist\\cjs\\classes\\worker.js:743:24)","timestamp":"2025-01-30T18:30:00.884Z"}
+{"level":"info","message":"Socket service initialized successfully","timestamp":"2025-01-30T21:02:59.214Z"}
+{"level":"info","message":"Connected to Redis server","timestamp":"2025-01-30T21:02:59.293Z"}
+{"level":"info","message":"Redis server is ready","timestamp":"2025-01-30T21:02:59.324Z"}
+{"level":"info","message":"Socket service initialized successfully","timestamp":"2025-01-30T21:03:02.163Z"}
+{"level":"info","message":"Connected to Redis server","timestamp":"2025-01-30T21:03:02.227Z"}
+{"level":"info","message":"Redis server is ready","timestamp":"2025-01-30T21:03:02.252Z"}
+{"level":"info","message":"Socket service initialized successfully","timestamp":"2025-01-30T21:03:06.068Z"}
+{"level":"info","message":"Connected to Redis server","timestamp":"2025-01-30T21:03:06.143Z"}
+{"level":"info","message":"Redis server is ready","timestamp":"2025-01-30T21:03:06.170Z"}
+{"level":"info","message":"Socket service initialized successfully","timestamp":"2025-01-30T21:06:37.054Z"}
+{"level":"info","message":"Connected to Redis server","timestamp":"2025-01-30T21:06:37.152Z"}
+{"level":"info","message":"Redis server is ready","timestamp":"2025-01-30T21:06:37.188Z"}
+{"level":"info","message":"Socket service initialized successfully","timestamp":"2025-01-30T21:10:44.888Z"}
+{"level":"info","message":"Connected to Redis server","timestamp":"2025-01-30T21:10:44.968Z"}
+{"level":"info","message":"Redis server is ready","timestamp":"2025-01-30T21:10:44.980Z"}
+{"level":"info","message":"Socket service initialized successfully","timestamp":"2025-01-30T21:11:14.582Z"}
+{"level":"info","message":"Connected to Redis server","timestamp":"2025-01-30T21:11:14.639Z"}
+{"level":"info","message":"Redis server is ready","timestamp":"2025-01-30T21:11:14.650Z"}
+{"level":"info","message":"Socket service initialized successfully","timestamp":"2025-01-31T17:13:39.522Z"}
+{"level":"info","message":"Connected to Redis server","timestamp":"2025-01-31T17:13:39.644Z"}
+{"level":"info","message":"Redis server is ready","timestamp":"2025-01-31T17:13:39.655Z"}
+{"level":"info","message":"Socket service initialized successfully","timestamp":"2025-01-31T17:18:25.467Z"}
+{"level":"info","message":"Connected to Redis server","timestamp":"2025-01-31T17:18:25.541Z"}
+{"level":"info","message":"Redis server is ready","timestamp":"2025-01-31T17:18:25.553Z"}
+{"level":"info","message":"Socket service initialized successfully","timestamp":"2025-01-31T17:18:31.029Z"}
+{"level":"info","message":"Connected to Redis server","timestamp":"2025-01-31T17:18:31.128Z"}
+{"level":"info","message":"Redis server is ready","timestamp":"2025-01-31T17:18:31.153Z"}
+{"level":"info","message":"Client connected: nv54nDqSwAk6NflAAAAC","timestamp":"2025-01-31T17:19:16.657Z"}
+{"level":"info","message":"Client nv54nDqSwAk6NflAAAAC joined auction 5","timestamp":"2025-01-31T17:19:16.661Z"}
+{"level":"info","message":"Client nv54nDqSwAk6NflAAAAC joined auction 5","timestamp":"2025-01-31T17:19:16.869Z"}
+{"level":"info","message":"Client nv54nDqSwAk6NflAAAAC left auction 5","timestamp":"2025-01-31T17:19:16.898Z"}
+{"level":"info","message":"Client disconnected: nv54nDqSwAk6NflAAAAC","timestamp":"2025-01-31T17:19:16.900Z"}
+{"level":"info","message":"Client connected: 90mA1JHqwTqELWoDAAAE","timestamp":"2025-01-31T17:19:16.921Z"}
+{"level":"info","message":"Client 90mA1JHqwTqELWoDAAAE joined auction 5","timestamp":"2025-01-31T17:19:16.925Z"}
+{"level":"info","message":"Socket service initialized successfully","timestamp":"2025-01-31T17:27:05.333Z"}
+{"level":"info","message":"Connected to Redis server","timestamp":"2025-01-31T17:27:05.461Z"}
+{"level":"info","message":"Redis server is ready","timestamp":"2025-01-31T17:27:05.482Z"}
+{"level":"info","message":"Client connected: PMmQg0Nm-kgBIgolAAAB","timestamp":"2025-01-31T17:27:05.664Z"}
+{"level":"info","message":"Socket service initialized successfully","timestamp":"2025-01-31T17:27:09.902Z"}
+{"level":"info","message":"Connected to Redis server","timestamp":"2025-01-31T17:27:09.960Z"}
+{"level":"info","message":"Redis server is ready","timestamp":"2025-01-31T17:27:09.972Z"}
+{"level":"info","message":"Client connected: tmIwm29LNbc7hK69AAAB","timestamp":"2025-01-31T17:27:10.154Z"}
+{"level":"info","message":"Socket service initialized successfully","timestamp":"2025-01-31T17:27:12.861Z"}
+{"level":"info","message":"Connected to Redis server","timestamp":"2025-01-31T17:27:12.910Z"}
+{"level":"info","message":"Redis server is ready","timestamp":"2025-01-31T17:27:12.920Z"}
+{"level":"info","message":"Client connected: aoagPM--HXLbXHXHAAAB","timestamp":"2025-01-31T17:27:13.635Z"}
+{"level":"info","message":"Socket service initialized successfully","timestamp":"2025-01-31T17:31:04.730Z"}
+{"level":"info","message":"Connected to Redis server","timestamp":"2025-01-31T17:31:04.775Z"}
+{"level":"info","message":"Redis server is ready","timestamp":"2025-01-31T17:31:04.784Z"}
+{"level":"info","message":"Client connected: GEt39vWiGlr1vOEiAAAB","timestamp":"2025-01-31T17:31:05.671Z"}
+{"level":"info","message":"Socket service initialized successfully","timestamp":"2025-01-31T17:31:50.601Z"}
+{"level":"info","message":"Connected to Redis server","timestamp":"2025-01-31T17:31:50.654Z"}
+{"level":"info","message":"Redis server is ready","timestamp":"2025-01-31T17:31:50.664Z"}
+{"level":"info","message":"Client connected: IRh4suZ-RRn09JG0AAAB","timestamp":"2025-01-31T17:31:50.902Z"}
+{"level":"info","message":"Socket service initialized successfully","timestamp":"2025-01-31T17:39:34.011Z"}
+{"level":"info","message":"Connected to Redis server","timestamp":"2025-01-31T17:39:34.056Z"}
+{"level":"info","message":"Redis server is ready","timestamp":"2025-01-31T17:39:34.068Z"}
+{"level":"info","message":"Client connected: GGpcAp3GzaGfGAUcAAAB","timestamp":"2025-01-31T17:39:34.669Z"}
+{"level":"info","message":"Socket service initialized successfully","timestamp":"2025-01-31T17:39:41.173Z"}
+{"level":"info","message":"Connected to Redis server","timestamp":"2025-01-31T17:39:41.227Z"}
+{"level":"info","message":"Redis server is ready","timestamp":"2025-01-31T17:39:41.239Z"}
+{"level":"info","message":"Client connected: vYXQr8mvuuonJsN4AAAB","timestamp":"2025-01-31T17:39:42.601Z"}
+{"level":"info","message":"Socket service initialized successfully","timestamp":"2025-01-31T17:52:47.573Z"}
+{"level":"info","message":"Connected to Redis server","timestamp":"2025-01-31T17:52:47.679Z"}
+{"level":"info","message":"Redis server is ready","timestamp":"2025-01-31T17:52:47.703Z"}
+{"level":"error","message":"Authentication required","stack":"Error: Authentication required\n    at protect (F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\middleware\\auth.middleware.js:14:19)\n    at Layer.handle [as handle_request] (F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at Function.handle (F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\node_modules\\express\\lib\\router\\index.js:175:3)\n    at router (F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\node_modules\\express\\lib\\router\\index.js:47:12)\n    at Layer.handle [as handle_request] (F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)","statusCode":401,"timestamp":"2025-01-31T17:52:50.231Z"}
+{"level":"info","message":"Socket service initialized successfully","timestamp":"2025-01-31T18:21:11.528Z"}
+{"level":"info","message":"Connected to Redis server","timestamp":"2025-01-31T18:21:11.575Z"}
+{"level":"info","message":"Redis server is ready","timestamp":"2025-01-31T18:21:11.601Z"}
+{"level":"info","message":"Socket service initialized successfully","timestamp":"2025-01-31T18:21:28.914Z"}
+{"level":"info","message":"Connected to Redis server","timestamp":"2025-01-31T18:21:28.975Z"}
+{"level":"info","message":"Redis server is ready","timestamp":"2025-01-31T18:21:28.987Z"}
+{"level":"info","message":"Socket service initialized successfully","timestamp":"2025-01-31T18:21:30.400Z"}
+{"level":"info","message":"Connected to Redis server","timestamp":"2025-01-31T18:21:30.442Z"}
+{"level":"info","message":"Redis server is ready","timestamp":"2025-01-31T18:21:30.450Z"}
+{"level":"info","message":"Socket service initialized successfully","timestamp":"2025-01-31T18:21:41.846Z"}
+{"level":"info","message":"Connected to Redis server","timestamp":"2025-01-31T18:21:41.891Z"}
+{"level":"info","message":"Redis server is ready","timestamp":"2025-01-31T18:21:41.908Z"}
+{"level":"info","message":"Socket service initialized successfully","timestamp":"2025-01-31T18:23:50.383Z"}
+{"level":"info","message":"Connected to Redis server","timestamp":"2025-01-31T18:23:50.461Z"}
+{"level":"info","message":"Redis server is ready","timestamp":"2025-01-31T18:23:50.471Z"}
+{"level":"info","message":"Socket service initialized successfully","timestamp":"2025-01-31T18:23:51.928Z"}
+{"level":"info","message":"Connected to Redis server","timestamp":"2025-01-31T18:23:51.991Z"}
+{"level":"info","message":"Redis server is ready","timestamp":"2025-01-31T18:23:52.009Z"}
+{"level":"info","message":"Socket service initialized successfully","timestamp":"2025-01-31T18:25:01.638Z"}
+{"level":"info","message":"Connected to Redis server","timestamp":"2025-01-31T18:25:01.700Z"}
+{"level":"info","message":"Redis server is ready","timestamp":"2025-01-31T18:25:01.712Z"}
+{"level":"info","message":"Socket service initialized successfully","timestamp":"2025-01-31T18:25:08.186Z"}
+{"level":"info","message":"Connected to Redis server","timestamp":"2025-01-31T18:25:08.245Z"}
+{"level":"info","message":"Redis server is ready","timestamp":"2025-01-31T18:25:08.268Z"}
+{"level":"info","message":"Socket service initialized successfully","timestamp":"2025-01-31T18:25:32.683Z"}
+{"level":"info","message":"Connected to Redis server","timestamp":"2025-01-31T18:25:32.750Z"}
+{"level":"info","message":"Redis server is ready","timestamp":"2025-01-31T18:25:32.766Z"}
+{"level":"info","message":"Socket service initialized successfully","timestamp":"2025-01-31T18:45:57.782Z"}
+{"level":"info","message":"Connected to Redis server","timestamp":"2025-01-31T18:45:57.877Z"}
+{"level":"info","message":"Redis server is ready","timestamp":"2025-01-31T18:45:57.894Z"}
+{"level":"info","message":"Socket service initialized successfully","timestamp":"2025-01-31T18:46:06.827Z"}
+{"level":"info","message":"Connected to Redis server","timestamp":"2025-01-31T18:46:06.959Z"}
+{"level":"info","message":"Redis server is ready","timestamp":"2025-01-31T18:46:06.984Z"}
+{"level":"info","message":"Socket service initialized successfully","timestamp":"2025-01-31T18:46:12.257Z"}
+{"level":"info","message":"Connected to Redis server","timestamp":"2025-01-31T18:46:12.336Z"}
+{"level":"info","message":"Redis server is ready","timestamp":"2025-01-31T18:46:12.350Z"}
+{"level":"info","message":"Socket service initialized successfully","timestamp":"2025-01-31T18:46:22.689Z"}
+{"level":"info","message":"Connected to Redis server","timestamp":"2025-01-31T18:46:22.748Z"}
+{"level":"info","message":"Redis server is ready","timestamp":"2025-01-31T18:46:22.762Z"}
+{"level":"info","message":"Socket service initialized successfully","timestamp":"2025-01-31T18:46:25.049Z"}
+{"level":"info","message":"Connected to Redis server","timestamp":"2025-01-31T18:46:25.152Z"}
+{"level":"info","message":"Redis server is ready","timestamp":"2025-01-31T18:46:25.166Z"}
+{"level":"info","message":"Socket service initialized successfully","timestamp":"2025-01-31T18:51:56.286Z"}
+{"level":"info","message":"Connected to Redis server","timestamp":"2025-01-31T18:51:56.366Z"}
+{"level":"info","message":"Redis server is ready","timestamp":"2025-01-31T18:51:56.381Z"}
+{"level":"info","message":"Socket service initialized successfully","timestamp":"2025-01-31T18:52:28.993Z"}
+{"level":"info","message":"Connected to Redis server","timestamp":"2025-01-31T18:52:29.052Z"}
+{"level":"info","message":"Redis server is ready","timestamp":"2025-01-31T18:52:29.063Z"}
+{"level":"info","message":"Socket service initialized successfully","timestamp":"2025-01-31T18:52:35.458Z"}
+{"level":"info","message":"Connected to Redis server","timestamp":"2025-01-31T18:52:35.517Z"}
+{"level":"info","message":"Redis server is ready","timestamp":"2025-01-31T18:52:35.529Z"}
+{"level":"info","message":"Socket service initialized successfully","timestamp":"2025-01-31T18:55:23.254Z"}
+{"level":"info","message":"Connected to Redis server","timestamp":"2025-01-31T18:55:23.413Z"}
+{"level":"info","message":"Redis server is ready","timestamp":"2025-01-31T18:55:23.435Z"}
+{"level":"info","message":"Socket service initialized successfully","timestamp":"2025-01-31T19:06:32.128Z"}
+{"level":"info","message":"Connected to Redis server","timestamp":"2025-01-31T19:06:32.187Z"}
+{"level":"info","message":"Redis server is ready","timestamp":"2025-01-31T19:06:32.206Z"}
+{"level":"info","message":"Socket service initialized successfully","timestamp":"2025-01-31T19:06:54.284Z"}
+{"level":"info","message":"Connected to Redis server","timestamp":"2025-01-31T19:06:54.345Z"}
+{"level":"info","message":"Redis server is ready","timestamp":"2025-01-31T19:06:54.359Z"}
+{"level":"info","message":"Socket service initialized successfully","timestamp":"2025-01-31T19:14:17.133Z"}
+{"level":"info","message":"Connected to Redis server","timestamp":"2025-01-31T19:14:17.446Z"}
+{"level":"info","message":"Redis server is ready","timestamp":"2025-01-31T19:14:17.572Z"}
+{"level":"info","message":"Socket service initialized successfully","timestamp":"2025-01-31T19:15:07.541Z"}
+{"level":"info","message":"Connected to Redis server","timestamp":"2025-01-31T19:15:07.595Z"}
+{"level":"info","message":"Redis server is ready","timestamp":"2025-01-31T19:15:07.607Z"}
+{"level":"info","message":"Socket service initialized successfully","timestamp":"2025-01-31T19:15:16.099Z"}
+{"level":"info","message":"Connected to Redis server","timestamp":"2025-01-31T19:15:16.236Z"}
+{"level":"info","message":"Redis server is ready","timestamp":"2025-01-31T19:15:16.250Z"}
+{"level":"info","message":"Socket service initialized successfully","timestamp":"2025-01-31T19:15:43.746Z"}
+{"level":"info","message":"Connected to Redis server","timestamp":"2025-01-31T19:15:43.786Z"}
+{"level":"info","message":"Redis server is ready","timestamp":"2025-01-31T19:15:43.795Z"}
+{"level":"info","message":"Socket service initialized successfully","timestamp":"2025-01-31T19:15:48.400Z"}
+{"level":"info","message":"Connected to Redis server","timestamp":"2025-01-31T19:15:48.486Z"}
+{"level":"info","message":"Redis server is ready","timestamp":"2025-01-31T19:15:48.503Z"}
+{"level":"info","message":"Socket service initialized successfully","timestamp":"2025-01-31T19:35:59.786Z"}
+{"level":"info","message":"Connected to Redis server","timestamp":"2025-01-31T19:35:59.861Z"}
+{"level":"info","message":"Redis server is ready","timestamp":"2025-01-31T19:35:59.942Z"}
+{"level":"info","message":"Socket service initialized successfully","timestamp":"2025-01-31T19:37:00.980Z"}
+{"level":"info","message":"Connected to Redis server","timestamp":"2025-01-31T19:37:01.097Z"}
+{"level":"info","message":"Redis server is ready","timestamp":"2025-01-31T19:37:01.126Z"}
+{"level":"info","message":"Socket service initialized successfully","timestamp":"2025-01-31T19:37:34.801Z"}
+{"level":"info","message":"Connected to Redis server","timestamp":"2025-01-31T19:37:34.849Z"}
+{"level":"info","message":"Redis server is ready","timestamp":"2025-01-31T19:37:34.862Z"}
+{"level":"info","message":"Socket service initialized successfully","timestamp":"2025-01-31T19:52:34.196Z"}
+{"level":"info","message":"Connected to Redis server","timestamp":"2025-01-31T19:52:34.248Z"}
+{"level":"info","message":"Redis server is ready","timestamp":"2025-01-31T19:52:34.273Z"}
+{"level":"info","message":"Socket service initialized successfully","timestamp":"2025-01-31T19:52:38.099Z"}
+{"level":"info","message":"Connected to Redis server","timestamp":"2025-01-31T19:52:38.220Z"}
+{"level":"info","message":"Redis server is ready","timestamp":"2025-01-31T19:52:38.254Z"}
+{"level":"info","message":"Socket service initialized successfully","timestamp":"2025-01-31T19:52:58.714Z"}
+{"level":"info","message":"Connected to Redis server","timestamp":"2025-01-31T19:52:58.784Z"}
+{"level":"info","message":"Redis server is ready","timestamp":"2025-01-31T19:52:58.811Z"}
+{"level":"info","message":"Socket service initialized successfully","timestamp":"2025-01-31T19:53:06.912Z"}
+{"level":"info","message":"Connected to Redis server","timestamp":"2025-01-31T19:53:06.972Z"}
+{"level":"info","message":"Redis server is ready","timestamp":"2025-01-31T19:53:06.981Z"}
+{"level":"info","message":"Socket service initialized successfully","timestamp":"2025-01-31T19:53:09.392Z"}
+{"level":"info","message":"Connected to Redis server","timestamp":"2025-01-31T19:53:09.512Z"}
+{"level":"info","message":"Redis server is ready","timestamp":"2025-01-31T19:53:09.608Z"}
+{"level":"info","message":"Socket service initialized successfully","timestamp":"2025-01-31T19:53:14.208Z"}
+{"level":"info","message":"Connected to Redis server","timestamp":"2025-01-31T19:53:14.275Z"}
+{"level":"info","message":"Redis server is ready","timestamp":"2025-01-31T19:53:14.300Z"}
+{"level":"info","message":"Socket service initialized successfully","timestamp":"2025-01-31T19:53:31.385Z"}
+{"level":"info","message":"Connected to Redis server","timestamp":"2025-01-31T19:53:31.499Z"}
+{"level":"info","message":"Redis server is ready","timestamp":"2025-01-31T19:53:31.510Z"}
+{"level":"info","message":"Client connected: ePoXchjXr7-MN2D4AAAC","timestamp":"2025-01-31T20:25:30.302Z"}
+{"level":"info","message":"Client ePoXchjXr7-MN2D4AAAC joined auction 2","timestamp":"2025-01-31T20:25:30.357Z"}
+{"level":"info","message":"Client ePoXchjXr7-MN2D4AAAC joined auction 2","timestamp":"2025-01-31T20:25:30.859Z"}
+{"level":"info","message":"Client disconnected: ePoXchjXr7-MN2D4AAAC","timestamp":"2025-01-31T20:25:30.997Z"}
+{"level":"info","message":"Client connected: s9uXX3_MFblPT7QxAAAE","timestamp":"2025-01-31T20:25:31.132Z"}
+{"level":"info","message":"Client s9uXX3_MFblPT7QxAAAE joined auction 2","timestamp":"2025-01-31T20:25:31.281Z"}
+{"level":"error","message":"Invalid email or password","stack":"Error: Invalid email or password\n    at login (F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\controllers\\v1\\auth-controller.js:61:19)","statusCode":401,"timestamp":"2025-01-31T20:26:16.415Z"}
+{"level":"error","message":"Invalid email or password","stack":"Error: Invalid email or password\n    at login (F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\controllers\\v1\\auth-controller.js:61:19)","statusCode":401,"timestamp":"2025-01-31T20:26:19.427Z"}
+{"level":"error","message":"Invalid email or password","stack":"Error: Invalid email or password\n    at login (F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\controllers\\v1\\auth-controller.js:61:19)","statusCode":401,"timestamp":"2025-01-31T20:27:37.452Z"}
+{"level":"info","message":"Client connected: OVBNH-exr3gmd0fbAAAH","timestamp":"2025-01-31T20:29:48.694Z"}
+{"level":"info","message":"Client OVBNH-exr3gmd0fbAAAH joined auction 2","timestamp":"2025-01-31T20:29:48.698Z"}
+{"level":"info","message":"Client OVBNH-exr3gmd0fbAAAH joined auction 2","timestamp":"2025-01-31T20:29:48.803Z"}
+{"level":"info","message":"Client OVBNH-exr3gmd0fbAAAH left auction 2","timestamp":"2025-01-31T20:29:48.814Z"}
+{"level":"info","message":"Client disconnected: OVBNH-exr3gmd0fbAAAH","timestamp":"2025-01-31T20:29:48.816Z"}
+{"level":"info","message":"Client connected: HlOd6jS1y1O5RY5LAAAJ","timestamp":"2025-01-31T20:29:48.822Z"}
+{"level":"info","message":"Client HlOd6jS1y1O5RY5LAAAJ joined auction 2","timestamp":"2025-01-31T20:29:48.824Z"}
+{"clientVersion":"5.22.0","level":"error","message":"Error creating notification: \nInvalid `prisma.notification.create()` invocation in\nF:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\services\\notification\\notification.service.js:9:54\n\n  6 class NotificationService {\n  7   async createNotification(data) {\n  8     try {\n→ 9       const notification = await prisma.notification.create({\n            data: {\n              type: \"BID_OUTBID\",\n              title: \"You have been outbid!\",\n              message: \"Someone has placed a higher bid of 2200 on Apple MacBook Pro 16-inch (2021) \",\n              userId: \"cm6i5khh20002kwp811nfmzfg\",\n              auctionId: \"2\",\n                         ~~~\n              expiresAt: new Date(\"2025-03-02T20:30:01.086Z\")\n            }\n          })\n\nArgument `auctionId`: Invalid value provided. Expected Int or Null, provided String.","name":"PrismaClientValidationError","stack":"PrismaClientValidationError: \nInvalid `prisma.notification.create()` invocation in\nF:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\services\\notification\\notification.service.js:9:54\n\n  6 class NotificationService {\n  7   async createNotification(data) {\n  8     try {\n→ 9       const notification = await prisma.notification.create({\n            data: {\n              type: \"BID_OUTBID\",\n              title: \"You have been outbid!\",\n              message: \"Someone has placed a higher bid of 2200 on Apple MacBook Pro 16-inch (2021) \",\n              userId: \"cm6i5khh20002kwp811nfmzfg\",\n              auctionId: \"2\",\n                         ~~~\n              expiresAt: new Date(\"2025-03-02T20:30:01.086Z\")\n            }\n          })\n\nArgument `auctionId`: Invalid value provided. Expected Int or Null, provided String.\n    at wn (F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\node_modules\\@prisma\\client\\runtime\\library.js:29:1363)\n    at $n.handleRequestError (F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\node_modules\\@prisma\\client\\runtime\\library.js:121:6958)\n    at $n.handleAndLogRequestError (F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\node_modules\\@prisma\\client\\runtime\\library.js:121:6623)\n    at $n.request (F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\node_modules\\@prisma\\client\\runtime\\library.js:121:6307)\n    at async l (F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\node_modules\\@prisma\\client\\runtime\\library.js:130:9633)\n    at async NotificationService.createNotification (F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\services\\notification\\notification.service.js:9:28)\n    at async placeBid (F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\controllers\\bid\\bid-controller.js:80:9)","timestamp":"2025-01-31T20:30:01.152Z"}
+{"level":"error","message":"Place bid error: ApiError is not a constructor","stack":"TypeError: ApiError is not a constructor\n    at NotificationService.createNotification (F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\services\\notification\\notification.service.js:20:13)\n    at async placeBid (F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\controllers\\bid\\bid-controller.js:80:9)","timestamp":"2025-01-31T20:30:01.159Z"}
+{"level":"info","message":"Client s9uXX3_MFblPT7QxAAAE left auction 2","timestamp":"2025-01-31T20:33:04.845Z"}
+{"level":"info","message":"Client disconnected: s9uXX3_MFblPT7QxAAAE","timestamp":"2025-01-31T20:33:04.855Z"}
+{"level":"info","message":"Client connected: 1zb7vX6RVfGZGunKAAAL","timestamp":"2025-01-31T20:33:04.860Z"}
+{"level":"info","message":"Client 1zb7vX6RVfGZGunKAAAL joined auction 2","timestamp":"2025-01-31T20:33:04.861Z"}
+{"level":"info","message":"Socket service initialized successfully","timestamp":"2025-01-31T20:34:49.750Z"}
+{"level":"info","message":"Connected to Redis server","timestamp":"2025-01-31T20:34:49.923Z"}
+{"level":"info","message":"Redis server is ready","timestamp":"2025-01-31T20:34:49.979Z"}
+{"level":"info","message":"Client connected: JPwvhTKRZl3Y9jOkAAAB","timestamp":"2025-01-31T20:34:50.343Z"}
+{"level":"info","message":"Client connected: y9fxxrXD6w4irMeRAAAD","timestamp":"2025-01-31T20:34:53.488Z"}
+{"level":"info","message":"Client JPwvhTKRZl3Y9jOkAAAB left auction 2","timestamp":"2025-01-31T20:34:59.945Z"}
+{"level":"info","message":"Client disconnected: JPwvhTKRZl3Y9jOkAAAB","timestamp":"2025-01-31T20:34:59.947Z"}
+{"level":"info","message":"Client connected: UZ9_vURA1od8g_eRAAAF","timestamp":"2025-01-31T20:34:59.955Z"}
+{"level":"info","message":"Client UZ9_vURA1od8g_eRAAAF joined auction 2","timestamp":"2025-01-31T20:34:59.960Z"}
+{"level":"info","message":"Client disconnected: y9fxxrXD6w4irMeRAAAD","timestamp":"2025-01-31T20:40:55.559Z"}
+{"level":"info","message":"Client connected: xyDtNDPrPBbEqVLdAAAI","timestamp":"2025-01-31T20:42:08.540Z"}
+{"level":"info","message":"Client xyDtNDPrPBbEqVLdAAAI joined auction 2","timestamp":"2025-01-31T20:42:08.549Z"}
+{"level":"info","message":"Client xyDtNDPrPBbEqVLdAAAI joined auction 2","timestamp":"2025-01-31T20:42:08.903Z"}
+{"level":"info","message":"Client xyDtNDPrPBbEqVLdAAAI left auction 2","timestamp":"2025-01-31T20:42:08.954Z"}
+{"level":"info","message":"Client disconnected: xyDtNDPrPBbEqVLdAAAI","timestamp":"2025-01-31T20:42:08.962Z"}
+{"level":"info","message":"Client connected: I8_DMoulVTOdlHcaAAAK","timestamp":"2025-01-31T20:42:09.130Z"}
+{"level":"info","message":"Client I8_DMoulVTOdlHcaAAAK joined auction 2","timestamp":"2025-01-31T20:42:09.413Z"}
+{"level":"info","message":"Client disconnected: I8_DMoulVTOdlHcaAAAK","timestamp":"2025-01-31T20:42:14.865Z"}
+{"level":"info","message":"Client disconnected: UZ9_vURA1od8g_eRAAAF","timestamp":"2025-01-31T20:42:21.987Z"}
+{"level":"info","message":"Client connected: 6ti6VtsYrfRDrmVvAAAN","timestamp":"2025-01-31T20:59:50.428Z"}
+{"level":"info","message":"Client 6ti6VtsYrfRDrmVvAAAN joined auction 2","timestamp":"2025-01-31T20:59:50.717Z"}
+{"level":"info","message":"Client 6ti6VtsYrfRDrmVvAAAN joined auction 2","timestamp":"2025-01-31T20:59:51.365Z"}
+{"level":"info","message":"Client 6ti6VtsYrfRDrmVvAAAN left auction 2","timestamp":"2025-01-31T20:59:51.401Z"}
+{"level":"info","message":"Client disconnected: 6ti6VtsYrfRDrmVvAAAN","timestamp":"2025-01-31T20:59:51.404Z"}
+{"level":"info","message":"Client connected: ak48VkYz7ScwSfNxAAAP","timestamp":"2025-01-31T20:59:51.581Z"}
+{"level":"info","message":"Client ak48VkYz7ScwSfNxAAAP joined auction 2","timestamp":"2025-01-31T20:59:51.952Z"}
+{"clientVersion":"5.22.0","level":"error","message":"Error creating notification: \nInvalid `prisma.notification.create()` invocation in\nF:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\services\\notification\\notification.service.js:9:54\n\n  6 class NotificationService {\n  7   async createNotification(data) {\n  8     try {\n→ 9       const notification = await prisma.notification.create({\n            data: {\n              type: \"BID_OUTBID\",\n              title: \"You have been outbid!\",\n              message: \"Someone has placed a higher bid of 2400 on Apple MacBook Pro 16-inch (2021) \",\n              userId: \"cm6i5j3n10000kwp8fbz48ps8\",\n              auctionId: \"2\",\n                         ~~~\n              expiresAt: new Date(\"2025-03-02T21:00:01.397Z\")\n            }\n          })\n\nArgument `auctionId`: Invalid value provided. Expected Int or Null, provided String.","name":"PrismaClientValidationError","stack":"PrismaClientValidationError: \nInvalid `prisma.notification.create()` invocation in\nF:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\services\\notification\\notification.service.js:9:54\n\n  6 class NotificationService {\n  7   async createNotification(data) {\n  8     try {\n→ 9       const notification = await prisma.notification.create({\n            data: {\n              type: \"BID_OUTBID\",\n              title: \"You have been outbid!\",\n              message: \"Someone has placed a higher bid of 2400 on Apple MacBook Pro 16-inch (2021) \",\n              userId: \"cm6i5j3n10000kwp8fbz48ps8\",\n              auctionId: \"2\",\n                         ~~~\n              expiresAt: new Date(\"2025-03-02T21:00:01.397Z\")\n            }\n          })\n\nArgument `auctionId`: Invalid value provided. Expected Int or Null, provided String.\n    at wn (F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\node_modules\\@prisma\\client\\runtime\\library.js:29:1363)\n    at $n.handleRequestError (F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\node_modules\\@prisma\\client\\runtime\\library.js:121:6958)\n    at $n.handleAndLogRequestError (F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\node_modules\\@prisma\\client\\runtime\\library.js:121:6623)\n    at $n.request (F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\node_modules\\@prisma\\client\\runtime\\library.js:121:6307)\n    at async l (F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\node_modules\\@prisma\\client\\runtime\\library.js:130:9633)\n    at async NotificationService.createNotification (F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\services\\notification\\notification.service.js:9:28)\n    at async placeBid (F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\controllers\\bid\\bid-controller.js:80:9)","timestamp":"2025-01-31T21:00:01.452Z"}
+{"level":"error","message":"Place bid error: ApiError is not a constructor","stack":"TypeError: ApiError is not a constructor\n    at NotificationService.createNotification (F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\services\\notification\\notification.service.js:20:13)\n    at async placeBid (F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\controllers\\bid\\bid-controller.js:80:9)","timestamp":"2025-01-31T21:00:01.458Z"}
+{"level":"info","message":"Client disconnected: ak48VkYz7ScwSfNxAAAP","timestamp":"2025-01-31T21:00:43.100Z"}
+{"level":"info","message":"Socket service initialized successfully","timestamp":"2025-01-31T21:03:11.183Z"}
+{"level":"info","message":"Connected to Redis server","timestamp":"2025-01-31T21:03:11.309Z"}
+{"level":"info","message":"Redis server is ready","timestamp":"2025-01-31T21:03:11.385Z"}
+{"level":"info","message":"Socket service initialized successfully","timestamp":"2025-01-31T21:03:35.158Z"}
+{"level":"info","message":"Connected to Redis server","timestamp":"2025-01-31T21:03:35.350Z"}
+{"level":"info","message":"Redis server is ready","timestamp":"2025-01-31T21:03:35.380Z"}
+{"level":"info","message":"Client connected: zR8oVgmPCdhVuJPZAAAC","timestamp":"2025-01-31T21:03:48.618Z"}
+{"level":"info","message":"Client zR8oVgmPCdhVuJPZAAAC joined auction 2","timestamp":"2025-01-31T21:03:48.723Z"}
+{"level":"info","message":"Client zR8oVgmPCdhVuJPZAAAC joined auction 2","timestamp":"2025-01-31T21:03:49.526Z"}
+{"level":"info","message":"Client zR8oVgmPCdhVuJPZAAAC left auction 2","timestamp":"2025-01-31T21:03:49.566Z"}
+{"level":"info","message":"Client disconnected: zR8oVgmPCdhVuJPZAAAC","timestamp":"2025-01-31T21:03:49.571Z"}
+{"level":"info","message":"Client connected: P7L7gpxS7PO_XLWEAAAE","timestamp":"2025-01-31T21:03:49.761Z"}
+{"level":"info","message":"Client P7L7gpxS7PO_XLWEAAAE joined auction 2","timestamp":"2025-01-31T21:03:50.169Z"}
+{"level":"info","message":"Client connected: WDsawphGxDUG4dp-AAAH","timestamp":"2025-01-31T21:04:09.649Z"}
+{"level":"info","message":"Client WDsawphGxDUG4dp-AAAH joined auction 2","timestamp":"2025-01-31T21:04:09.846Z"}
+{"level":"info","message":"Client WDsawphGxDUG4dp-AAAH joined auction 2","timestamp":"2025-01-31T21:04:10.168Z"}
+{"level":"info","message":"Client WDsawphGxDUG4dp-AAAH left auction 2","timestamp":"2025-01-31T21:04:10.199Z"}
+{"level":"info","message":"Client disconnected: WDsawphGxDUG4dp-AAAH","timestamp":"2025-01-31T21:04:10.203Z"}
+{"level":"info","message":"Client connected: r5QtJ61SAaovFvyOAAAJ","timestamp":"2025-01-31T21:04:10.631Z"}
+{"level":"info","message":"Client r5QtJ61SAaovFvyOAAAJ joined auction 2","timestamp":"2025-01-31T21:04:10.679Z"}
+{"level":"info","message":"Client disconnected: P7L7gpxS7PO_XLWEAAAE","timestamp":"2025-01-31T21:06:26.521Z"}
+{"level":"info","message":"Client disconnected: r5QtJ61SAaovFvyOAAAJ","timestamp":"2025-01-31T21:06:38.875Z"}

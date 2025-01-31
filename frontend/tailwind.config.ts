@@ -37,7 +37,7 @@ const config: Config = {
   				}
   			],
   			sm: [
-  				'0.875rem',
+  				'0.825rem',
   				{
   					lineHeight: '1.25rem'
   				}
