@@ -1281,3 +1281,325 @@
 {"level":"info","message":"Client r5QtJ61SAaovFvyOAAAJ joined auction 2","timestamp":"2025-01-31T21:04:10.679Z"}
 {"level":"info","message":"Client disconnected: P7L7gpxS7PO_XLWEAAAE","timestamp":"2025-01-31T21:06:26.521Z"}
 {"level":"info","message":"Client disconnected: r5QtJ61SAaovFvyOAAAJ","timestamp":"2025-01-31T21:06:38.875Z"}
+{"level":"info","message":"Socket service initialized successfully","timestamp":"2025-02-01T17:17:03.707Z"}
+{"level":"info","message":"Connected to Redis server","timestamp":"2025-02-01T17:17:03.873Z"}
+{"level":"info","message":"Redis server is ready","timestamp":"2025-02-01T17:17:03.893Z"}
+{"level":"info","message":"Client connected: 2hAi8zn1tDtmPesjAAAC","timestamp":"2025-02-01T18:18:58.474Z"}
+{"level":"info","message":"Client 2hAi8zn1tDtmPesjAAAC joined auction 2","timestamp":"2025-02-01T18:18:58.497Z"}
+{"level":"info","message":"Client 2hAi8zn1tDtmPesjAAAC joined auction 2","timestamp":"2025-02-01T18:18:58.760Z"}
+{"level":"info","message":"Client 2hAi8zn1tDtmPesjAAAC left auction 2","timestamp":"2025-02-01T18:18:58.779Z"}
+{"level":"info","message":"Client disconnected: 2hAi8zn1tDtmPesjAAAC","timestamp":"2025-02-01T18:18:58.782Z"}
+{"level":"info","message":"Client connected: d89LcXPvEYhhbLkdAAAE","timestamp":"2025-02-01T18:18:58.789Z"}
+{"level":"info","message":"Client d89LcXPvEYhhbLkdAAAE joined auction 2","timestamp":"2025-02-01T18:18:58.790Z"}
+{"level":"info","message":"Client disconnected: d89LcXPvEYhhbLkdAAAE","timestamp":"2025-02-01T18:21:15.192Z"}
+{"level":"info","message":"Client connected: B653FlZcxuF-IukLAAAH","timestamp":"2025-02-01T18:21:16.978Z"}
+{"level":"info","message":"Client B653FlZcxuF-IukLAAAH joined auction 2","timestamp":"2025-02-01T18:21:17.032Z"}
+{"level":"info","message":"Client B653FlZcxuF-IukLAAAH joined auction 2","timestamp":"2025-02-01T18:21:17.680Z"}
+{"level":"info","message":"Client B653FlZcxuF-IukLAAAH left auction 2","timestamp":"2025-02-01T18:21:17.716Z"}
+{"level":"info","message":"Client disconnected: B653FlZcxuF-IukLAAAH","timestamp":"2025-02-01T18:21:17.719Z"}
+{"level":"info","message":"Client connected: 2uIgRaNeIrBPlZmUAAAJ","timestamp":"2025-02-01T18:21:18.253Z"}
+{"level":"info","message":"Client 2uIgRaNeIrBPlZmUAAAJ joined auction 2","timestamp":"2025-02-01T18:21:18.257Z"}
+{"level":"info","message":"Client disconnected: 2uIgRaNeIrBPlZmUAAAJ","timestamp":"2025-02-01T18:26:52.357Z"}
+{"level":"info","message":"Client connected: LDkc_wKrDC7X8NzyAAAL","timestamp":"2025-02-01T18:26:52.510Z"}
+{"level":"info","message":"Client LDkc_wKrDC7X8NzyAAAL joined auction 2","timestamp":"2025-02-01T18:26:52.514Z"}
+{"level":"info","message":"Socket service initialized successfully","timestamp":"2025-02-01T18:27:33.072Z"}
+{"level":"info","message":"Connected to Redis server","timestamp":"2025-02-01T18:27:33.149Z"}
+{"level":"info","message":"Redis server is ready","timestamp":"2025-02-01T18:27:33.180Z"}
+{"level":"info","message":"Client connected: Fger90AOl6Ya0y-9AAAB","timestamp":"2025-02-01T18:27:33.503Z"}
+{"level":"info","message":"Socket service initialized successfully","timestamp":"2025-02-01T18:36:31.222Z"}
+{"level":"info","message":"Connected to Redis server","timestamp":"2025-02-01T18:36:31.285Z"}
+{"level":"info","message":"Redis server is ready","timestamp":"2025-02-01T18:36:31.313Z"}
+{"level":"info","message":"Client connected: qztcZ4hVqxVBgDluAAAB","timestamp":"2025-02-01T18:36:31.797Z"}
+{"level":"info","message":"Client disconnected: qztcZ4hVqxVBgDluAAAB","timestamp":"2025-02-01T18:37:51.820Z"}
+{"level":"info","message":"Client connected: UbjRDeP7H_jxyiLsAAAE","timestamp":"2025-02-01T18:37:53.635Z"}
+{"level":"info","message":"Client UbjRDeP7H_jxyiLsAAAE joined auction 2","timestamp":"2025-02-01T18:37:53.717Z"}
+{"level":"info","message":"Client UbjRDeP7H_jxyiLsAAAE joined auction 2","timestamp":"2025-02-01T18:37:53.999Z"}
+{"level":"info","message":"Client UbjRDeP7H_jxyiLsAAAE left auction 2","timestamp":"2025-02-01T18:37:54.021Z"}
+{"level":"info","message":"Client disconnected: UbjRDeP7H_jxyiLsAAAE","timestamp":"2025-02-01T18:37:54.024Z"}
+{"level":"info","message":"Client connected: lspIDGDrAFp-6AO2AAAG","timestamp":"2025-02-01T18:37:54.067Z"}
+{"level":"info","message":"Client lspIDGDrAFp-6AO2AAAG joined auction 2","timestamp":"2025-02-01T18:37:54.314Z"}
+{"level":"info","message":"Socket service initialized successfully","timestamp":"2025-02-01T18:45:49.019Z"}
+{"level":"info","message":"Connected to Redis server","timestamp":"2025-02-01T18:45:49.063Z"}
+{"level":"info","message":"Redis server is ready","timestamp":"2025-02-01T18:45:49.088Z"}
+{"level":"info","message":"Client connected: 9v4uWE_jk0apr1ZNAAAB","timestamp":"2025-02-01T18:45:49.364Z"}
+{"level":"info","message":"Socket service initialized successfully","timestamp":"2025-02-01T18:45:56.762Z"}
+{"level":"info","message":"Connected to Redis server","timestamp":"2025-02-01T18:45:56.818Z"}
+{"level":"info","message":"Redis server is ready","timestamp":"2025-02-01T18:45:56.828Z"}
+{"level":"info","message":"Client connected: 4UHM1Ev9G6DVPzy6AAAB","timestamp":"2025-02-01T18:45:56.987Z"}
+{"level":"info","message":"Client disconnected: 4UHM1Ev9G6DVPzy6AAAB","timestamp":"2025-02-01T18:50:01.678Z"}
+{"level":"info","message":"Client connected: k41nqafC-S4C-U4sAAAD","timestamp":"2025-02-01T18:50:03.941Z"}
+{"level":"info","message":"Client k41nqafC-S4C-U4sAAAD joined auction 2","timestamp":"2025-02-01T18:50:03.986Z"}
+{"level":"info","message":"Socket service initialized successfully","timestamp":"2025-02-01T18:50:24.813Z"}
+{"level":"info","message":"Connected to Redis server","timestamp":"2025-02-01T18:50:24.901Z"}
+{"level":"info","message":"Redis server is ready","timestamp":"2025-02-01T18:50:24.921Z"}
+{"level":"info","message":"Client connected: tD5ZAD9cru87EFoVAAAB","timestamp":"2025-02-01T18:50:26.438Z"}
+{"level":"info","message":"Socket service initialized successfully","timestamp":"2025-02-01T18:53:44.041Z"}
+{"level":"info","message":"Connected to Redis server","timestamp":"2025-02-01T18:53:44.154Z"}
+{"level":"info","message":"Redis server is ready","timestamp":"2025-02-01T18:53:44.185Z"}
+{"level":"info","message":"Client connected: lEKfi1gchPU-nKrMAAAB","timestamp":"2025-02-01T18:53:44.291Z"}
+{"level":"info","message":"Client disconnected: lEKfi1gchPU-nKrMAAAB","timestamp":"2025-02-01T18:54:37.463Z"}
+{"level":"info","message":"Client connected: 23Sa6m4AUhuW461vAAAE","timestamp":"2025-02-01T18:54:39.502Z"}
+{"level":"info","message":"Client 23Sa6m4AUhuW461vAAAE joined auction 2","timestamp":"2025-02-01T18:54:39.569Z"}
+{"level":"info","message":"Client 23Sa6m4AUhuW461vAAAE joined auction 2","timestamp":"2025-02-01T18:54:39.892Z"}
+{"level":"info","message":"Client disconnected: 23Sa6m4AUhuW461vAAAE","timestamp":"2025-02-01T18:54:39.929Z"}
+{"level":"info","message":"Client connected: gmvqSWZa3Hptk6m0AAAG","timestamp":"2025-02-01T18:54:40.191Z"}
+{"level":"info","message":"Client gmvqSWZa3Hptk6m0AAAG joined auction 2","timestamp":"2025-02-01T18:54:40.195Z"}
+{"level":"info","message":"Socket service initialized successfully","timestamp":"2025-02-01T18:56:37.565Z"}
+{"level":"info","message":"Connected to Redis server","timestamp":"2025-02-01T18:56:37.632Z"}
+{"level":"info","message":"Redis server is ready","timestamp":"2025-02-01T18:56:37.663Z"}
+{"level":"info","message":"Client connected: ZKpbIZkIcU1Y0n_zAAAB","timestamp":"2025-02-01T18:56:37.794Z"}
+{"level":"info","message":"Socket service initialized successfully","timestamp":"2025-02-01T18:57:01.605Z"}
+{"level":"info","message":"Connected to Redis server","timestamp":"2025-02-01T18:57:01.682Z"}
+{"level":"info","message":"Redis server is ready","timestamp":"2025-02-01T18:57:01.713Z"}
+{"level":"info","message":"Client connected: LbI6dNbFYFqLODVNAAAB","timestamp":"2025-02-01T18:57:01.979Z"}
+{"level":"info","message":"Socket service initialized successfully","timestamp":"2025-02-01T18:57:30.390Z"}
+{"level":"info","message":"Connected to Redis server","timestamp":"2025-02-01T18:57:30.474Z"}
+{"level":"info","message":"Redis server is ready","timestamp":"2025-02-01T18:57:30.492Z"}
+{"level":"info","message":"Client connected: e4cOP2fGOz-BpKsAAAAB","timestamp":"2025-02-01T18:57:30.786Z"}
+{"level":"info","message":"Client disconnected: e4cOP2fGOz-BpKsAAAAB","timestamp":"2025-02-01T19:00:38.330Z"}
+{"level":"info","message":"Client connected: PMgC8u9H6kc3TMQdAAAD","timestamp":"2025-02-01T19:00:38.502Z"}
+{"level":"info","message":"Client PMgC8u9H6kc3TMQdAAAD joined auction 2","timestamp":"2025-02-01T19:00:38.510Z"}
+{"level":"info","message":"Client disconnected: PMgC8u9H6kc3TMQdAAAD","timestamp":"2025-02-01T19:01:34.111Z"}
+{"level":"info","message":"Client connected: NI0lQLMEacqvhL09AAAF","timestamp":"2025-02-01T19:01:34.126Z"}
+{"level":"info","message":"Client NI0lQLMEacqvhL09AAAF joined auction 2","timestamp":"2025-02-01T19:01:34.129Z"}
+{"level":"info","message":"Client disconnected: NI0lQLMEacqvhL09AAAF","timestamp":"2025-02-01T19:01:50.489Z"}
+{"level":"info","message":"Client connected: g8weQwdoJlY9zfH3AAAI","timestamp":"2025-02-01T19:01:51.884Z"}
+{"level":"info","message":"Client g8weQwdoJlY9zfH3AAAI joined auction 2","timestamp":"2025-02-01T19:01:51.907Z"}
+{"level":"info","message":"Client g8weQwdoJlY9zfH3AAAI joined auction 2","timestamp":"2025-02-01T19:01:52.289Z"}
+{"level":"info","message":"Client g8weQwdoJlY9zfH3AAAI left auction 2","timestamp":"2025-02-01T19:01:52.319Z"}
+{"level":"info","message":"Client disconnected: g8weQwdoJlY9zfH3AAAI","timestamp":"2025-02-01T19:01:52.322Z"}
+{"level":"info","message":"Client connected: SFBKg_NC40AxSglBAAAK","timestamp":"2025-02-01T19:01:52.629Z"}
+{"level":"info","message":"Client SFBKg_NC40AxSglBAAAK joined auction 2","timestamp":"2025-02-01T19:01:52.631Z"}
+{"level":"info","message":"Client disconnected: SFBKg_NC40AxSglBAAAK","timestamp":"2025-02-01T19:02:08.698Z"}
+{"level":"info","message":"Client connected: SlRRpgWS3cY8DVc6AAAN","timestamp":"2025-02-01T19:02:09.932Z"}
+{"level":"info","message":"Client SlRRpgWS3cY8DVc6AAAN joined auction 2","timestamp":"2025-02-01T19:02:09.954Z"}
+{"level":"info","message":"Client SlRRpgWS3cY8DVc6AAAN joined auction 2","timestamp":"2025-02-01T19:02:10.261Z"}
+{"level":"info","message":"Client SlRRpgWS3cY8DVc6AAAN left auction 2","timestamp":"2025-02-01T19:02:10.287Z"}
+{"level":"info","message":"Client disconnected: SlRRpgWS3cY8DVc6AAAN","timestamp":"2025-02-01T19:02:10.289Z"}
+{"level":"info","message":"Client connected: pivcJo-VsUjdwA1EAAAP","timestamp":"2025-02-01T19:02:10.589Z"}
+{"level":"info","message":"Client pivcJo-VsUjdwA1EAAAP joined auction 2","timestamp":"2025-02-01T19:02:10.679Z"}
+{"level":"info","message":"Socket service initialized successfully","timestamp":"2025-02-01T19:10:23.589Z"}
+{"level":"info","message":"Connected to Redis server","timestamp":"2025-02-01T19:10:23.670Z"}
+{"level":"info","message":"Socket service initialized successfully","timestamp":"2025-02-01T19:10:24.952Z"}
+{"level":"info","message":"Connected to Redis server","timestamp":"2025-02-01T19:10:25.006Z"}
+{"level":"info","message":"Redis server is ready","timestamp":"2025-02-01T19:10:25.016Z"}
+{"level":"info","message":"Client connected: FHjMfa5vM5JVWl9SAAAB","timestamp":"2025-02-01T19:10:26.504Z"}
+{"level":"info","message":"Client disconnected: FHjMfa5vM5JVWl9SAAAB","timestamp":"2025-02-01T19:10:56.170Z"}
+{"level":"info","message":"Client connected: TcDxHM_D6RthxIaTAAAD","timestamp":"2025-02-01T19:10:56.197Z"}
+{"level":"info","message":"Client TcDxHM_D6RthxIaTAAAD joined auction 2","timestamp":"2025-02-01T19:10:56.204Z"}
+{"level":"info","message":"Client disconnected: TcDxHM_D6RthxIaTAAAD","timestamp":"2025-02-01T19:11:08.384Z"}
+{"level":"info","message":"Client connected: cWbZvzB5NCb73cszAAAG","timestamp":"2025-02-01T19:11:34.684Z"}
+{"level":"info","message":"Client cWbZvzB5NCb73cszAAAG joined auction 2","timestamp":"2025-02-01T19:11:34.718Z"}
+{"level":"info","message":"Client cWbZvzB5NCb73cszAAAG joined auction 2","timestamp":"2025-02-01T19:11:35.085Z"}
+{"level":"info","message":"Client cWbZvzB5NCb73cszAAAG left auction 2","timestamp":"2025-02-01T19:11:35.127Z"}
+{"level":"info","message":"Client disconnected: cWbZvzB5NCb73cszAAAG","timestamp":"2025-02-01T19:11:35.129Z"}
+{"level":"info","message":"Client connected: oqA2mrnSIXGe9AsMAAAI","timestamp":"2025-02-01T19:11:35.524Z"}
+{"level":"info","message":"Client oqA2mrnSIXGe9AsMAAAI joined auction 2","timestamp":"2025-02-01T19:11:35.872Z"}
+{"level":"info","message":"Client connected: OsR_z0EeUlxvroUiAAAL","timestamp":"2025-02-01T19:13:04.585Z"}
+{"level":"info","message":"Client OsR_z0EeUlxvroUiAAAL joined auction 2","timestamp":"2025-02-01T19:13:04.597Z"}
+{"level":"info","message":"Client OsR_z0EeUlxvroUiAAAL joined auction 2","timestamp":"2025-02-01T19:13:04.747Z"}
+{"level":"info","message":"Client disconnected: OsR_z0EeUlxvroUiAAAL","timestamp":"2025-02-01T19:13:04.760Z"}
+{"level":"info","message":"Client connected: pxt-eotZ8bW6WqnwAAAN","timestamp":"2025-02-01T19:13:05.006Z"}
+{"level":"info","message":"Client pxt-eotZ8bW6WqnwAAAN joined auction 2","timestamp":"2025-02-01T19:13:05.016Z"}
+{"level":"info","message":"Client disconnected: oqA2mrnSIXGe9AsMAAAI","timestamp":"2025-02-01T19:13:20.492Z"}
+{"level":"info","message":"Client connected: 9ui5bd3vcJOylw6KAAAQ","timestamp":"2025-02-01T19:13:22.067Z"}
+{"level":"info","message":"Client 9ui5bd3vcJOylw6KAAAQ joined auction 2","timestamp":"2025-02-01T19:13:22.096Z"}
+{"level":"info","message":"Client 9ui5bd3vcJOylw6KAAAQ joined auction 2","timestamp":"2025-02-01T19:13:22.277Z"}
+{"level":"info","message":"Client 9ui5bd3vcJOylw6KAAAQ left auction 2","timestamp":"2025-02-01T19:13:22.298Z"}
+{"level":"info","message":"Client disconnected: 9ui5bd3vcJOylw6KAAAQ","timestamp":"2025-02-01T19:13:22.299Z"}
+{"level":"info","message":"Client connected: ShjGaMgTvwRhDvpVAAAS","timestamp":"2025-02-01T19:13:22.384Z"}
+{"level":"info","message":"Client ShjGaMgTvwRhDvpVAAAS joined auction 2","timestamp":"2025-02-01T19:13:22.519Z"}
+{"level":"info","message":"Client disconnected: ShjGaMgTvwRhDvpVAAAS","timestamp":"2025-02-01T19:13:32.318Z"}
+{"level":"info","message":"Client connected: PnvqZEIU87NxNFgHAAAV","timestamp":"2025-02-01T19:13:33.410Z"}
+{"level":"info","message":"Client PnvqZEIU87NxNFgHAAAV joined auction 2","timestamp":"2025-02-01T19:13:33.417Z"}
+{"level":"info","message":"Client disconnected: PnvqZEIU87NxNFgHAAAV","timestamp":"2025-02-01T19:13:54.536Z"}
+{"level":"info","message":"Client connected: Ixs3nUIWsWw0nVe4AAAX","timestamp":"2025-02-01T19:13:54.717Z"}
+{"level":"info","message":"Client Ixs3nUIWsWw0nVe4AAAX joined auction 2","timestamp":"2025-02-01T19:13:54.732Z"}
+{"level":"info","message":"Client disconnected: pxt-eotZ8bW6WqnwAAAN","timestamp":"2025-02-01T19:13:54.827Z"}
+{"level":"info","message":"Client connected: SfwRofeKHq_izU3MAAAZ","timestamp":"2025-02-01T19:13:54.858Z"}
+{"level":"info","message":"Client SfwRofeKHq_izU3MAAAZ joined auction 2","timestamp":"2025-02-01T19:13:54.862Z"}
+{"level":"info","message":"Client disconnected: Ixs3nUIWsWw0nVe4AAAX","timestamp":"2025-02-01T19:14:06.296Z"}
+{"level":"info","message":"Client connected: GXoJfsY-XH16ObGyAAAc","timestamp":"2025-02-01T19:14:07.567Z"}
+{"level":"info","message":"Client GXoJfsY-XH16ObGyAAAc joined auction 2","timestamp":"2025-02-01T19:14:07.577Z"}
+{"level":"info","message":"Client disconnected: GXoJfsY-XH16ObGyAAAc","timestamp":"2025-02-01T19:14:15.478Z"}
+{"level":"info","message":"Client connected: FU20IuvABqZvwOCHAAAf","timestamp":"2025-02-01T19:14:16.650Z"}
+{"level":"info","message":"Client FU20IuvABqZvwOCHAAAf joined auction 2","timestamp":"2025-02-01T19:14:16.659Z"}
+{"level":"info","message":"Socket service initialized successfully","timestamp":"2025-02-01T19:14:33.669Z"}
+{"level":"info","message":"Connected to Redis server","timestamp":"2025-02-01T19:14:33.715Z"}
+{"level":"info","message":"Redis server is ready","timestamp":"2025-02-01T19:14:33.733Z"}
+{"level":"info","message":"Client connected: 29g3oB081xUJmAD7AAAB","timestamp":"2025-02-01T19:14:33.963Z"}
+{"level":"info","message":"Client connected: rdSjX0SiSkz88tcWAAAD","timestamp":"2025-02-01T19:14:34.440Z"}
+{"level":"info","message":"Client disconnected: 29g3oB081xUJmAD7AAAB","timestamp":"2025-02-01T19:14:39.651Z"}
+{"level":"info","message":"Client connected: utWgAgzUnOkuYk50AAAG","timestamp":"2025-02-01T19:14:40.942Z"}
+{"level":"info","message":"Client utWgAgzUnOkuYk50AAAG joined auction 2","timestamp":"2025-02-01T19:14:40.986Z"}
+{"level":"info","message":"Client utWgAgzUnOkuYk50AAAG joined auction 2","timestamp":"2025-02-01T19:14:41.231Z"}
+{"level":"info","message":"Client utWgAgzUnOkuYk50AAAG left auction 2","timestamp":"2025-02-01T19:14:41.253Z"}
+{"level":"info","message":"Client disconnected: utWgAgzUnOkuYk50AAAG","timestamp":"2025-02-01T19:14:41.257Z"}
+{"level":"info","message":"Client connected: bHubmiZEcdH6b8ulAAAI","timestamp":"2025-02-01T19:14:41.345Z"}
+{"level":"info","message":"Client bHubmiZEcdH6b8ulAAAI joined auction 2","timestamp":"2025-02-01T19:14:41.584Z"}
+{"level":"info","message":"Client disconnected: bHubmiZEcdH6b8ulAAAI","timestamp":"2025-02-01T19:14:55.386Z"}
+{"level":"info","message":"Client connected: 4jpB2HOBZ6BEZEwlAAAL","timestamp":"2025-02-01T19:14:56.497Z"}
+{"level":"info","message":"Client 4jpB2HOBZ6BEZEwlAAAL joined auction 2","timestamp":"2025-02-01T19:14:56.504Z"}
+{"level":"info","message":"Client 4jpB2HOBZ6BEZEwlAAAL joined auction 2","timestamp":"2025-02-01T19:14:56.705Z"}
+{"level":"info","message":"Client 4jpB2HOBZ6BEZEwlAAAL left auction 2","timestamp":"2025-02-01T19:14:56.727Z"}
+{"level":"info","message":"Client disconnected: 4jpB2HOBZ6BEZEwlAAAL","timestamp":"2025-02-01T19:14:56.729Z"}
+{"level":"info","message":"Client connected: CZRy-1TzancpjDB8AAAN","timestamp":"2025-02-01T19:14:56.987Z"}
+{"level":"info","message":"Client CZRy-1TzancpjDB8AAAN joined auction 2","timestamp":"2025-02-01T19:14:56.992Z"}
+{"level":"info","message":"Client disconnected: rdSjX0SiSkz88tcWAAAD","timestamp":"2025-02-01T19:15:27.489Z"}
+{"level":"info","message":"Client connected: 3IV80ecFn1mCUgDsAAAQ","timestamp":"2025-02-01T19:15:29.340Z"}
+{"level":"info","message":"Client 3IV80ecFn1mCUgDsAAAQ joined auction 2","timestamp":"2025-02-01T19:15:29.353Z"}
+{"level":"info","message":"Client 3IV80ecFn1mCUgDsAAAQ joined auction 2","timestamp":"2025-02-01T19:15:29.555Z"}
+{"level":"info","message":"Client 3IV80ecFn1mCUgDsAAAQ left auction 2","timestamp":"2025-02-01T19:15:29.583Z"}
+{"level":"info","message":"Client disconnected: 3IV80ecFn1mCUgDsAAAQ","timestamp":"2025-02-01T19:15:29.585Z"}
+{"level":"info","message":"Client connected: Dwlp5GDtVCICHk_0AAAS","timestamp":"2025-02-01T19:15:30.024Z"}
+{"level":"info","message":"Client Dwlp5GDtVCICHk_0AAAS joined auction 2","timestamp":"2025-02-01T19:15:30.042Z"}
+{"level":"info","message":"Client CZRy-1TzancpjDB8AAAN left auction 2","timestamp":"2025-02-01T19:20:22.170Z"}
+{"level":"info","message":"Client disconnected: CZRy-1TzancpjDB8AAAN","timestamp":"2025-02-01T19:20:22.175Z"}
+{"level":"info","message":"Client connected: C5p_1HJPkJhfV5k7AAAU","timestamp":"2025-02-01T19:20:22.176Z"}
+{"level":"info","message":"Client C5p_1HJPkJhfV5k7AAAU joined auction 2","timestamp":"2025-02-01T19:20:22.178Z"}
+{"level":"info","message":"Client disconnected: Dwlp5GDtVCICHk_0AAAS","timestamp":"2025-02-01T19:25:02.114Z"}
+{"level":"info","message":"Client connected: m4XpBwSq4lUKy2DsAAAX","timestamp":"2025-02-01T19:25:03.979Z"}
+{"level":"info","message":"Client m4XpBwSq4lUKy2DsAAAX joined auction 2","timestamp":"2025-02-01T19:25:03.996Z"}
+{"level":"info","message":"Socket service initialized successfully","timestamp":"2025-02-01T19:25:21.069Z"}
+{"level":"info","message":"Connected to Redis server","timestamp":"2025-02-01T19:25:21.113Z"}
+{"level":"info","message":"Redis server is ready","timestamp":"2025-02-01T19:25:21.132Z"}
+{"level":"info","message":"Client connected: bUmjRvDf3pNm4KaqAAAB","timestamp":"2025-02-01T19:25:21.460Z"}
+{"level":"info","message":"Client connected: CeWGFEurLXR1bUjOAAAD","timestamp":"2025-02-01T19:25:21.464Z"}
+{"level":"info","message":"Client disconnected: bUmjRvDf3pNm4KaqAAAB","timestamp":"2025-02-01T19:25:28.918Z"}
+{"level":"info","message":"Client CeWGFEurLXR1bUjOAAAD joined auction 2","timestamp":"2025-02-01T19:25:30.598Z"}
+{"level":"info","message":"Client disconnected: CeWGFEurLXR1bUjOAAAD","timestamp":"2025-02-01T19:25:30.617Z"}
+{"level":"info","message":"Client connected: ds0q_62yRlsWJAKVAAAH","timestamp":"2025-02-01T19:25:31.041Z"}
+{"level":"info","message":"Client ds0q_62yRlsWJAKVAAAH joined auction 2","timestamp":"2025-02-01T19:25:31.276Z"}
+{"level":"info","message":"Client connected: TmZkkX5AihPUQ84FAAAI","timestamp":"2025-02-01T19:25:31.294Z"}
+{"level":"info","message":"Client TmZkkX5AihPUQ84FAAAI joined auction 2","timestamp":"2025-02-01T19:25:31.332Z"}
+{"level":"info","message":"Client ds0q_62yRlsWJAKVAAAH joined auction 2","timestamp":"2025-02-01T19:25:31.566Z"}
+{"level":"info","message":"Client ds0q_62yRlsWJAKVAAAH left auction 2","timestamp":"2025-02-01T19:25:31.595Z"}
+{"level":"info","message":"Client disconnected: ds0q_62yRlsWJAKVAAAH","timestamp":"2025-02-01T19:25:31.599Z"}
+{"level":"info","message":"Client connected: 8gWQaZ4xJMnk9QtqAAAK","timestamp":"2025-02-01T19:25:31.672Z"}
+{"level":"info","message":"Client 8gWQaZ4xJMnk9QtqAAAK joined auction 2","timestamp":"2025-02-01T19:25:31.693Z"}
+{"level":"info","message":"Client disconnected: TmZkkX5AihPUQ84FAAAI","timestamp":"2025-02-01T19:25:36.597Z"}
+{"level":"info","message":"Client connected: 97iDfG5SMiKGMfFLAAAN","timestamp":"2025-02-01T19:25:38.276Z"}
+{"level":"info","message":"Client 97iDfG5SMiKGMfFLAAAN joined auction 2","timestamp":"2025-02-01T19:25:38.344Z"}
+{"level":"info","message":"Client 97iDfG5SMiKGMfFLAAAN joined auction 2","timestamp":"2025-02-01T19:25:38.476Z"}
+{"level":"info","message":"Client 97iDfG5SMiKGMfFLAAAN left auction 2","timestamp":"2025-02-01T19:25:38.496Z"}
+{"level":"info","message":"Client disconnected: 97iDfG5SMiKGMfFLAAAN","timestamp":"2025-02-01T19:25:38.498Z"}
+{"level":"info","message":"Client connected: 2lkeQQ7MZjCDbX2tAAAP","timestamp":"2025-02-01T19:25:38.781Z"}
+{"level":"info","message":"Client 2lkeQQ7MZjCDbX2tAAAP joined auction 2","timestamp":"2025-02-01T19:25:38.799Z"}
+{"level":"info","message":"Client disconnected: 2lkeQQ7MZjCDbX2tAAAP","timestamp":"2025-02-01T19:28:13.605Z"}
+{"level":"info","message":"Client connected: 1PZaBjRH4keK6Jw1AAAS","timestamp":"2025-02-01T19:28:15.348Z"}
+{"level":"info","message":"Client 1PZaBjRH4keK6Jw1AAAS joined auction 2","timestamp":"2025-02-01T19:28:15.362Z"}
+{"level":"info","message":"Client disconnected: 1PZaBjRH4keK6Jw1AAAS","timestamp":"2025-02-01T19:28:23.098Z"}
+{"level":"info","message":"Client connected: RvhyfeHHKdsYnCH0AAAV","timestamp":"2025-02-01T19:28:25.262Z"}
+{"level":"info","message":"Client RvhyfeHHKdsYnCH0AAAV joined auction 2","timestamp":"2025-02-01T19:28:25.272Z"}
+{"level":"info","message":"Client disconnected: 8gWQaZ4xJMnk9QtqAAAK","timestamp":"2025-02-01T19:28:49.098Z"}
+{"level":"info","message":"Client connected: gyM92pssr7NTtTfAAAAY","timestamp":"2025-02-01T19:28:50.811Z"}
+{"level":"info","message":"Client gyM92pssr7NTtTfAAAAY joined auction 2","timestamp":"2025-02-01T19:28:50.817Z"}
+{"level":"info","message":"Client disconnected: gyM92pssr7NTtTfAAAAY","timestamp":"2025-02-01T19:28:55.043Z"}
+{"level":"info","message":"Client connected: MGJzgJMa24rEsWKlAAAb","timestamp":"2025-02-01T19:28:56.575Z"}
+{"level":"info","message":"Client MGJzgJMa24rEsWKlAAAb joined auction 2","timestamp":"2025-02-01T19:28:56.589Z"}
+{"level":"info","message":"Socket service initialized successfully","timestamp":"2025-02-01T19:29:14.545Z"}
+{"level":"info","message":"Connected to Redis server","timestamp":"2025-02-01T19:29:14.610Z"}
+{"level":"info","message":"Redis server is ready","timestamp":"2025-02-01T19:29:14.629Z"}
+{"level":"info","message":"Client connected: W6awRrh57bRuBLgYAAAB","timestamp":"2025-02-01T19:29:14.795Z"}
+{"level":"info","message":"Client connected: nqbaOiBtHbiKrhsNAAAD","timestamp":"2025-02-01T19:29:14.811Z"}
+{"level":"info","message":"Client W6awRrh57bRuBLgYAAAB joined auction 2","timestamp":"2025-02-01T19:29:16.512Z"}
+{"level":"info","message":"Client W6awRrh57bRuBLgYAAAB left auction 2","timestamp":"2025-02-01T19:29:16.531Z"}
+{"level":"info","message":"Client disconnected: W6awRrh57bRuBLgYAAAB","timestamp":"2025-02-01T19:29:16.534Z"}
+{"level":"info","message":"Client connected: 9PmsAgEezlbwXYJEAAAF","timestamp":"2025-02-01T19:29:16.658Z"}
+{"level":"info","message":"Client 9PmsAgEezlbwXYJEAAAF joined auction 2","timestamp":"2025-02-01T19:29:16.879Z"}
+{"level":"info","message":"Client disconnected: 9PmsAgEezlbwXYJEAAAF","timestamp":"2025-02-01T19:29:17.887Z"}
+{"level":"info","message":"Client connected: OUq9GDrJxWiEi_78AAAH","timestamp":"2025-02-01T19:29:20.193Z"}
+{"level":"info","message":"Client OUq9GDrJxWiEi_78AAAH joined auction 2","timestamp":"2025-02-01T19:29:20.216Z"}
+{"level":"info","message":"Client OUq9GDrJxWiEi_78AAAH joined auction 2","timestamp":"2025-02-01T19:29:20.459Z"}
+{"level":"info","message":"Client OUq9GDrJxWiEi_78AAAH left auction 2","timestamp":"2025-02-01T19:29:20.482Z"}
+{"level":"info","message":"Client disconnected: OUq9GDrJxWiEi_78AAAH","timestamp":"2025-02-01T19:29:20.483Z"}
+{"level":"info","message":"Client connected: jA_Vxljf9BB1P54hAAAJ","timestamp":"2025-02-01T19:29:20.973Z"}
+{"level":"info","message":"Client jA_Vxljf9BB1P54hAAAJ joined auction 2","timestamp":"2025-02-01T19:29:21.014Z"}
+{"level":"info","message":"Client disconnected: jA_Vxljf9BB1P54hAAAJ","timestamp":"2025-02-01T19:32:14.329Z"}
+{"level":"info","message":"Client disconnected: nqbaOiBtHbiKrhsNAAAD","timestamp":"2025-02-01T19:32:14.537Z"}
+{"level":"info","message":"Client connected: nvC9kT1SeFxTb8oGAAAS","timestamp":"2025-02-01T19:32:38.188Z"}
+{"level":"info","message":"Client connected: 32vp7dLaISgtRHgUAAAT","timestamp":"2025-02-01T19:32:38.210Z"}
+{"level":"info","message":"Client 32vp7dLaISgtRHgUAAAT joined auction 2","timestamp":"2025-02-01T19:32:38.227Z"}
+{"level":"info","message":"Client nvC9kT1SeFxTb8oGAAAS joined auction 2","timestamp":"2025-02-01T19:32:38.303Z"}
+{"level":"info","message":"Client nvC9kT1SeFxTb8oGAAAS joined auction 2","timestamp":"2025-02-01T19:32:38.936Z"}
+{"level":"info","message":"Client nvC9kT1SeFxTb8oGAAAS left auction 2","timestamp":"2025-02-01T19:32:39.113Z"}
+{"level":"info","message":"Client disconnected: nvC9kT1SeFxTb8oGAAAS","timestamp":"2025-02-01T19:32:39.114Z"}
+{"level":"info","message":"Client connected: GdK-V6KUjnVA2JLbAAAV","timestamp":"2025-02-01T19:32:40.501Z"}
+{"level":"info","message":"Client 32vp7dLaISgtRHgUAAAT joined auction 2","timestamp":"2025-02-01T19:32:40.538Z"}
+{"level":"info","message":"Client GdK-V6KUjnVA2JLbAAAV joined auction 2","timestamp":"2025-02-01T19:32:40.580Z"}
+{"level":"info","message":"Client 32vp7dLaISgtRHgUAAAT left auction 2","timestamp":"2025-02-01T19:32:40.620Z"}
+{"level":"info","message":"Client disconnected: 32vp7dLaISgtRHgUAAAT","timestamp":"2025-02-01T19:32:40.621Z"}
+{"level":"info","message":"Client connected: -HoKiuFfpYai_1AEAAAX","timestamp":"2025-02-01T19:32:40.925Z"}
+{"level":"info","message":"Client -HoKiuFfpYai_1AEAAAX joined auction 2","timestamp":"2025-02-01T19:32:41.254Z"}
+{"level":"info","message":"Client disconnected: -HoKiuFfpYai_1AEAAAX","timestamp":"2025-02-01T19:34:31.796Z"}
+{"level":"info","message":"Client connected: D1IYfuALbZB9IhvJAAAa","timestamp":"2025-02-01T19:34:33.338Z"}
+{"level":"info","message":"Client D1IYfuALbZB9IhvJAAAa joined auction 2","timestamp":"2025-02-01T19:34:33.347Z"}
+{"level":"info","message":"Client D1IYfuALbZB9IhvJAAAa joined auction 2","timestamp":"2025-02-01T19:34:33.669Z"}
+{"level":"info","message":"Client D1IYfuALbZB9IhvJAAAa left auction 2","timestamp":"2025-02-01T19:34:33.692Z"}
+{"level":"info","message":"Client disconnected: D1IYfuALbZB9IhvJAAAa","timestamp":"2025-02-01T19:34:33.694Z"}
+{"level":"info","message":"Client connected: 5DBJvIXRnWy4_GV2AAAc","timestamp":"2025-02-01T19:34:33.935Z"}
+{"level":"info","message":"Client 5DBJvIXRnWy4_GV2AAAc joined auction 2","timestamp":"2025-02-01T19:34:33.963Z"}
+{"level":"info","message":"Client GdK-V6KUjnVA2JLbAAAV left auction 2","timestamp":"2025-02-01T19:38:54.954Z"}
+{"level":"info","message":"Client disconnected: GdK-V6KUjnVA2JLbAAAV","timestamp":"2025-02-01T19:38:54.964Z"}
+{"level":"info","message":"Client connected: m0hgoS9eDVwwIrgbAAAe","timestamp":"2025-02-01T19:38:54.982Z"}
+{"level":"info","message":"Client m0hgoS9eDVwwIrgbAAAe joined auction 2","timestamp":"2025-02-01T19:38:54.985Z"}
+{"level":"info","message":"Client disconnected: 5DBJvIXRnWy4_GV2AAAc","timestamp":"2025-02-01T19:39:25.149Z"}
+{"level":"info","message":"Client connected: 8K0iA5G9HW4pekDrAAAh","timestamp":"2025-02-01T19:39:26.526Z"}
+{"level":"info","message":"Client 8K0iA5G9HW4pekDrAAAh joined auction 2","timestamp":"2025-02-01T19:39:26.535Z"}
+{"level":"info","message":"Socket service initialized successfully","timestamp":"2025-02-01T19:39:50.765Z"}
+{"level":"info","message":"Connected to Redis server","timestamp":"2025-02-01T19:39:50.836Z"}
+{"level":"info","message":"Redis server is ready","timestamp":"2025-02-01T19:39:50.860Z"}
+{"level":"info","message":"Client connected: wllPw2fagWg4HMzGAAAB","timestamp":"2025-02-01T19:39:50.945Z"}
+{"level":"info","message":"Client wllPw2fagWg4HMzGAAAB joined auction 2","timestamp":"2025-02-01T19:39:54.927Z"}
+{"level":"info","message":"Client wllPw2fagWg4HMzGAAAB left auction 2","timestamp":"2025-02-01T19:39:54.942Z"}
+{"level":"info","message":"Client disconnected: wllPw2fagWg4HMzGAAAB","timestamp":"2025-02-01T19:39:54.946Z"}
+{"level":"info","message":"Client connected: AOAR5aLQ82PpnFB7AAAD","timestamp":"2025-02-01T19:39:54.991Z"}
+{"level":"info","message":"Client AOAR5aLQ82PpnFB7AAAD joined auction 2","timestamp":"2025-02-01T19:39:55.202Z"}
+{"level":"info","message":"Client connected: hAQF3maMtm_mNgdzAAAF","timestamp":"2025-02-01T19:39:56.433Z"}
+{"level":"info","message":"Client disconnected: AOAR5aLQ82PpnFB7AAAD","timestamp":"2025-02-01T19:39:56.953Z"}
+{"level":"info","message":"Client connected: mRZ06OY3f3FW4pDBAAAI","timestamp":"2025-02-01T19:39:58.539Z"}
+{"level":"info","message":"Client mRZ06OY3f3FW4pDBAAAI joined auction 2","timestamp":"2025-02-01T19:39:58.570Z"}
+{"level":"info","message":"Client mRZ06OY3f3FW4pDBAAAI joined auction 2","timestamp":"2025-02-01T19:39:58.746Z"}
+{"level":"info","message":"Client mRZ06OY3f3FW4pDBAAAI left auction 2","timestamp":"2025-02-01T19:39:58.768Z"}
+{"level":"info","message":"Client disconnected: mRZ06OY3f3FW4pDBAAAI","timestamp":"2025-02-01T19:39:58.769Z"}
+{"level":"info","message":"Client connected: -hl4JS8yj7pT1Ue9AAAK","timestamp":"2025-02-01T19:39:59.039Z"}
+{"level":"info","message":"Client -hl4JS8yj7pT1Ue9AAAK joined auction 2","timestamp":"2025-02-01T19:39:59.164Z"}
+{"level":"info","message":"Client disconnected: hAQF3maMtm_mNgdzAAAF","timestamp":"2025-02-01T19:40:18.583Z"}
+{"level":"info","message":"Client connected: 8EsYx0DuGZdot_PqAAAN","timestamp":"2025-02-01T19:40:20.552Z"}
+{"level":"info","message":"Client 8EsYx0DuGZdot_PqAAAN joined auction 2","timestamp":"2025-02-01T19:40:20.569Z"}
+{"level":"info","message":"Client 8EsYx0DuGZdot_PqAAAN joined auction 2","timestamp":"2025-02-01T19:40:20.792Z"}
+{"level":"info","message":"Client 8EsYx0DuGZdot_PqAAAN left auction 2","timestamp":"2025-02-01T19:40:20.817Z"}
+{"level":"info","message":"Client disconnected: 8EsYx0DuGZdot_PqAAAN","timestamp":"2025-02-01T19:40:20.819Z"}
+{"level":"info","message":"Client connected: vXx7js7IcsqxL5RmAAAP","timestamp":"2025-02-01T19:40:20.935Z"}
+{"level":"info","message":"Client vXx7js7IcsqxL5RmAAAP joined auction 2","timestamp":"2025-02-01T19:40:21.218Z"}
+{"level":"info","message":"Client disconnected: vXx7js7IcsqxL5RmAAAP","timestamp":"2025-02-01T19:40:58.273Z"}
+{"level":"info","message":"Client disconnected: -hl4JS8yj7pT1Ue9AAAK","timestamp":"2025-02-01T19:50:13.808Z"}
+{"level":"info","message":"Socket service initialized successfully","timestamp":"2025-02-02T08:30:27.866Z"}
+{"level":"info","message":"Connected to Redis server","timestamp":"2025-02-02T08:30:28.036Z"}
+{"level":"info","message":"Redis server is ready","timestamp":"2025-02-02T08:30:28.126Z"}
+{"isOperational":true,"level":"error","message":"Authentication error: Invalid token","stack":"Error: Invalid token\n    at verifyToken (F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\middleware\\auth.middleware.js:66:11)\n    at protect (F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\middleware\\auth.middleware.js:23:21)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)","status":"fail","statusCode":401,"timestamp":"2025-02-02T08:31:23.028Z"}
+{"level":"error","message":"Authentication failed","stack":"Error: Authentication failed\n    at protect (F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\middleware\\auth.middleware.js:35:10)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)","statusCode":401,"timestamp":"2025-02-02T08:31:23.030Z"}
+{"isOperational":true,"level":"error","message":"Authentication error: Invalid token","stack":"Error: Invalid token\n    at verifyToken (F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\middleware\\auth.middleware.js:66:11)\n    at protect (F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\middleware\\auth.middleware.js:23:21)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)","status":"fail","statusCode":401,"timestamp":"2025-02-02T08:31:23.048Z"}
+{"level":"error","message":"Authentication failed","stack":"Error: Authentication failed\n    at protect (F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\middleware\\auth.middleware.js:35:10)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)","statusCode":401,"timestamp":"2025-02-02T08:31:23.051Z"}
+{"level":"error","message":"Invalid email or password","stack":"Error: Invalid email or password\n    at login (F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\controllers\\v1\\auth-controller.js:61:19)","statusCode":401,"timestamp":"2025-02-02T08:31:45.897Z"}
+{"level":"error","message":"Invalid email or password","stack":"Error: Invalid email or password\n    at login (F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\controllers\\v1\\auth-controller.js:61:19)","statusCode":401,"timestamp":"2025-02-02T08:33:20.011Z"}
+{"level":"error","message":"Invalid email or password","stack":"Error: Invalid email or password\n    at login (F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\controllers\\v1\\auth-controller.js:61:19)","statusCode":401,"timestamp":"2025-02-02T08:33:34.775Z"}
+{"level":"info","message":"Client connected: Bp5a__iNvZfURw3IAAAC","timestamp":"2025-02-02T08:40:33.425Z"}
+{"level":"info","message":"Client Bp5a__iNvZfURw3IAAAC joined auction 5","timestamp":"2025-02-02T08:40:33.431Z"}
+{"level":"info","message":"Client Bp5a__iNvZfURw3IAAAC joined auction 5","timestamp":"2025-02-02T08:40:33.597Z"}
+{"level":"info","message":"Client Bp5a__iNvZfURw3IAAAC left auction 5","timestamp":"2025-02-02T08:40:33.609Z"}
+{"level":"info","message":"Client disconnected: Bp5a__iNvZfURw3IAAAC","timestamp":"2025-02-02T08:40:33.612Z"}
+{"level":"info","message":"Client connected: jwVA_B4EybvZAkYKAAAE","timestamp":"2025-02-02T08:40:33.621Z"}
+{"level":"info","message":"Client jwVA_B4EybvZAkYKAAAE joined auction 5","timestamp":"2025-02-02T08:40:33.622Z"}
+{"level":"info","message":"Client disconnected: jwVA_B4EybvZAkYKAAAE","timestamp":"2025-02-02T08:40:49.256Z"}
+{"level":"error","message":"Insufficient permissions","stack":"Error: Insufficient permissions\n    at F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\middleware\\auth.middleware.js:42:19\n    at Layer.handle [as handle_request] (F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at protect (F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\middleware\\auth.middleware.js:32:5)","statusCode":403,"timestamp":"2025-02-02T12:54:10.973Z"}
+{"level":"error","message":"Insufficient permissions","stack":"Error: Insufficient permissions\n    at F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\middleware\\auth.middleware.js:42:19\n    at Layer.handle [as handle_request] (F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at protect (F:\\WORKSPACE-DEV\\testing\\b2\\code\\backend\\middleware\\auth.middleware.js:32:5)","statusCode":403,"timestamp":"2025-02-02T12:54:11.083Z"}
+{"level":"info","message":"Socket service initialized successfully","timestamp":"2025-02-02T14:00:10.014Z"}
+{"level":"info","message":"Connected to Redis server","timestamp":"2025-02-02T14:00:10.170Z"}
+{"level":"info","message":"Redis server is ready","timestamp":"2025-02-02T14:00:10.189Z"}
+{"level":"info","message":"Socket service initialized successfully","timestamp":"2025-02-02T14:01:27.436Z"}
+{"level":"info","message":"Connected to Redis server","timestamp":"2025-02-02T14:01:27.497Z"}
+{"level":"info","message":"Redis server is ready","timestamp":"2025-02-02T14:01:27.512Z"}
+{"level":"info","message":"Socket service initialized successfully","timestamp":"2025-02-02T14:04:44.924Z"}
+{"level":"info","message":"Connected to Redis server","timestamp":"2025-02-02T14:04:44.973Z"}
+{"level":"info","message":"Redis server is ready","timestamp":"2025-02-02T14:04:45.013Z"}
