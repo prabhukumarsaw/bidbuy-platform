@@ -1643,3 +1643,6 @@
 {"level":"info","message":"Socket service initialized successfully","timestamp":"2025-02-03T11:28:27.333Z"}
 {"level":"info","message":"Connected to Redis server","timestamp":"2025-02-03T11:28:27.380Z"}
 {"level":"info","message":"Redis server is ready","timestamp":"2025-02-03T11:28:27.390Z"}
+{"level":"info","message":"Socket service initialized successfully","timestamp":"2025-02-03T11:47:47.221Z"}
+{"level":"info","message":"Connected to Redis server","timestamp":"2025-02-03T11:47:47.330Z"}
+{"level":"info","message":"Redis server is ready","timestamp":"2025-02-03T11:47:47.363Z"}
