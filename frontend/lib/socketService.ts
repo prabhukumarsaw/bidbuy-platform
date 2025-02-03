@@ -4,8 +4,13 @@ import { Bid, AuctionUpdate, OutbidNotification } from '@/types/types';
 const SOCKET_URL = process.env.NEXT_PUBLIC_SOCKET_URL || 'http://localhost:5000';
 
 class SocketService {
-  private socket: Socket | null = null;
+  private socket: Socket | null = null; // Keep it private
   private isConnected: boolean = false;
+
+  // Public getter for the socket
+  public getSocket(): Socket | null {
+    return this.socket;
+  }
 
   connect() {
     if (this.socket) {

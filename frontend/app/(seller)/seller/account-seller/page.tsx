@@ -41,6 +41,7 @@ import {
 } from 'lucide-react';
 import { Progress } from '@/components/ui/progress';
 import { EditProfileDialog } from './EditProfileDialog';
+import { log } from 'console';
 
 export default function SellerProfile() {
   const { data, isLoading, isError } = useQuery({
@@ -57,6 +58,8 @@ export default function SellerProfile() {
   }
 
   const profile = data?.data;
+
+  console.log('==========profile============', profile);
 
   if (!profile) {
     return null;
