@@ -27,6 +27,7 @@ export interface Bid {
   id: string;
   amount: number;
   auctionId: string;
+  auction: AuctionItem;
   bidderId: string;
   status: BidStatus;
   createdAt: string;
@@ -85,7 +86,7 @@ export interface AuctionFilters {
 }
 
 export interface AuctionItem {
-  id: string;
+  id: number;
   title: string;
   description?: string;
   startingPrice: number;
@@ -95,6 +96,7 @@ export interface AuctionItem {
   startTime: string;
   endTime: string;
   creatorId: string;
+  category: Category;
   status: 'DRAFT' | 'SCHEDULED' | 'ACTIVE' | 'ENDED' | 'CANCELLED' | 'SOLD';
   auctionState: 'RUNNING' | 'PAUSED' | 'RESUMED' | 'STOPPED';
   categoryId: string;
@@ -104,6 +106,7 @@ export interface AuctionItem {
   paymentStatus: 'PENDING' | 'PROCESSING' | 'COMPLETED' | 'FAILED' | 'REFUNDED';
   winnerId?: string;
   views: number;
+  seller: Seller;
   totalBids: number;
   createdAt: string;
   updatedAt: string;
@@ -149,6 +152,10 @@ export interface User {
   name: string;
   image?: string;
   role: 'USER' | 'ADMIN' | 'SELLER';
+  emailVerified: boolean;
+  mobile?: string;
+  address?: string;
+  bio?: string;
   active: boolean;
   createdAt: string;
   updatedAt: string;
@@ -227,4 +234,20 @@ export interface SortingState {
   sortBy: string;
   sortOrder: SortOrder;
   onSort: (sortBy: string, sortOrder: SortOrder) => void;
+}
+
+export interface Notification {
+  id: string;
+  type: string;
+  title: string;
+  message: string;
+  read: boolean;
+  createdAt: Date;
+  expiresAt?: Date;
+}
+export interface InboxMessage {
+  id: string;
+  content: string;
+  read: boolean;
+  createdAt: Date;
 }

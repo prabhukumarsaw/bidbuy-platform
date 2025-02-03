@@ -23,6 +23,7 @@ import {
   BarChart,
   FileText,
 } from 'lucide-react';
+import { DateRange } from 'react-day-picker';
 
 export default function Dashboard() {
   const [selectedDateRange, setSelectedDateRange] = useState<

@@ -4,11 +4,30 @@ const logger = require('../../config/logger');
 const { calculateNextMinimumBid } = require('../../utils/auction.utils');
 const { AppError } = require('../../middleware/error-handler');
 const actionLogService = require('../action-log.service');
-const auctionQueue = require('../scheduler');
+const auctionQueue = require('../../config/queueProcessor');
 
 class SellerAuctionService {
   async createAuction(auctionData) {
     try {
+      const startTime = new Date(auctionData.startTime);
+      const endTime = new Date(auctionData.endTime);
+      const now = new Date();
+
+      // Validate times
+      if (startTime >= endTime) {
+        throw new AppError(400, 'Start time must be before end time');
+      }
+
+      // Determine initial status
+      let initialStatus = 'DRAFT';
+      if (auctionData.startTime && auctionData.endTime) {
+        if (startTime <= now && now < endTime) {
+          initialStatus = 'ACTIVE';
+        } else if (startTime > now) {
+          initialStatus = 'SCHEDULED';
+        }
+      }
+
       const auction = await prisma.auction.create({
         data: {
           title: auctionData.title,
@@ -25,7 +44,7 @@ class SellerAuctionService {
           sellerId: auctionData.sellerId,
           creatorId: auctionData.creatorId,
           currentPrice: auctionData.startingPrice,
-          status: 'DRAFT',
+          status: initialStatus,
         },
         include: {
           category: true,
@@ -35,7 +54,7 @@ class SellerAuctionService {
       });
 
       // Schedule events if the auction is SCHEDULED
-      if (auctionData.status === 'SCHEDULED') {
+      if (initialStatus === 'SCHEDULED') {
         await this.scheduleAuctionEvents(auction);
       }
 
@@ -311,6 +330,42 @@ class SellerAuctionService {
       // Validate status transition
       this.validateStatusTransition(auction.status, status);
 
+      // Additional validation for SCHEDULED status
+      if (status === 'SCHEDULED') {
+        const now = new Date();
+        const startTime = new Date(auction.startTime);
+        const endTime = new Date(auction.endTime);
+
+        // Ensure all required fields are present
+        if (
+          !auction.title ||
+          !auction.description ||
+          !auction.startingPrice ||
+          !auction.startTime ||
+          !auction.endTime ||
+          !auction.categoryId ||
+          !auction.featuredImage ||
+          auction.images.length === 0
+        ) {
+          throw new AppError(
+            400,
+            'All required fields must be filled before scheduling'
+          );
+        }
+
+        // Validate times
+        if (startTime <= now) {
+          throw new AppError(
+            400,
+            'Cannot schedule an auction with a start time in the past'
+          );
+        }
+
+        if (startTime >= endTime) {
+          throw new AppError(400, 'Start time must be before end time');
+        }
+      }
+
       // Update the auction status
       const updatedAuction = await prisma.auction.update({
         where: { id },
@@ -321,7 +376,6 @@ class SellerAuctionService {
         },
       });
 
-      console.log(`Updated auction status to: ${updatedAuction.status}`);
       // Handle status-specific actions
       await this.handleStatusChange(updatedAuction, status);
 

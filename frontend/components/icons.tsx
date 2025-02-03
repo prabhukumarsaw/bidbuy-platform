@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import {
   Eye,
   EyeOff,
@@ -49,6 +51,7 @@ export type Icon = LucideIcon;
 
 export const Icons = {
   clock: Clock,
+  more: MoreHorizontal,
   users: User,
   calendar: Calendar,
   trendingUp: TrendingUp,

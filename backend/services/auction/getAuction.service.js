@@ -161,7 +161,7 @@ class AuctionService {
   async getAuctionById(id) {
     try {
       const auction = await prisma.auction.findUnique({
-        where: { id },
+        where: { id: parseInt(id) },
         include: {
           user: true,
           category: true,
@@ -182,7 +182,7 @@ class AuctionService {
 
       // Increment views
       await prisma.auction.update({
-        where: { id },
+        where: { id: parseInt(id) },
         data: { views: { increment: 1 } },
       });
 
@@ -196,7 +196,7 @@ class AuctionService {
   async validateAuctionForBidding(id) {
     try {
       const auction = await prisma.auction.findUnique({
-        where: { id },
+        where: { id: parseInt(id) },
         include: {
           bids: {
             orderBy: { amount: 'desc' },

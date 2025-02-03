@@ -17,6 +17,8 @@ class BidService {
   }
 
   async createBid({ amount, auctionId, bidderId, auction }) {
+    const parsedAuctionId = parseInt(auctionId, 10);
+
     // Validate minimum bid increment
     if (amount < auction.currentPrice + auction.minBidIncrement) {
       throw new AppError(
@@ -29,7 +31,7 @@ class BidService {
     const newBid = await this.prisma.$transaction(async (tx) => {
       // Get latest auction state to prevent race conditions
       const currentAuction = await tx.auction.findUnique({
-        where: { id: auctionId },
+        where: { id: parsedAuctionId },
         select: { currentPrice: true, winnerId: true },
       });
 
@@ -45,7 +47,7 @@ class BidService {
       if (currentAuction.currentPrice > 0) {
         await tx.bid.updateMany({
           where: {
-            auctionId,
+            auctionId: parsedAuctionId,
             status: 'WINNING',
           },
           data: {
@@ -58,7 +60,7 @@ class BidService {
       const bid = await tx.bid.create({
         data: {
           amount,
-          auctionId,
+          auctionId: parsedAuctionId,
           bidderId,
           status: 'WINNING',
           bidHistory: {
@@ -78,7 +80,7 @@ class BidService {
 
       // Update auction current price and winner
       await tx.auction.update({
-        where: { id: auctionId },
+        where: { id: parsedAuctionId },
         data: {
           currentPrice: amount,
           winnerId: bidderId,
@@ -89,7 +91,7 @@ class BidService {
     });
 
     // Emit real-time updates
-    socketService.emitNewBid(auctionId, {
+    socketService.emitNewBid(parsedAuctionId, {
       id: newBid.id,
       amount: newBid.amount,
       bidder: newBid.bidder,
@@ -98,20 +100,21 @@ class BidService {
 
     // Notify previous highest bidder
     if (auction.winnerId && auction.winnerId !== bidderId) {
-      socketService.emitOutbidNotification(auction.winnerId, auctionId, {
+      socketService.emitOutbidNotification(auction.winnerId, parsedAuctionId, {
         amount: newBid.amount,
         bidder: newBid.bidder,
       });
     }
 
     // Invalidate relevant caches
-    await this.invalidateBidCache(auctionId, bidderId);
+    await this.invalidateBidCache(parsedAuctionId, bidderId);
 
     return newBid;
   }
 
   async getAuctionBids(auctionId, sort = 'desc') {
-    const cacheKey = `${CACHE_PREFIX.BIDS_AUCTION}:${auctionId}:${sort}`;
+    const parsedAuctionId = parseInt(auctionId, 10);
+    const cacheKey = `${CACHE_PREFIX.BIDS_AUCTION}:${parsedAuctionId}:${sort}`;
 
     try {
       // Try to get from cache
@@ -121,7 +124,7 @@ class BidService {
       }
 
       const bids = await this.prisma.bid.findMany({
-        where: { auctionId },
+        where: { auctionId: parsedAuctionId },
         include: {
           bidder: {
             select: {
@@ -238,7 +241,8 @@ class BidService {
   }
 
   async getWinningBid(auctionId) {
-    const cacheKey = `bid:winning:${auctionId}`;
+    const parsedAuctionId = parseInt(auctionId, 10);
+    const cacheKey = `bid:winning:${parsedAuctionId}`;
 
     try {
       const cached = await redis.get(cacheKey);
@@ -248,7 +252,7 @@ class BidService {
 
       const bid = await this.prisma.bid.findFirst({
         where: {
-          auctionId,
+          auctionId: parsedAuctionId,
           status: 'WINNING',
         },
         include: {

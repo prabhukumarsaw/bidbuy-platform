@@ -3,10 +3,68 @@ const redis = require('../../config/redis');
 const logger = require('../../config/logger');
 const { calculateNextMinimumBid } = require('../../utils/auction.utils');
 const { AppError } = require('../../middleware/error-handler');
+const auctionQueue = require('../scheduler');
 
 class AuctionService {
+  // async createAuction(auctionData) {
+  //   try {
+  //     const auction = await prisma.auction.create({
+  //       data: {
+  //         title: auctionData.title,
+  //         description: auctionData.description,
+  //         startingPrice: auctionData.startingPrice,
+  //         minBidIncrement: auctionData.minBidIncrement || 1,
+  //         reservePrice: auctionData.reservePrice,
+  //         startTime: new Date(auctionData.startTime),
+  //         endTime: new Date(auctionData.endTime),
+  //         categoryId: auctionData.categoryId,
+  //         tags: auctionData.tags || [],
+  //         featuredImage: auctionData.featuredImage,
+  //         images: auctionData.images,
+  //         creatorId: auctionData.creatorId,
+  //         currentPrice: auctionData.startingPrice,
+  //         status: 'DRAFT',
+  //       },
+  //       include: {
+  //         category: true,
+  //         user: true,
+  //       },
+  //     });
+
+  //     // Schedule events if the auction is SCHEDULED
+  //     if (auctionData.status === 'SCHEDULED') {
+  //       await this.scheduleAuctionEvents(auction);
+  //     }
+
+  //     return auction;
+  //   } catch (error) {
+  //     logger.error('Error in createAuction service:', error);
+  //     throw new Error('Failed to create auction');
+  //   }
+  // }
+
   async createAuction(auctionData) {
     try {
+      // Determine initial status based on start time
+      const startTime = new Date(auctionData.startTime);
+      const endTime = new Date(auctionData.endTime);
+      const now = new Date();
+
+      // Validate times
+      if (startTime >= endTime) {
+        throw new AppError(400, 'Start time must be before end time');
+      }
+
+      // Determine initial status
+      let initialStatus = 'DRAFT';
+      if (auctionData.startTime && auctionData.endTime) {
+        if (startTime <= now && now < endTime) {
+          initialStatus = 'ACTIVE';
+        } else if (startTime > now) {
+          initialStatus = 'SCHEDULED';
+        }
+      }
+
       const auction = await prisma.auction.create({
         data: {
           title: auctionData.title,
@@ -14,15 +72,15 @@ class AuctionService {
           startingPrice: auctionData.startingPrice,
           minBidIncrement: auctionData.minBidIncrement || 1,
           reservePrice: auctionData.reservePrice,
-          startTime: new Date(auctionData.startTime),
-          endTime: new Date(auctionData.endTime),
+          startTime: startTime,
+          endTime: endTime,
           categoryId: auctionData.categoryId,
           tags: auctionData.tags || [],
           featuredImage: auctionData.featuredImage,
           images: auctionData.images,
           creatorId: auctionData.creatorId,
           currentPrice: auctionData.startingPrice,
-          status: 'DRAFT',
+          status: initialStatus,
         },
         include: {
           category: true,
@@ -31,8 +89,18 @@ class AuctionService {
       });
 
       // Schedule events if the auction is SCHEDULED
-      if (auctionData.status === 'SCHEDULED') {
+      if (initialStatus === 'SCHEDULED') {
         await this.scheduleAuctionEvents(auction);
+        await auctionQueue.add(
+          'update-auction-status',
+          {
+            auctionId: auction.id,
+            startTime: auctionData.startTime,
+          },
+          {
+            delay: new Date(auctionData.startTime) - Date.now(), // Delay job until the start time
+          }
+        );
       }
 
       return auction;
@@ -288,12 +356,10 @@ class AuctionService {
 
   async updateAuctionStatus(id, status) {
     try {
-      console.log(
-        `Updating auction status. ID: ${id}, Status: ${status}, Seller ID: ${sellerId}`
-      );
-      // Fetch the auction by ID and seller ID
+      console.log(`Updating auction status. ID: ${id}, Status: ${status}`);
+
       const auction = await prisma.auction.findUnique({
-        where: { id }, // Ensure the auction belongs to the seller
+        where: { id },
       });
 
       if (!auction) {
@@ -302,10 +368,49 @@ class AuctionService {
           'Auction not found or you are not authorized to update it'
         );
       }
-      console.log(`Current auction status: ${auction.status}`);
 
-      // Validate status transition
+      if (auction.status === status) {
+        throw new AppError(400, `Auction is already in status: ${status}`);
+      }
+
+      // Validate the status transition
       this.validateStatusTransition(auction.status, status);
+
+      // Additional validation for SCHEDULED status
+      if (status === 'SCHEDULED') {
+        const now = new Date();
+        const startTime = new Date(auction.startTime);
+        const endTime = new Date(auction.endTime);
+
+        // Ensure all required fields are present
+        if (
+          !auction.title ||
+          !auction.description ||
+          !auction.startingPrice ||
+          !auction.startTime ||
+          !auction.endTime ||
+          !auction.categoryId ||
+          !auction.featuredImage ||
+          auction.images.length === 0
+        ) {
+          throw new AppError(
+            400,
+            'All required fields must be filled before scheduling'
+          );
+        }
+
+        // Validate times
+        if (startTime <= now) {
+          throw new AppError(
+            400,
+            'Cannot schedule an auction with a start time in the past'
+          );
+        }
+
+        if (startTime >= endTime) {
+          throw new AppError(400, 'Start time must be before end time');
+        }
+      }
 
       // Update the auction status
       const updatedAuction = await prisma.auction.update({
@@ -317,11 +422,10 @@ class AuctionService {
         },
       });
 
-      console.log(`Updated auction status to: ${updatedAuction.status}`);
       // Handle status-specific actions
       await this.handleStatusChange(updatedAuction, status);
 
-      // Invalidate cache for the auction's category
+      // Invalidate cache
       await this.invalidateAuctionCaches(updatedAuction.categoryId);
 
       return updatedAuction;
@@ -341,9 +445,32 @@ class AuctionService {
       SOLD: [],
     };
 
-    newStatus = newStatus.toUpperCase();
+    // Additional validation for time-based transitions
+    if (newStatus === 'SCHEDULED') {
+      const now = new Date();
+      const startTime = new Date(this.startTime);
+      const endTime = new Date(this.endTime);
 
-    if (!allowedTransitions[currentStatus].includes(newStatus)) {
+      if (!startTime || !endTime) {
+        throw new AppError(
+          400,
+          'Start time and end time must be set to schedule an auction'
+        );
+      }
+
+      if (startTime <= now) {
+        throw new AppError(
+          400,
+          'Cannot schedule an auction with a start time in the past'
+        );
+      }
+
+      if (startTime >= endTime) {
+        throw new AppError(400, 'Start time must be before end time');
+      }
+    }
+
+    if (!allowedTransitions[currentStatus]?.includes(newStatus)) {
       throw new AppError(
         400,
         `Invalid status transition from ${currentStatus} to ${newStatus}`

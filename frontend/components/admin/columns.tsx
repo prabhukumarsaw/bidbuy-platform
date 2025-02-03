@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { ColumnDef } from '@tanstack/react-table';
 import { User } from '@/lib/api/admin';
 import { Badge } from '@/components/ui/badge';

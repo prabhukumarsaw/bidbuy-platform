@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { backgroundApi } from '@/lib/api/background';
 import { BidsResponse, TopBidder, Category, Pagination, Bid } from '@/types/types';

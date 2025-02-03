@@ -116,7 +116,8 @@ export default function CreateAuctionForm() {
     queryFn: () => sellerApi.getAllCategories(),
   });
 
-  const categories = categoriesData?.categories ?? [];
+  // const categories = categoriesData?.categories ?? [];
+  const categories = categoriesData?.data ?? [];
 
   const form = useForm<CreateAuctionValues>({
     resolver: zodResolver(createAuctionSchema),
@@ -468,42 +469,14 @@ export default function CreateAuctionForm() {
                       render={({ field }) => (
                         <FormItem className="flex flex-col">
                           <FormLabel>Start Time</FormLabel>
-                          <Popover>
-                            <PopoverTrigger asChild>
-                              <FormControl>
-                                <Button
-                                  variant={'outline'}
-                                  className={cn(
-                                    'w-full pl-3 text-left font-normal',
-                                    !field.value && 'text-muted-foreground'
-                                  )}
-                                >
-                                  {field.value ? (
-                                    format(field.value, 'PPP')
-                                  ) : (
-                                    <span>Pick a date</span>
-                                  )}
-                                  <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                                </Button>
-                              </FormControl>
-                            </PopoverTrigger>
-                            <PopoverContent
-                              className="w-auto p-0"
-                              align="start"
-                            >
-                              <Calendar
-                                mode="single"
-                                selected={field.value}
-                                onSelect={field.onChange}
-                                disabled={(date) =>
-                                  date < new Date() ||
-                                  (form.watch('endTime') &&
-                                    date > form.watch('endTime'))
-                                }
-                                initialFocus
-                              />
-                            </PopoverContent>
-                          </Popover>
+                          <FormControl>
+                            <DateTimePicker
+                              date={field.value}
+                              setDate={field.onChange}
+                              minDate={new Date()}
+                              maxDate={form.watch('endTime')}
+                            />
+                          </FormControl>
                           <FormMessage />
                         </FormItem>
                       )}
@@ -515,42 +488,13 @@ export default function CreateAuctionForm() {
                       render={({ field }) => (
                         <FormItem className="flex flex-col">
                           <FormLabel>End Time</FormLabel>
-                          <Popover>
-                            <PopoverTrigger asChild>
-                              <FormControl>
-                                <Button
-                                  variant={'outline'}
-                                  className={cn(
-                                    'w-full pl-3 text-left font-normal',
-                                    !field.value && 'text-muted-foreground'
-                                  )}
-                                >
-                                  {field.value ? (
-                                    format(field.value, 'PPP')
-                                  ) : (
-                                    <span>Pick a date</span>
-                                  )}
-                                  <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                                </Button>
-                              </FormControl>
-                            </PopoverTrigger>
-                            <PopoverContent
-                              className="w-auto p-0"
-                              align="start"
-                            >
-                              <Calendar
-                                mode="single"
-                                selected={field.value}
-                                onSelect={field.onChange}
-                                disabled={(date) =>
-                                  date < new Date() ||
-                                  (form.watch('startTime') &&
-                                    date < form.watch('startTime'))
-                                }
-                                initialFocus
-                              />
-                            </PopoverContent>
-                          </Popover>
+                          <FormControl>
+                            <DateTimePicker
+                              date={field.value}
+                              setDate={field.onChange}
+                              minDate={form.watch('startTime') || new Date()}
+                            />
+                          </FormControl>
                           <FormMessage />
                         </FormItem>
                       )}

@@ -25,6 +25,7 @@ import {
   FileText,
 } from 'lucide-react';
 import { sellerApi } from '@/lib/api/seller';
+import { DateRange } from 'react-day-picker';
 
 export default function Dashboard() {
   const [selectedDateRange, setSelectedDateRange] = useState<

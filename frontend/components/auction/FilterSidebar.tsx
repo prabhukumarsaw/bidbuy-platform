@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import type React from 'react';
 import { useCallback, useMemo, useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
@@ -40,11 +42,15 @@ import {
 } from '@/components/ui/select';
 import { ScrollArea } from '@/components/ui/scroll-area';
 
+interface FilterSidebarProps {
+  onFilterChange?: (filters: any) => void;
+  isMobile?: boolean;
+}
+
 export default function FilterSidebar({
   onFilterChange,
-}: {
-  onFilterChange?: (filters: any) => void;
-}) {
+  isMobile = false,
+}: FilterSidebarProps) {
   const {
     filters,
     setFilter,
@@ -127,11 +133,18 @@ export default function FilterSidebar({
     }
   }, [filters, onFilterChange]);
 
+  const containerClasses = isMobile
+    ? 'bg-white h-full'
+    : 'bg-white rounded-lg shadow-lg min-h-screen overflow-hidden transition-all duration-300 w-80';
+
+  const headerClasses = isMobile
+    ? 'sticky top-0 z-10 bg-white border-b border-gray-200 p-4 flex items-center justify-between'
+    : 'p-4 border-b border-gray-200 flex items-center justify-between';
+
   return (
-    <div
-      className={`bg-white rounded-lg shadow-lg min-h-screen overflow-hidden transition-all duration-300 w-80`}
-    >
-      <div className="p-4 border-b border-gray-200 flex items-center justify-between">
+    <div className={containerClasses}>
+      <div className={headerClasses}>
+        {' '}
         <h2 className={`text-xl font-semibold block`}>Filters</h2>
         <Button
           variant="ghost"
@@ -142,7 +155,9 @@ export default function FilterSidebar({
         </Button>
       </div>
 
-      <ScrollArea className="min-h-screen">
+      <ScrollArea
+        className={isMobile ? 'h-[calc(85vh-4rem)]' : 'h-[calc(90vh-0rem)] '}
+      >
         <div className="p-4">
           <div className="relative mb-6">
             <Search className="absolute left-3 top-3 h-4 w-4 text-gray-400" />

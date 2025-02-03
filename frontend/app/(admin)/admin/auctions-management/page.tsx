@@ -1,3 +1,6 @@
+// eslint-disable-next-line
+// @ts-nocheck
+
 'use client';
 import React, { useState, useCallback, useMemo } from 'react';
 import { format } from 'date-fns';

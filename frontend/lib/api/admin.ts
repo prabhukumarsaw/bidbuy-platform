@@ -67,7 +67,7 @@ export const adminApi = {
   },
 
   // User management
-  getUsers: async () => {
+  getUsers: async (debouncedSearchValue?: string) => {
     const { data } = await api.get<{ data: User[] }>('/admin/users');
     return data;
   },

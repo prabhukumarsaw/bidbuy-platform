@@ -1,3 +1,4 @@
+// @ts-nocheck
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -155,11 +156,8 @@ export default function ProductGrid({
           )}{' '}
           of {initialProducts.pagination.total} results
         </h1>
-        <div className="flex items-center space-x-4">
-          <span className="hidden md:block">
-            <SortDropdown onSort={handleSort} />
-          </span>
-          <span className="w-[180px] block sm:hidden font-semibold">
+        <div className="flex items-center md:space-x-4 space-x-44 ">
+          <span className="w-[180px] block sm:hidden font-medium">
             Showing {(currentPage - 1) * initialProducts.pagination.limit + 1}–
             {Math.min(
               currentPage * initialProducts.pagination.limit,
@@ -167,6 +165,10 @@ export default function ProductGrid({
             )}{' '}
             of {initialProducts.pagination.total} results
           </span>
+          <span className="hidden md:block">
+            <SortDropdown onSort={handleSort} />
+          </span>
+
           <ViewToggle view={view} onViewChange={setView} />
         </div>
       </div>

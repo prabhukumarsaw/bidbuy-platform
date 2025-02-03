@@ -6,6 +6,7 @@ const categoryRoutes = require('./v1/category-routes');
 const auctionRoutes = require('./v1/auction.routes');
 const adminAuction = require('./admin/admin-auction');
 const sellerAuction = require('./seller/seller-auction');
+const userRoutes = require('./v1/user-routes');
 // const notificationRoutes = require('./v1/notification.routes');
 
 const router = express.Router();
@@ -15,6 +16,7 @@ const router = express.Router();
 /*---------------------------------------------------------------------- */
 
 router.use('/auth', authRoutes);
+router.use('/user', userRoutes);
 router.use('/seller', sellerRoutes);
 router.use('/admin', adminRoutes);
 
