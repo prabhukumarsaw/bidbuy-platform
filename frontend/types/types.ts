@@ -245,6 +245,7 @@ export interface Notification {
   createdAt: Date;
   expiresAt?: Date;
 }
+
 export interface InboxMessage {
   id: string;
   content: string;

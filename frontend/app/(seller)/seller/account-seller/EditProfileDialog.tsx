@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -29,9 +29,10 @@ import {
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 
-import { Edit } from 'lucide-react';
+import { Edit, Upload } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { Icons } from '@/components/icons';
+import { useDropzone } from 'react-dropzone';
 
 // Define the form schema
 const formSchema = z.object({
@@ -54,6 +55,7 @@ interface EditProfileDialogProps {
 
 export function EditProfileDialog({ profile }: EditProfileDialogProps) {
   const { toast } = useToast();
+  const [previewImage, setPreviewImage] = useState<string | null>(null);
   const [isOpen, setIsOpen] = React.useState(false);
   const queryClient = useQueryClient();
   const form = useForm<FormValues>({
@@ -68,6 +70,18 @@ export function EditProfileDialog({ profile }: EditProfileDialogProps) {
       country: profile.country,
     },
   });
+
+  // if (previewImage && previewImage !== user?.image) {
+  //   const response = await fetch(previewImage);
+  //   const blob = await response.blob();
+  //   formData.append('profileImage', blob, 'profile.jpg');
+  // }
+
+  useEffect(() => {
+    if (profile.user) {
+      setPreviewImage(profile.user.image || null);
+    }
+  }, [profile.user]);
 
   const mutation = useMutation({
     mutationFn: (data: FormValues) => sellerApi.updateProfile(data),
@@ -87,6 +101,26 @@ export function EditProfileDialog({ profile }: EditProfileDialogProps) {
         variant: 'destructive',
       });
     },
+  });
+
+  const onDrop = useCallback((acceptedFiles: File[]) => {
+    const file = acceptedFiles[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPreviewImage(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  }, []);
+
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop,
+    accept: {
+      'image/*': ['.jpeg', '.jpg', '.png', '.webp'],
+    },
+    maxSize: 2 * 1024 * 1024, // 2MB
+    maxFiles: 1,
   });
 
   const onSubmit = (data: FormValues) => {
@@ -113,6 +147,30 @@ export function EditProfileDialog({ profile }: EditProfileDialogProps) {
         </DialogHeader>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+            <div
+              {...getRootProps()}
+              className="border-2 border-dashed rounded-lg p-4 text-center cursor-pointer hover:border-primary"
+            >
+              <input {...getInputProps()} />
+              {previewImage ? (
+                <div className="relative w-32 h-32 mx-auto">
+                  <img
+                    src={previewImage}
+                    alt="Preview"
+                    className="w-full h-full object-cover rounded-full"
+                  />
+                </div>
+              ) : (
+                <div className="flex flex-col items-center">
+                  <Upload className="w-8 h-8 mb-2 text-gray-500" />
+                  <p className="text-sm text-gray-500">
+                    {isDragActive
+                      ? 'Drop image here'
+                      : 'Drag & drop or click to select profile image'}
+                  </p>
+                </div>
+              )}
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <FormField
                 control={form.control}

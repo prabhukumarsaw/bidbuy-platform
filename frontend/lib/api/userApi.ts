@@ -25,18 +25,21 @@ export const userApi = {
   },
   // Notifications
   getNotifications: async (params?: { page?: number; limit?: number; read?: boolean }) => {
-    const { data } = await api.get<{ data: Notification[]; pagination: Pagination }>(
+    const { data } = await api.get<{ data: Notification[]; unreadCount: number; pagination: Pagination }>(
       '/user/notifications',
       { params }
     );
     return data;
   },
+  
+  
   markNotificationAsRead: async (notificationId: string) => {
     const { data } = await api.patch<{ data: Notification }>(
       `/user/notifications/${notificationId}/read`
     );
     return data;
   },
+  
   // Inbox Messages
   getInboxMessages: async (params?: { page?: number; limit?: number; read?: boolean }) => {
     const { data } = await api.get<{ data: InboxMessage[]; pagination: Pagination }>(
@@ -45,6 +48,7 @@ export const userApi = {
     );
     return data;
   },
+
   markMessageAsRead: async (messageId: string) => {
     const { data } = await api.patch<{ data: InboxMessage }>(
       `/user/inbox/${messageId}/read`
