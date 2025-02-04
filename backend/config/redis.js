@@ -3,8 +3,9 @@ const logger = require('./logger');
 
 // Configure Redis connection
 const redis = new Redis({
-  host: process.env.REDIS_HOST || 'localhost', // Default to 'localhost' if no REDIS_HOST is specified
-  port: parseInt(process.env.REDIS_PORT || '6379'), // Default to port 6379 if no REDIS_PORT is specified
+  host: process.env.REDISHOST, // Default to 'localhost' if no REDIS_HOST is specified
+  port: parseInt(process.env.REDISPORT), // Default to port 6379 if no REDIS_PORT is specified
+  password: process.env.REDISPASSWORD, // Use the REDIS_PASSWORD if specified
   maxRetriesPerRequest: null, // Ensure this is set to null for BullMQ
   retryStrategy: (times) => {
     // Gradually increase the retry delay with each attempt, up to a max of 2 seconds
