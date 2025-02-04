@@ -3,143 +3,126 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
+const loadingTexts = [
+  'Bidding time! 🕒',
+  'Let’s hope your internet is faster than your bid! ⚡',
+  'Let’s go! 🚀',
+  'Bid now or regret later! 😅',
+  'Who’s winning? 🤔',
+  'Hold my coffee, I’m bidding! ☕💻',
+  'Bids incoming! 💥',
+  'Time to bid! ⏳',
+  'Let’s make it rain! 🌧️💸',
+  'Winning starts now! 🏆',
+  'Get your bid on! 👏',
+  'Game on! 🎮',
+];
+
 export default function Loading() {
   const [mounted, setMounted] = useState(false);
+  const [textIndex, setTextIndex] = useState(0);
 
   useEffect(() => {
     setMounted(true);
+    const interval = setInterval(() => {
+      setTextIndex((prevIndex) => (prevIndex + 1) % loadingTexts.length);
+    }, 3000);
+    return () => clearInterval(interval);
   }, []);
 
   if (!mounted) return null;
 
   return (
-    <div className="fixed inset-0 bg-gradient-to-br from-primary to-secondary flex items-center justify-center overflow-hidden z-[999]">
-      <AnimatePresence>
+    <div className="fixed inset-0 bg-gradient-to-br from-purple-600 to-indigo-900 flex flex-col items-center justify-center overflow-hidden z-[999]">
+      <div className="relative w-32 h-32 sm:w-24 sm:h-24 mb-8">
         <motion.div
-          key="splash"
-          initial={{ scale: 0, rotate: -180 }}
-          animate={{ scale: 1, rotate: 0 }}
-          exit={{ scale: 0, rotate: 180 }}
-          transition={{
-            type: 'spring',
-            stiffness: 260,
-            damping: 20,
+          className="absolute inset-0 bg-pink-500 rounded-full opacity-20"
+          animate={{
+            scale: [1, 1.2, 1],
+            rotate: [0, 180, 360],
           }}
-          className="relative"
+          transition={{
+            duration: 4,
+            repeat: Number.POSITIVE_INFINITY,
+            ease: 'easeInOut',
+          }}
+        />
+        <motion.div
+          className="absolute inset-4 bg-yellow-400 rounded-full opacity-20"
+          animate={{
+            scale: [1.2, 1, 1.2],
+            rotate: [0, -180, -360],
+          }}
+          transition={{
+            duration: 4,
+            repeat: Number.POSITIVE_INFINITY,
+            ease: 'easeInOut',
+          }}
+        />
+        <motion.div
+          className="absolute inset-8 bg-blue-500 rounded-full opacity-20"
+          animate={{
+            scale: [1, 1.1, 1],
+            rotate: [0, 90, 0],
+          }}
+          transition={{
+            duration: 4,
+            repeat: Number.POSITIVE_INFINITY,
+            ease: 'easeInOut',
+          }}
+        />
+        <motion.div
+          className="absolute inset-0 border-4 border-white rounded-full"
+          animate={{
+            rotate: 360,
+          }}
+          transition={{
+            duration: 2,
+            repeat: Number.POSITIVE_INFINITY,
+            ease: 'linear',
+          }}
         >
-          <svg viewBox="0 0 100 100" className="w-64 h-64 md:w-96 md:h-96">
-            <defs>
-              <filter id="glow">
-                <feGaussianBlur stdDeviation="3.5" result="coloredBlur" />
-                <feMerge>
-                  <feMergeNode in="coloredBlur" />
-                  <feMergeNode in="SourceGraphic" />
-                </feMerge>
-              </filter>
-            </defs>
-            <motion.circle
-              cx="50"
-              cy="50"
-              r="45"
-              fill="none"
-              stroke="white"
-              strokeWidth="2"
-              strokeDasharray="0 1"
-              filter="url(#glow)"
-              animate={{
-                strokeDasharray: ['1 0', '0 1'],
-              }}
-              transition={{
-                duration: 2,
-                ease: 'easeInOut',
-                repeat: Number.POSITIVE_INFINITY,
-                repeatType: 'reverse',
-              }}
-            />
-            <motion.path
-              d="M20 80L80 20M50 90L90 50M10 50L50 10"
-              stroke="white"
-              strokeWidth="4"
-              strokeLinecap="round"
-              filter="url(#glow)"
-              animate={{
-                pathLength: [0, 1],
-                opacity: [0.2, 1],
-              }}
-              transition={{
-                duration: 2,
-                ease: 'easeInOut',
-                repeat: Number.POSITIVE_INFINITY,
-                repeatType: 'reverse',
-              }}
-            />
-            <motion.rect
-              x="60"
-              y="60"
-              width="30"
-              height="15"
-              rx="2"
-              fill="white"
-              filter="url(#glow)"
-              animate={{
-                y: [60, 55, 60],
-                opacity: [0.5, 1, 0.5],
-              }}
-              transition={{
-                duration: 2,
-                ease: 'easeInOut',
-                repeat: Number.POSITIVE_INFINITY,
-              }}
-            />
-          </svg>
+          <motion.div
+            className="w-2 h-3 bg-white rounded-full absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+            animate={{
+              scale: [1, 1.2, 1],
+            }}
+            transition={{
+              duration: 1,
+              repeat: Number.POSITIVE_INFINITY,
+              ease: 'easeInOut',
+            }}
+          />
+        </motion.div>
+      </div>
+
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={textIndex}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          transition={{ duration: 0.5 }}
+          className="text-center"
+        >
+          <h2 className=" font-semibold text-xs sm:text-sm md:text-md lg:text-xl text-white mb-4 tracking-tight">
+            {loadingTexts[textIndex]}
+          </h2>
         </motion.div>
       </AnimatePresence>
 
       <motion.div
-        className="absolute bottom-10 left-0 right-0 text-center"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.5 }}
+        className="mt-4 sm:mt-6 text-white text-xs sm:text-sm md:text-base lg:text-xl font-medium"
+        animate={{
+          opacity: [1, 0.5, 1],
+        }}
+        transition={{
+          duration: 2,
+          repeat: Number.POSITIVE_INFINITY,
+          ease: 'easeInOut',
+        }}
       >
-        <motion.h1
-          className="text-4xl md:text-6xl font-bold text-white mb-4"
-          animate={{ scale: [1, 1.05, 1] }}
-          transition={{
-            duration: 2,
-            repeat: Number.POSITIVE_INFINITY,
-            repeatType: 'reverse',
-          }}
-        >
-          Auction Bidding
-        </motion.h1>
-        <div className="flex justify-center items-end space-x-2 h-12">
-          {[0, 1, 2, 3, 4].map((index) => (
-            <motion.div
-              key={index}
-              className="w-6 bg-white rounded-t-full"
-              animate={{
-                height: ['20%', '100%', '20%'],
-              }}
-              transition={{
-                duration: 1.5,
-                repeat: Number.POSITIVE_INFINITY,
-                delay: index * 0.2,
-              }}
-            >
-              <motion.div
-                className="w-full h-2 bg-primary rounded-full"
-                animate={{
-                  scale: [1, 1.2, 1],
-                }}
-                transition={{
-                  duration: 1.5,
-                  repeat: Number.POSITIVE_INFINITY,
-                  delay: index * 0.2,
-                }}
-              />
-            </motion.div>
-          ))}
-        </div>
+        Loading amazing auctions...
       </motion.div>
     </div>
   );
