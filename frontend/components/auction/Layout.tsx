@@ -17,8 +17,8 @@ export default function Layout({ children, onFilterChange }: LayoutProps) {
       <div className="hidden lg:block w-80 fixed left-0 top-0 bottom-0 h-screen overflow-hidden border-r border-gray-200 z-30">
         <FilterSidebar onFilterChange={onFilterChange} />
       </div>
-      <main className="flex-1 lg:ml-80">
-        <div className="container mx-auto px-4 py-8 pb-24 lg:pb-8 min-h-screen">
+      <main className="flex lg:ml-80 border-2 w-full">
+        <div className="container mx-auto px-4 py-4 pb-24 lg:pb-8 min-h-screen">
           {children}
         </div>
       </main>

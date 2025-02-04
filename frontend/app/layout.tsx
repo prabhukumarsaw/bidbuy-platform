@@ -4,6 +4,8 @@ import './globals.css';
 import { Providers } from './providers';
 import { LocationProvider } from '@/contexts/LocationContext';
 import { Toaster } from '@/components/ui/toaster';
+import { Suspense } from 'react';
+import Loading from './loading';
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
@@ -45,7 +47,7 @@ export default function RootLayout({
         {' '}
         <Providers>
           <LocationProvider>
-            {children}
+          <Suspense fallback={<Loading />}>{children}</Suspense>
             <Toaster />
           </LocationProvider>
         </Providers>

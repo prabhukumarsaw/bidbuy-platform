@@ -1,10 +1,7 @@
-// eslint-disable-next-line
-// @ts-nocheck
-
 'use client';
 
-import * as React from 'react';
-import { Bell, Check, Loader2, AlertCircle } from 'lucide-react';
+import React, { useEffect, useRef, useState } from 'react';
+import { Bell, AlertCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -20,8 +17,8 @@ import { Notification } from '@/types/types';
 import { useInfiniteScroll } from '@/hooks/useInfiniteScroll';
 import { Skeleton } from '@/components/ui/skeleton';
 import { userApi } from '@/lib/api/userApi';
-import { toast } from '@/hooks/use-toast';
 import { socketService } from '@/lib/socketService';
+import { useAuthStore } from '@/lib/store/auth-store';
 
 // Debounce function to limit rapid API calls
 const debounce = (func: (...args: any[]) => void, delay: number) => {
@@ -33,11 +30,12 @@ const debounce = (func: (...args: any[]) => void, delay: number) => {
 };
 
 export function UserNotifications() {
-  const [notifications, setNotifications] = React.useState<Notification[]>([]);
-  const [unreadCount, setUnreadCount] = React.useState(0);
-  const [loading, setLoading] = React.useState(false);
-  const [error, setError] = React.useState<string | null>(null);
-  const lastPageRef = React.useRef(0);
+  const { isAuthenticated } = useAuthStore(); // Use the auth store
+  const [notifications, setNotifications] = useState<Notification[]>([]);
+  const [unreadCount, setUnreadCount] = useState(0);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const lastPageRef = useRef(0);
 
   // Exponential backoff fetch function
   const fetchNotifications = async (
@@ -87,26 +85,62 @@ export function UserNotifications() {
   const { loadMoreRef } = useInfiniteScroll(debouncedFetch);
 
   // Initial fetch
-  React.useEffect(() => {
-    fetchNotifications(1);
-  }, []);
+  useEffect(() => {
+    if (isAuthenticated) {
+      fetchNotifications(1);
+    }
+  }, [isAuthenticated]);
 
   // WebSocket updates
-  React.useEffect(() => {
+
+  useEffect(() => {
+    if (!isAuthenticated) return;
+
     const socket = socketService.getSocket();
     if (!socket) return;
 
     const handleNewNotification = (newNotification: Notification) => {
       setNotifications((prev) => {
-        if (prev.some((n) => n.id === newNotification.id)) return prev; // Prevent duplicates
+        if (prev.some((n) => n.id === newNotification.id)) return prev;
         return [newNotification, ...prev];
       });
       setUnreadCount((prev) => prev + 1);
     };
 
+    // Attach event listener
     socket.on('newNotification', handleNewNotification);
-    return () => socket.off('newNotification', handleNewNotification);
-  }, []);
+
+    // Cleanup function to remove listener
+    return () => {
+      socket.off('newNotification', handleNewNotification);
+    };
+  }, [isAuthenticated]); // Re-run effect when authentication status changes
+
+  if (!isAuthenticated) {
+    return (
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button variant="ghost" size="icon" className="relative">
+            <Bell className="h-5 w-5" />
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent
+          className="w-[320px] max-w-xs p-2 rounded-xl shadow-lg backdrop-blur-sm bg-background/80"
+          align="end"
+        >
+          <DropdownMenuLabel className="flex justify-between items-center">
+            Notifications
+          </DropdownMenuLabel>
+          <DropdownMenuSeparator />
+          <DropdownMenuGroup>
+            <DropdownMenuItem>
+              No notifications available. Please log in.
+            </DropdownMenuItem>
+          </DropdownMenuGroup>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    );
+  }
 
   return (
     <DropdownMenu>

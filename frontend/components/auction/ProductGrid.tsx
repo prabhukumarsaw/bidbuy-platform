@@ -148,16 +148,17 @@ export default function ProductGrid({
   return (
     <div>
       <div className="flex flex-col sm:flex-row justify-between items-center mb-6">
-        <h1 className="text-xl sm:text-xl font-bold mb-4 sm:mb-0 hidden md:block">
+        <span className="text-xl sm:text-xl font-bold mb-4 sm:mb-0 hidden md:block">
           Showing {(currentPage - 1) * initialProducts.pagination.limit + 1}–
           {Math.min(
             currentPage * initialProducts.pagination.limit,
             initialProducts.pagination.total
           )}{' '}
           of {initialProducts.pagination.total} results
-        </h1>
-        <div className="flex items-center md:space-x-4 space-x-44 ">
-          <span className="w-[180px] block sm:hidden font-medium">
+        </span>
+        <div className="flex items-center justify-between w-full">
+          {/* Left Part: Showing Results - Visible only on small screens */}
+          <span className="block sm:hidden font-medium">
             Showing {(currentPage - 1) * initialProducts.pagination.limit + 1}–
             {Math.min(
               currentPage * initialProducts.pagination.limit,
@@ -165,11 +166,14 @@ export default function ProductGrid({
             )}{' '}
             of {initialProducts.pagination.total} results
           </span>
-          <span className="hidden md:block">
-            <SortDropdown onSort={handleSort} />
-          </span>
 
-          <ViewToggle view={view} onViewChange={setView} />
+          {/* Right Part: Sort Dropdown + View Toggle */}
+          <div className="flex items-center space-x-4">
+            <span className="hidden md:block">
+              <SortDropdown onSort={handleSort} />
+            </span>
+            <ViewToggle view={view} onViewChange={setView} />
+          </div>
         </div>
       </div>
       <div

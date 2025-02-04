@@ -17,6 +17,7 @@ import {
   ChevronLeft,
   ChevronRight,
   Pencil,
+  Copy,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -46,12 +47,26 @@ import { useAuth } from '@/hooks/use-auth';
 import { useRouter } from 'next/navigation';
 import EditProfileDialog from '@/components/user/EditProfileDialog';
 import BidsCard from '@/components/user/BidsCardUser';
+import { useToast } from '@/hooks/use-toast';
 
 export default function DoctorDashboard() {
   const { user, isAuthenticated } = useAuthStore();
   const [isEditProfileOpen, setIsEditProfileOpen] = useState(false);
   const { logout } = useAuth();
   const router = useRouter();
+  const { toast } = useToast();
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(profile?.id);
+    setCopied(true);
+    toast({
+      title: 'Copied to clipboard!',
+      description: `User Code: ${profile?.id}`,
+      duration: 2000,
+    });
+    setTimeout(() => setCopied(false), 2000);
+  };
 
   const { data: profile, refetch: refetchProfile } = useQuery({
     queryKey: ['user-profile'],
@@ -106,9 +121,28 @@ export default function DoctorDashboard() {
                   {profile?.role}
                 </p>
                 <div className="flex flex-col space-y-2">
-                  <div className="flex items-center space-x-2">
-                    USER CODE: <Badge variant="secondary"> {profile?.id}</Badge>
-                    {/* <Badge variant="secondary">10 years experience</Badge> */}
+                  <div className="flex items-center space-x-2 flex-wrap">
+                    <span className="font-medium text-gray-700 dark:text-gray-300">
+                      UserId:
+                    </span>
+                    <strong className="text-xs">{profile?.id}</strong>
+
+                    {/* Copy Button with Tooltip */}
+                    <TooltipProvider>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            onClick={handleCopy}
+                          >
+                            <Copy className="h-4 w-4 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200" />
+                          </Button>
+                        </TooltipTrigger>
+
+                        <TooltipContent>Copy User Code</TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
                   </div>
                   <div className="flex items-center space-x-2 text-muted-foreground">
                     <Mail className="w-4 h-4" />

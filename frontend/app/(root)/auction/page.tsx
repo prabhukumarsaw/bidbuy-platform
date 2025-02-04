@@ -1,11 +1,12 @@
 // @ts-nocheck
 
 'use client';
-import { useState, useCallback } from 'react';
+import { useState, useCallback, Suspense } from 'react';
 import { useAdvancedFilters } from '@/hooks/useAdvancedFilters';
 import ProductGrid from '@/components/auction/ProductGrid';
 import MobileActionBar from '@/components/auction/MobileActionBar';
 import Layout from '@/components/auction/Layout';
+import Loading from '@/app/loading';
 
 export default function Home() {
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -42,7 +43,7 @@ export default function Home() {
   }, []);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   const auctionProducts = auctionsResponse?.auctions || [];
@@ -56,12 +57,12 @@ export default function Home() {
   };
 
   return (
-    <Layout
-      categories={categories}
-      sellers={sellers}
-      onFilterChange={handleFilterChange}
-    >
-      <div className="">
+    <Suspense fallback={<Loading />}>
+      <Layout
+        categories={categories}
+        sellers={sellers}
+        onFilterChange={handleFilterChange}
+      >
         <ProductGrid
           initialProducts={{
             auctions: auctionProducts,
@@ -70,13 +71,13 @@ export default function Home() {
           onPageChange={handlePageChange}
           onSort={handleSort}
         />
-      </div>
-      <MobileActionBar
-        categories={categories}
-        onFilterChange={handleFilterChange}
-        sellers={sellers}
-        onSort={handleSort}
-      />
-    </Layout>
+        <MobileActionBar
+          categories={categories}
+          onFilterChange={handleFilterChange}
+          sellers={sellers}
+          onSort={handleSort}
+        />
+      </Layout>
+    </Suspense>
   );
 }
