@@ -33,12 +33,12 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { useDebounce } from '@/hooks/use-debounce';
 import { Skeleton } from '@/components/ui/skeleton';
-import { useMediaQuery } from '@/hooks/use-media-query';
 import { useVirtualizer } from '@tanstack/react-virtual';
 import type { AuctionItem } from '@/types/types';
 import { ViewAuctionDialog } from './ViewAuctionDialog';
 import { AuctionStatHeader } from './AuctionStatHeader';
 import { EditAuctionDialog } from './EditAuctionDialog';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface FilterState {
   search: string;
@@ -85,7 +85,7 @@ export default function AuctionTable() {
   const [loading, setLoading] = useState(false);
   const [viewDialogOpen, setViewDialogOpen] = useState(false);
   const [editDialogOpen, setEditDialogOpen] = useState(false);
-  const isMobile = useMediaQuery('(max-width: 768px)');
+  const isMobile = useIsMobile();
 
   const { toast } = useToast();
   const debouncedSearch = useDebounce(filters.search, 300);
