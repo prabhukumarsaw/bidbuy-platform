@@ -1,5 +1,3 @@
-// @ts-nocheck
-
 'use client';
 import React, { useState, useCallback, useMemo } from 'react';
 import { format } from 'date-fns';
@@ -189,7 +187,7 @@ export default function AuctionTable() {
           <div className="flex items-center space-x-3">
             <div className="relative w-10 h-10 rounded-full overflow-hidden">
               <img
-                src={row.original.featuredImage}
+                src={row.original.featuredImage || '/placeholder.svg'}
                 alt={row.original.title}
                 className="absolute inset-0 w-full h-full object-cover"
                 loading="lazy"
@@ -302,6 +300,124 @@ export default function AuctionTable() {
       },
     ],
     [handleDelete, handleStatusUpdate, handleViewAuction, handleEditAuction]
+  );
+
+  const renderMobileAuctionCard = useCallback(
+    (auction: AuctionItem) => (
+      <Card key={auction.id} className="mb-4 overflow-hidden">
+        <CardContent className="p-4">
+          <div className="flex items-start space-x-4">
+            <div className="relative w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
+              <img
+                src={auction.featuredImage || '/placeholder.svg'}
+                alt={auction.title}
+                className="absolute inset-0 w-full h-full object-cover"
+                loading="lazy"
+              />
+            </div>
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center justify-between mb-2">
+                <h3 className="font-medium truncate">{auction.title}</h3>
+                <Badge
+                  variant={
+                    auction.status === 'ACTIVE'
+                      ? 'success'
+                      : auction.status === 'ENDED'
+                      ? 'destructive'
+                      : 'pending'
+                  }
+                  className="ml-2 capitalize"
+                >
+                  {auction.status.toLowerCase()}
+                </Badge>
+              </div>
+              <div className="grid grid-cols-2 gap-2 text-sm text-gray-600">
+                <div className="flex items-center">
+                  <Icons.tag className="w-4 h-4 mr-1" />
+                  <span className="truncate">{auction.category.name}</span>
+                </div>
+                <div className="flex items-center justify-end font-medium tabular-nums">
+                  <Icons.dollarSign className="w-4 h-4 mr-1" />
+                  {auction.currentPrice.toLocaleString()}
+                </div>
+                <div className="flex items-center">
+                  <Icons.clock className="w-4 h-4 mr-1" />
+                  <span>{format(new Date(auction.endTime), 'PP')}</span>
+                </div>
+                <div className="flex items-center justify-end">
+                  <Icons.users className="w-4 h-4 mr-1" />
+                  {auction._count.bids} bids
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="mt-4 flex justify-end space-x-2">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => handleViewAuction(auction)}
+            >
+              <Icons.eye className="w-4 h-4 mr-1" />
+              View
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => handleEditAuction(auction)}
+            >
+              <Icons.edit className="w-4 h-4 mr-1" />
+              Edit
+            </Button>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="outline" size="sm">
+                  <Icons.moreHorizontal className="h-4 w-4" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-[160px]">
+                <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                <DropdownMenuItem
+                  onClick={() => handleStatusUpdate(auction.id, 'ACTIVE')}
+                  disabled={auction.status === 'ACTIVE' || loading}
+                >
+                  <Icons.play className="mr-2 h-4 w-4" />
+                  {loading ? 'Updating...' : 'Mark Active'}
+                </DropdownMenuItem>
+                <DropdownMenuItem
+                  onClick={() => handleStatusUpdate(auction.id, 'SCHEDULED')}
+                  disabled={auction.status !== 'DRAFT' || loading}
+                >
+                  <Icons.calendar className="mr-2 h-4 w-4" />
+                  {loading ? 'Scheduling...' : 'Schedule Auction'}
+                </DropdownMenuItem>
+                <DropdownMenuItem
+                  onClick={() => handleStatusUpdate(auction.id, 'ENDED')}
+                  disabled={auction.status === 'ENDED' || loading}
+                >
+                  <Icons.stop className="mr-2 h-4 w-4" />
+                  {loading ? 'Updating...' : 'Mark Ended'}
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem
+                  onClick={() => handleDelete(auction.id)}
+                  className="text-red-600"
+                >
+                  <Icons.trash className="mr-2 h-4 w-4" />
+                  Delete
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
+        </CardContent>
+      </Card>
+    ),
+    [
+      handleViewAuction,
+      handleEditAuction,
+      handleStatusUpdate,
+      handleDelete,
+      loading,
+    ]
   );
 
   if (isError) {
@@ -433,7 +549,7 @@ export default function AuctionTable() {
               ))}
             </div>
           ) : (
-            <div ref={parentRef} className="h-[600px] overflow-auto">
+            <div ref={parentRef} className="overflow-auto">
               {isMobile ? (
                 <div
                   className="relative"
@@ -442,7 +558,7 @@ export default function AuctionTable() {
                   }}
                 >
                   {rowVirtualizer.getVirtualItems().map((virtualRow) => {
-                    const auction = auctionData?.data?.[virtualRow.index];
+                    const auction = auctionData?.auctions?.[virtualRow.index];
                     return auction ? (
                       <div
                         key={virtualRow.index}
@@ -452,122 +568,7 @@ export default function AuctionTable() {
                           transform: `translateY(${virtualRow.start}px)`,
                         }}
                       >
-                        <Card className="mb-4 overflow-hidden">
-                          <CardContent className="p-4">
-                            <div className="flex items-start space-x-4">
-                              <div className="relative w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
-                                <img
-                                  src={auction.featuredImage}
-                                  alt={auction.title}
-                                  className="absolute inset-0 w-full h-full object-cover"
-                                  loading="lazy"
-                                />
-                              </div>
-                              <div className="flex-1 min-w-0">
-                                <div className="flex items-center justify-between mb-2">
-                                  <h3 className="font-medium truncate">
-                                    {auction.title}
-                                  </h3>
-                                  <Badge
-                                    variant={
-                                      auction.status === 'active'
-                                        ? 'success'
-                                        : auction.status === 'ended'
-                                        ? 'destructive'
-                                        : 'pending'
-                                    }
-                                    className="ml-2 capitalize"
-                                  >
-                                    {auction.status}
-                                  </Badge>
-                                </div>
-                                <div className="grid grid-cols-2 gap-2 text-sm text-gray-600">
-                                  <div className="flex items-center">
-                                    <Icons.tag className="w-4 h-4 mr-1" />
-                                    <span className="truncate">
-                                      {auction.category.name}
-                                    </span>
-                                  </div>
-                                  <div className="flex items-center justify-end font-medium tabular-nums">
-                                    <Icons.dollarSign className="w-4 h-4 mr-1" />
-                                    {auction.currentPrice.toLocaleString()}
-                                  </div>
-                                  <div className="flex items-center">
-                                    <Icons.clock className="w-4 h-4 mr-1" />
-                                    <span>
-                                      {format(new Date(auction.endTime), 'PP')}
-                                    </span>
-                                  </div>
-                                  <div className="flex items-center justify-end">
-                                    <Icons.users className="w-4 h-4 mr-1" />
-                                    {auction._count.bids} bids
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div className="mt-4 flex justify-end space-x-2">
-                              <Button
-                                variant="outline"
-                                size="sm"
-                                onClick={() => handleViewAuction(auction)}
-                              >
-                                <Icons.eye className="w-4 h-4 mr-1" />
-                                View
-                              </Button>
-                              <Button
-                                variant="outline"
-                                size="sm"
-                                onClick={() => handleEditAuction(auction)}
-                              >
-                                <Icons.edit className="w-4 h-4 mr-1" />
-                                Edit
-                              </Button>
-                              <Button
-                                variant="outline"
-                                size="sm"
-                                onClick={() =>
-                                  handleStatusUpdate(auction.id, 'SCHEDULED')
-                                }
-                                disabled={auction.status !== 'DRAFT' || loading}
-                              >
-                                <Icons.calendar className="w-4 h-4 mr-1" />
-                                {loading ? 'Scheduling...' : 'Schedule'}
-                              </Button>
-                              <Button
-                                variant="outline"
-                                size="sm"
-                                onClick={() =>
-                                  handleStatusUpdate(auction.id, 'ACTIVE')
-                                }
-                                disabled={
-                                  auction.status === 'ACTIVE' || loading
-                                }
-                              >
-                                <Icons.play className="w-4 h-4 mr-1" />
-                                {loading ? 'Updating...' : 'Active'}
-                              </Button>
-
-                              <Button
-                                variant="outline"
-                                size="sm"
-                                onClick={() =>
-                                  handleStatusUpdate(auction.id, 'ENDED')
-                                }
-                                disabled={auction.status === 'ENDED' || loading}
-                              >
-                                <Icons.stop className="w-4 h-4 mr-1" />
-                                {loading ? 'Updating...' : 'End'}
-                              </Button>
-                              <Button
-                                variant="destructive"
-                                size="sm"
-                                onClick={() => handleDelete(auction.id)}
-                              >
-                                <Icons.trash className="w-4 h-4" />
-                              </Button>
-                            </div>
-                          </CardContent>
-                        </Card>
+                        {renderMobileAuctionCard(auction)}
                       </div>
                     ) : null;
                   })}

@@ -8,7 +8,7 @@ import { authApi, LoginCredentials, RegisterData } from '@/lib/api/auth';
 import { useAuthStore } from '@/lib/store/auth-store';
 import { useSession, signOut } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-import { toast } from 'sonner';
+import { useToast } from "@/hooks/use-toast"
 import { useEffect } from 'react';
 
 export const useAuth = () => {
@@ -16,16 +16,17 @@ export const useAuth = () => {
   const queryClient = useQueryClient();
   const { setAuth, logout: logoutStore } = useAuthStore();
   const { data: session } = useSession();
+  const { toast } = useToast()
 
     // Update auth store when session changes
     useEffect(() => {
       if (session?.user) {
         setAuth({
           id: session.user.id,
-          email: session.user.email!,
-          name: session.user.name!,
-          role: session.user.role,
-          image: session.user.image,
+        email: session.user.email || '',
+        name: session.user.name || '',
+        role: session.user.role || 'user', 
+        image: session.user.image || '',
         }, session.accessToken, session.refreshToken || undefined); // Pass undefined if refreshToken is not available
       }
     }, [session, setAuth]);
@@ -36,41 +37,58 @@ export const useAuth = () => {
     onSuccess: (data) => {
       console.log('Login response:', data); // Add a log to check response
       setAuth(data.data.user, data.data.token, data.data.refreshToken);
-      
-      toast.success('Successfully logged in');
+      toast({
+        variant: "success",
+        title: "Successfully logged in",
+        description: `Welcome back! ${data.data.user.name}`,
+      });
       router.push('/');
     },
     onError: (error: Error) => {
-      toast.error(error.message || 'Failed to login');
+      toast({
+        variant: "destructive",
+        title: 'Failed to login',
+        description: `Please check your credentials and try again`,
+      });
     },
   });
 
   const registerMutation = useMutation({
     mutationFn: (userData: RegisterData) => authApi.register(userData),
     onSuccess: () => {
-      toast.success('Registration successful! Please check your email to verify your account.');
+      toast({
+        title: 'Registration successful! Please check your email to verify your account.',
+      });
       router.push('/verify-email-sent');
     },
     onError: (error: Error) => {
-      toast.error(error.message || 'Failed to register');
+      toast({
+        title: 'Failed to register' || error.message,
+      });
     },
   });
 
   const forgotPasswordMutation = useMutation({
     mutationFn: (email: string) => authApi.forgotPassword(email),
     onSuccess: () => {
-      toast.success('Password reset instructions sent to your email');
+      toast({
+        title: 'Password reset instructions sent to your email',
+      });
       router.push('/login');
     },
     onError: (error: Error) => {
-      toast.error(error.message || 'Failed to send reset instructions');
+      toast({
+        title: 'Failed to send reset instructions' || error.message,
+      });
     },
   });
 
   const resendVerificationMutation = useMutation({
     mutationFn: (email: string) => authApi.resendVerification(email),
     onSuccess: () => {
-      toast.success('Verification email resent successfully');
+      toast({
+        title: 'Verification email resent successfully',
+      });
     },
     onError: (error: Error) => {
       toast.error(error.message || 'Failed to resend verification email');
@@ -82,7 +100,9 @@ export const useAuth = () => {
     logoutStore();
     queryClient.clear();
     router.push('/login');
-    toast.success('Successfully logged out');
+    toast({
+      title: 'Successfully logged out',
+    });
   };
 
   

@@ -6,7 +6,6 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import Image from 'next/image';
-import { CountdownTimer } from './CountdownTimer';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -34,6 +33,7 @@ import {
 } from '@/components/ui/tooltip';
 import { AuctionItem } from '@/types/types';
 import Link from 'next/link';
+import { CountdownTimer } from '../countdown-timer';
 
 interface ProductCardProps {
   product: AuctionItem;

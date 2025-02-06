@@ -49,7 +49,7 @@ export default function Dashboard() {
   console.log('all category', categories);
 
   return (
-    <div className="flex-1 space-y-8 p-8 pt-6">
+    <div className="flex-1  space-y-8 p-1 md:p-8 pt-6">
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
         <MetricCard
           title="Total Revenue"
@@ -85,7 +85,9 @@ export default function Dashboard() {
         <Card className="col-span-4">
           <CardHeader>
             <div className="flex items-center justify-between">
-              <CardTitle>Revenue Overview</CardTitle>
+              <CardTitle className=" text-sm md:text-md">
+                Revenue Overview
+              </CardTitle>
               <CalendarDateRangePicker
                 date={selectedDateRange}
                 setDate={setSelectedDateRange}
@@ -96,7 +98,7 @@ export default function Dashboard() {
             <MainChart />
           </CardContent>
         </Card>
-        <Card className="col-span-3">
+        <Card className="md:col-span-3 col-span-4">
           <CardHeader>
             <CardTitle>Active Listings</CardTitle>
           </CardHeader>
@@ -115,7 +117,7 @@ export default function Dashboard() {
             <RecentTransactions />
           </CardContent>
         </Card>
-        <Card className="col-span-3">
+        <Card className="md:col-span-3 col-span-4">
           <CardHeader>
             <CardTitle>Top Bidders</CardTitle>
           </CardHeader>

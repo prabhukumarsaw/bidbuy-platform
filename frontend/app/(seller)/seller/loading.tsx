@@ -26,7 +26,7 @@ export default function Loading() {
     setMounted(true);
     const interval = setInterval(() => {
       setTextIndex((prevIndex) => (prevIndex + 1) % loadingTexts.length);
-    }, 2000);
+    }, 3000);
     return () => clearInterval(interval);
   }, []);
 

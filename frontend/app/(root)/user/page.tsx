@@ -160,7 +160,7 @@ export default function DoctorDashboard() {
               </div>
             </CardContent>
             <CardContent>
-              <h3 className="text-xl font-semibold mb-2">Bio</h3>
+              <h3 className="text-md md:text-xl font-semibold mb-2">Bio</h3>
               <p className="text-muted-foreground">
                 <span>{profile?.bio}</span>
               </p>
@@ -169,18 +169,16 @@ export default function DoctorDashboard() {
 
           <Card className="col-span-1 bg-gradient-to-br from-blue-100 to-cyan-100">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-xl font-bold text-primary">
-                Today&apos;s Slots
+              <CardTitle className="text-md md:text-xl  font-bold text-primary">
+                Activity
               </CardTitle>
               <div className="flex items-center space-x-2">s</div>
             </CardHeader>
             <CardContent>
               <div className="mb-4 flex items-center justify-between">
-                <span className="text-sm text-muted-foreground">
-                  Total Slots:
-                </span>
+                <span className="text-sm text-muted-foreground"></span>
                 <Button variant="outline" size="sm">
-                  <Plus className="h-4 w-4 mr-2" /> Add Slot
+                  <Plus className="h-4 w-4 mr-2" /> setting
                 </Button>
               </div>
               <ScrollArea className="h-[300px] pr-4">

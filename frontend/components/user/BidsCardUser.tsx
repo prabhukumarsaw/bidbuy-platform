@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { userApi } from '@/lib/api/userApi'; 
+import { userApi } from '@/lib/api/userApi';
 import { Bid, BidStatus } from '@/types/types';
 import {
   Table,
@@ -59,7 +59,9 @@ const BidsTable = () => {
 
   return (
     <div className="overflow-hidden bg-gradient-to-br from-blue-100 to-cyan-100 p-8 rounded-xl shadow-xl">
-      <h2 className="text-3xl font-bold text-white mb-6">Your Bids Activity</h2>
+      <h2 className="text-md md:text-xl font-bold text-white mb-6">
+        Your Bids Activity
+      </h2>
 
       {loading && (
         <div className="flex justify-center items-center mb-6">

@@ -41,7 +41,6 @@ export default function ProductGrid({
   );
 
   useEffect(() => {
-    console.log('Initial Products in ProductGrid:', initialProducts);
     setProducts(initialProducts.auctions);
     setCurrentPage(initialProducts.pagination.page);
   }, [initialProducts.auctions, initialProducts.pagination.page]);

@@ -13,6 +13,8 @@ import { NotificationCenter } from './dashboard/notification-center';
 import { CreateAuction } from './dashboard/create-auction';
 import AuthGuard from '@/lib/auth/AuthGaurd';
 import { useAuthStore } from '@/lib/store/auth-store';
+import { Suspense } from 'react';
+import Loading from './loading';
 
 export default function SellerLayout({
   children,
@@ -30,7 +32,7 @@ export default function SellerLayout({
             {/* Left Section: Logo and Sidebar Trigger */}
             <div className="flex items-center gap-4">
               <SidebarTrigger className="md:hidden" />
-              <div className="text-xl font-bold text-gray-800 dark:text-gray-200">
+              <div className="md:block hidden  text-xl font-bold text-gray-800 dark:text-gray-200">
                 Welcome,{' '}
                 <span className="font-semibold">{user?.name ?? 'Guest'}</span>
               </div>
@@ -43,8 +45,9 @@ export default function SellerLayout({
               <CreateAuction />
             </div>
           </header>
-
-          <main className="p-4 ">{children}</main>
+          <Suspense fallback={<Loading />}>
+            <main className="p-4 ">{children}</main>
+          </Suspense>
         </SidebarInset>
       </SidebarProvider>
     </AuthGuard>

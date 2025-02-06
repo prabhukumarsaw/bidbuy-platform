@@ -2,6 +2,8 @@
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 import { usePathname } from 'next/navigation';
+import { Suspense } from 'react';
+import Loading from '../loading';
 
 export default function RootLayout({
   children,
@@ -14,7 +16,10 @@ export default function RootLayout({
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
-      <div className="flex-1">{children}</div>
+
+      <div className="flex-1">
+        <Suspense fallback={<Loading />}>{children}</Suspense>
+      </div>
       {!isAuctionPage && <Footer />}
     </div>
   );
