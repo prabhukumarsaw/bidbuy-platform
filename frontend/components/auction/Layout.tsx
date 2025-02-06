@@ -1,39 +1,27 @@
 import HeaderBanner from './HeaderBanner';
 import FilterSidebar from './FilterSidebar';
 import { ReactNode } from 'react';
+import { AuctionItem, Category } from '@/types/types';
 
 interface LayoutProps {
   children: ReactNode;
-  categories: string[];
+  categories: Category[];
   conditions: string[];
   sellers: Array<{ id: number; name: string; rating: number }>;
+  onFilterChange?: (filters: any) => void;
 }
 
-export default function Layout({
-  children,
-  categories,
-  conditions,
-  sellers,
-}: LayoutProps) {
+export default function Layout({ children, onFilterChange }: LayoutProps) {
   return (
-    <div className="min-h-screen mx-auto bg-gray-50">
-      <HeaderBanner
-        title="Live Bid"
-        subtitle="Comprehensive to Products"
-        bgImage="/feature/fourm.avif" // Replace with your actual image path
-      />
-      <div className="container px-2 py-8">
-        <div className="flex flex-col lg:flex-row gap-8">
-          <aside className="hidden md:block w-full lg:w-1/4 xl:w-1/5">
-            <FilterSidebar
-              categories={categories}
-              conditions={conditions}
-              sellers={sellers}
-            />
-          </aside>
-          <main className="w-full lg:w-3/4 xl:w-4/5">{children}</main>
-        </div>
+    <div className="flex min-h-screen bg-gray-50">
+      <div className="hidden lg:block w-80 fixed left-0 top-0 bottom-0 h-screen overflow-hidden border-r border-gray-200 z-30">
+        <FilterSidebar onFilterChange={onFilterChange} />
       </div>
+      <main className="flex lg:ml-80 border-2 w-full">
+        <div className="container mx-auto px-4 py-4 pb-24 lg:pb-8 min-h-screen">
+          {children}
+        </div>
+      </main>
     </div>
   );
 }

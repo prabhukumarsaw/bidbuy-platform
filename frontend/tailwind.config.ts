@@ -37,7 +37,7 @@ const config: Config = {
   				}
   			],
   			sm: [
-  				'0.875rem',
+  				'0.825rem',
   				{
   					lineHeight: '1.25rem'
   				}
@@ -48,6 +48,12 @@ const config: Config = {
   					lineHeight: '1.5rem'
   				}
   			],
+			  md: [
+				'1.08rem',
+				{
+					lineHeight: '1.5rem'
+				}
+			],
   			lg: [
   				'1.125rem',
   				{

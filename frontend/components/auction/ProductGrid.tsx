@@ -1,3 +1,4 @@
+// @ts-nocheck
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -5,100 +6,173 @@ import ProductCard from './ProductCard';
 import SortDropdown from './SortDropdown';
 import ViewToggle from './ViewToggle';
 import { Button } from '@/components/ui/button';
-import { Product, FilterState } from '@/types/product';
+import { FilterState } from '@/types/product';
+import { AuctionItem } from '@/types/types';
+import { ChevronLeft, ChevronRight, MoreHorizontal } from 'lucide-react';
 
 interface ProductGridProps {
-  initialProducts: Product[];
+  initialProducts: {
+    auctions: AuctionItem[];
+    pagination: {
+      total: number;
+      page: number;
+      limit: number;
+      totalPages: number;
+      nextPage: number | null;
+      prevPage: null | number;
+    };
+  };
+  onPageChange: (pageNumber: number) => void;
+  onSort: (sortOption: string) => void;
 }
 
-export default function ProductGrid({ initialProducts }: ProductGridProps) {
-  const [products, setProducts] = useState<Product[]>(initialProducts);
+export default function ProductGrid({
+  initialProducts,
+  onPageChange,
+  onSort,
+}: ProductGridProps) {
+  const [products, setProducts] = useState<AuctionItem[]>(
+    initialProducts.auctions
+  );
   const [view, setView] = useState<'grid' | 'list'>('grid');
-  const [filters, setFilters] = useState<FilterState>({
-    categories: [],
-    conditions: [],
-    sellers: [],
-    priceRange: [0, 20000],
-  });
   const [sortOption, setSortOption] = useState<string>('default');
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  const productsPerPage = 12;
+  const [currentPage, setCurrentPage] = useState<number>(
+    initialProducts.pagination.page
+  );
 
   useEffect(() => {
-    let filteredProducts = initialProducts.filter((product) => {
-      const categoryMatch =
-        filters.categories.length === 0 ||
-        filters.categories.includes(product.category);
-      const conditionMatch =
-        filters.conditions.length === 0 ||
-        filters.conditions.includes(product.condition);
-      const sellerMatch =
-        filters.sellers.length === 0 ||
-        filters.sellers.includes(product.seller.id);
-      const priceMatch =
-        product.currentBid >= filters.priceRange[0] &&
-        product.currentBid <= filters.priceRange[1];
-      return categoryMatch && conditionMatch && sellerMatch && priceMatch;
-    });
-
-    switch (sortOption) {
-      case 'price-asc':
-        filteredProducts.sort((a, b) => a.currentBid - b.currentBid);
-        break;
-      case 'price-desc':
-        filteredProducts.sort((a, b) => b.currentBid - a.currentBid);
-        break;
-      case 'time-asc':
-        filteredProducts.sort(
-          (a, b) =>
-            new Date(a.endTime).getTime() - new Date(b.endTime).getTime()
-        );
-        break;
-      case 'time-desc':
-        filteredProducts.sort(
-          (a, b) =>
-            new Date(b.endTime).getTime() - new Date(a.endTime).getTime()
-        );
-        break;
-    }
-
-    setProducts(filteredProducts);
-    setCurrentPage(1);
-  }, [filters, sortOption, initialProducts]);
-
-  const handleFilterChange = (newFilters: FilterState) => {
-    setFilters(newFilters);
-  };
+    setProducts(initialProducts.auctions);
+    setCurrentPage(initialProducts.pagination.page);
+  }, [initialProducts.auctions, initialProducts.pagination.page]);
 
   const handleSort = (option: string) => {
     setSortOption(option);
+    onSort(option);
   };
 
-  const indexOfLastProduct = currentPage * productsPerPage;
-  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-  const currentProducts = products.slice(
-    indexOfFirstProduct,
-    indexOfLastProduct
-  );
+  const paginate = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
+    onPageChange(pageNumber);
+  };
 
-  const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
+  const renderPaginationButtons = () => {
+    const totalPages = initialProducts.pagination.totalPages;
+    const currentPage = initialProducts.pagination.page;
+    const buttons = [];
+    const maxVisibleButtons = 5;
+
+    if (totalPages <= maxVisibleButtons) {
+      for (let i = 1; i <= totalPages; i++) {
+        buttons.push(
+          <Button
+            key={i}
+            variant={currentPage === i ? 'default' : 'outline'}
+            className="mx-1 mb-2"
+            onClick={() => paginate(i)}
+          >
+            {i}
+          </Button>
+        );
+      }
+    } else {
+      buttons.push(
+        <Button
+          key="first"
+          variant={currentPage === 1 ? 'default' : 'outline'}
+          className="mx-1 mb-2"
+          onClick={() => paginate(1)}
+        >
+          1
+        </Button>
+      );
+
+      if (currentPage > 3) {
+        buttons.push(
+          <Button
+            key="ellipsis-start"
+            variant="ghost"
+            className="mx-1 mb-2"
+            disabled
+          >
+            <MoreHorizontal className="h-4 w-4" />
+          </Button>
+        );
+      }
+
+      for (
+        let i = Math.max(2, currentPage - 1);
+        i <= Math.min(totalPages - 1, currentPage + 1);
+        i++
+      ) {
+        buttons.push(
+          <Button
+            key={i}
+            variant={currentPage === i ? 'default' : 'outline'}
+            className="mx-1 mb-2"
+            onClick={() => paginate(i)}
+          >
+            {i}
+          </Button>
+        );
+      }
+
+      if (currentPage < totalPages - 2) {
+        buttons.push(
+          <Button
+            key="ellipsis-end"
+            variant="ghost"
+            className="mx-1 mb-2"
+            disabled
+          >
+            <MoreHorizontal className="h-4 w-4" />
+          </Button>
+        );
+      }
+
+      buttons.push(
+        <Button
+          key="last"
+          variant={currentPage === totalPages ? 'default' : 'outline'}
+          className="mx-1 mb-2"
+          onClick={() => paginate(totalPages)}
+        >
+          {totalPages}
+        </Button>
+      );
+    }
+
+    return buttons;
+  };
 
   return (
     <div>
       <div className="flex flex-col sm:flex-row justify-between items-center mb-6">
-        <h1 className="text-xl sm:text-xl font-bold mb-4 sm:mb-0 hidden md:block">
-          Showing 1–12 Of 27 Results
-        </h1>
-        <div className="flex items-center space-x-4">
-          <span className="hidden md:block">
-            {' '}
-            <SortDropdown onSort={handleSort} />
-          </span>
-          <span className="w-[180px] block sm:hidden font-semibold">
-            Showing 1–12 Of 27 Results
+        <span className="text-xl sm:text-xl font-bold mb-4 sm:mb-0 hidden md:block">
+          Showing {(currentPage - 1) * initialProducts.pagination.limit + 1}–
+          {Math.min(
+            currentPage * initialProducts.pagination.limit,
+            initialProducts.pagination.total
+          )}{' '}
+          of {initialProducts.pagination.total} results
+        </span>
+        <div className="flex items-center justify-between w-full">
+          {/* Left Part: Showing Results - Visible only on small screens */}
+          <span className="block sm:hidden font-medium">
+            Showing {(currentPage - 1) * initialProducts.pagination.limit + 1}–
+            {Math.min(
+              currentPage * initialProducts.pagination.limit,
+              initialProducts.pagination.total
+            )}{' '}
+            of {initialProducts.pagination.total} results
           </span>
 
-          <ViewToggle view={view} onViewChange={setView} />
+          {/* Right Part: Sort Dropdown + View Toggle */}
+          <div className="flex items-center space-x-4">
+            <span className="hidden md:block">
+              <SortDropdown onSort={handleSort} />
+            </span>
+            <ViewToggle view={view} onViewChange={setView} />
+          </div>
         </div>
       </div>
       <div
@@ -108,7 +182,7 @@ export default function ProductGrid({ initialProducts }: ProductGridProps) {
             : 'grid-cols-1'
         }`}
       >
-        {currentProducts.map((product, index) => (
+        {products.map((product, index) => (
           <ProductCard
             key={product.id}
             product={product}
@@ -117,20 +191,26 @@ export default function ProductGrid({ initialProducts }: ProductGridProps) {
           />
         ))}
       </div>
-      <div className="mt-8 flex justify-center flex-wrap">
-        {Array.from(
-          { length: Math.ceil(products.length / productsPerPage) },
-          (_, i) => (
-            <Button
-              key={i}
-              variant={currentPage === i + 1 ? 'default' : 'outline'}
-              className="mx-1 mb-2"
-              onClick={() => paginate(i + 1)}
-            >
-              {i + 1}
-            </Button>
-          )
-        )}
+      <div className="mt-8 flex justify-center items-center flex-wrap">
+        <Button
+          variant="outline"
+          className="mx-1 mb-2"
+          onClick={() => paginate(currentPage - 1)}
+          disabled={currentPage === 1}
+        >
+          <ChevronLeft className="h-4 w-4 mr-2" />
+          Previous
+        </Button>
+        {renderPaginationButtons()}
+        <Button
+          variant="outline"
+          className="mx-1 mb-2"
+          onClick={() => paginate(currentPage + 1)}
+          disabled={currentPage === initialProducts.pagination.totalPages}
+        >
+          Next
+          <ChevronRight className="h-4 w-4 ml-2" />
+        </Button>
       </div>
     </div>
   );

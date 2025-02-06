@@ -7,40 +7,70 @@ class AdminAuctionController {
   async getAllAuctions(req, res) {
     try {
       const {
+        status,
+        categoryId,
+        sortBy,
+        sortOrder,
         page = 1,
         limit = 10,
-        sort = 'createdAt:desc',
-        status,
-        categoryId,
-        userId,
+        search,
         minPrice,
         maxPrice,
-        search,
+        startTime,
+        endTime,
+        sellerName,
+        sellerId,
       } = req.query;
 
-      const filters = {
-        status,
-        categoryId,
-        userId,
-        minPrice: minPrice ? parseFloat(minPrice) : undefined,
-        maxPrice: maxPrice ? parseFloat(maxPrice) : undefined,
-        search,
+      // Build the filter object
+      const filter = {
+        ...(status &&
+          status !== 'all' && { status: { in: status.split(',') } }), // Filter by status if not "all"
+        ...(categoryId && categoryId !== 'all' && { categoryId }), // Filter by category if not "all"
+        ...(search && {
+          OR: [
+            { title: { contains: search, mode: 'insensitive' } },
+            { description: { contains: search, mode: 'insensitive' } },
+          ],
+        }), // Search by title or description
+        ...(minPrice && { currentPrice: { gte: parseFloat(minPrice) } }), // Filter by minimum price
+        ...(maxPrice && { currentPrice: { lte: parseFloat(maxPrice) } }), // Filter by maximum price
+        ...(startTime && { startTime: { gte: new Date(startTime) } }), // Filter by start time
+        ...(endTime && { endTime: { lte: new Date(endTime) } }), // Filter by end time
+        ...(sellerName && {
+          seller: {
+            businessName: { contains: sellerName, mode: 'insensitive' }, // Filter by seller's business name
+          },
+        }),
+        ...(sellerId && { sellerId }),
       };
 
-      const result = await auctionService.getAllAuctions({
-        page: parseInt(page),
-        limit: parseInt(limit),
-        sort,
-        filters,
-      });
+      // Build the sorting object
+      const orderBy = [];
+      if (sortBy) {
+        sortBy.split(',').forEach((field) => {
+          const [fieldName, fieldOrder] = field.split(':');
+          orderBy.push({ [fieldName]: fieldOrder || 'asc' });
+        });
+      } else {
+        orderBy.push({ createdAt: 'desc' }); // Default sorting
+      }
+
+      // Fetch auctions with pagination
+      const auctions = await auctionService.getAllAuctions(
+        filter,
+        orderBy,
+        parseInt(page),
+        parseInt(limit)
+      );
 
       res.json({
         status: 'success',
-        data: result,
+        data: auctions,
       });
     } catch (error) {
       logger.error('Error in getAllAuctions:', error);
-      throw new AppError(500, error.message);
+      throw new AppError(500, 'Failed to fetch auctions');
     }
   }
 

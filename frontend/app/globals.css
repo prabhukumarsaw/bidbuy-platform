@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
 @layer base {
   :root {
     /* Colors */
@@ -44,17 +46,20 @@
   }
 
   h1 {
-    @apply text-3xl font-semibold tracking-tight;
+    font-size: clamp(1.5rem, 5vw, 3rem);
+    @apply font-semibold tracking-tight;
     letter-spacing: -0.025em;
   }
 
   h2 {
-    @apply text-2xl font-semibold tracking-tight;
+    font-size: clamp(1.25rem, 4vw, 2.5rem);
+    @apply font-semibold tracking-tight;
     letter-spacing: -0.025em;
   }
 
   h3 {
-    @apply text-xl font-semibold tracking-tight;
+    font-size: clamp(1rem, 3vw, 2rem);
+    @apply font-semibold tracking-tight;
     letter-spacing: -0.025em;
   }
 
@@ -159,15 +164,15 @@
   }
 
   h1 {
-    @apply text-2xl;
+    font-size: clamp(1.25rem, 5vw, 2rem);
   }
 
   h2 {
-    @apply text-xl;
+    font-size: clamp(1.125rem, 4vw, 1.75rem);
   }
 
   h3 {
-    @apply text-lg;
+    font-size: clamp(1rem, 3vw, 1.5rem);
   }
 }
 @layer base {
@@ -208,4 +213,47 @@
 
 .animate-pattern-slide {
   animation: pattern-slide 20s linear infinite;
+}
+
+
+/* Carousel Container */
+.carousel-container {
+  display: flex;
+  height: 100vh;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+}
+
+/* Carousel Slide */
+.carousel-slide {
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+}
+
+/* Navigation Buttons */
+.navigation-button {
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 50%;
+  padding: 12px;
+  transition: background-color 0.3s ease;
+}
+
+.navigation-button:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Dots Indicator */
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.5);
+  transition: all 0.3s ease;
+}
+
+.dot.active {
+  width: 32px;
+  background-color: white;
 }

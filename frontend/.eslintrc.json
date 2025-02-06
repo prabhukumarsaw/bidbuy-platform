@@ -1,3 +1,12 @@
+
+
 {
-  "extends": "next/core-web-vitals"
+  "extends": "next/core-web-vitals",
+  "rules": {
+    "react/no-unescaped-entities": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@next/next/no-page-custom-font": "off",
+     "react-hooks/exhaustive-deps": "off"
+  }
 }

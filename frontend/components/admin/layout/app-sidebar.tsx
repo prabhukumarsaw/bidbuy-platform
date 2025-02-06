@@ -1,22 +1,18 @@
+// @ts-nocheck
+
 'use client';
 
 import * as React from 'react';
 import {
-  BookOpen,
-  Bot,
   Command,
   Frame,
-  Inbox,
   LayoutDashboard,
-  LifeBuoy,
-  Map,
   Package,
-  PieChart,
-  Send,
-  Settings2,
   ShoppingCart,
-  SquareTerminal,
+  Inbox,
   User,
+  PieChart,
+  Map,
 } from 'lucide-react';
 
 import { NavMain } from '../navigation/nav-main';
@@ -31,13 +27,10 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from '@/components/ui/sidebar';
+import { useAuthStore } from '@/lib/store/auth-store'; // Assuming auth-store is correctly set up
+import { useAuth } from '@/hooks/use-auth';
 
 const data = {
-  user: {
-    name: 'shadcn',
-    email: 'm@example.com',
-    avatar: '/avatars/shadcn.jpg',
-  },
   navMain: [
     {
       title: 'Dashboard',
@@ -46,7 +39,7 @@ const data = {
     },
     {
       title: 'Auction Management',
-      url: '/admin/auction-management',
+      url: '/admin/auctions-management',
       icon: Package,
     },
     {
@@ -158,25 +151,36 @@ const data = {
   projects: [
     {
       name: 'Home',
-      url: '#',
+      url: '/',
       icon: Frame,
     },
     {
       name: 'Auctions',
-      url: '#',
+      url: '/auction',
       icon: PieChart,
     },
     {
       name: 'About',
-      url: '#',
+      url: '/',
       icon: Map,
     },
   ],
 };
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-  return (
-    <Sidebar variant="inset" {...props}>
+export function AppSidebar() {
+  const { user, isAuthenticated } = useAuthStore();
+  const { logout } = useAuth();
+
+  // Redirect to login if not authenticated
+  React.useEffect(() => {
+    if (!isAuthenticated) {
+      // Example redirect logic if unauthenticated
+      window.location.href = '/login';
+    }
+  }, [isAuthenticated]);
+
+  return isAuthenticated && user ? (
+    <Sidebar variant="inset">
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
@@ -187,20 +191,22 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 </div>
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-semibold">BuyBid</span>
-                  <span className="truncate text-xs">💕 Seller</span>
+                  <span className="truncate text-xs">💕 Admin Dashboard</span>
                 </div>
               </a>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
+
       <SidebarContent>
         <NavMain items={data.navMain} />
         <NavProjects projects={data.projects} />
       </SidebarContent>
+
       <SidebarFooter>
-        <NavUser user={data.user} />
+        <NavUser user={user} onLogout={logout} />
       </SidebarFooter>
     </Sidebar>
-  );
+  ) : null;
 }

@@ -22,6 +22,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
+import Link from 'next/link';
 
 interface BidCardProps {
   item: {
@@ -45,7 +46,7 @@ interface BidCardProps {
 export const BidCard: React.FC<BidCardProps> = ({ item, index }) => {
   const [isLiked, setIsLiked] = useState(false);
   const progress = (item.bidders / 50) * 100; // Assuming 50 is the max number of bidders
-
+  console.log(item, 'saf');
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.9 }}
@@ -91,8 +92,13 @@ export const BidCard: React.FC<BidCardProps> = ({ item, index }) => {
                   </p>
                 </div>
                 <div className="text-right">
-                  <p className="text-xs text-muted-foreground">Lot #</p>
-                  <p className="text-sm font-semibold">{item.lotNumber}</p>
+                  <p className="text-xs text-muted-foreground">
+                    Lot #{' '}
+                    <span className="font-semibold  text-sm">
+                      {' '}
+                      {item.lotNumber}
+                    </span>
+                  </p>
                 </div>
               </div>
 
@@ -179,9 +185,11 @@ export const BidCard: React.FC<BidCardProps> = ({ item, index }) => {
                   </DialogContent>
                 </Dialog>
 
-                <Button variant="action">
-                  Place Bid <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
+                <Link href={`/auction/${item.lotNumber}`}>
+                  <Button variant="action">
+                    Place Bid <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </Link>
               </div>
             </div>
           </CardContent>
