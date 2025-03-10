@@ -281,7 +281,7 @@ export default function Navbar() {
 
             <Button
               variant="outline"
-              className=" flex md:flex-1 md:justify-start md:text-base lg:w-[260px]"
+              className="flex md:flex-1 md:justify-start md:text-base w-[200px] lg:w-[260px]"
               onClick={() => setShowSearch(true)}
             >
               <Search className="mr-2 h-4 w-4" />

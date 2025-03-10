@@ -31,10 +31,10 @@ export default function SettingsLayout({ children }: SettingsLayoutProps) {
         {/* Main Content */}
         <Suspense fallback={<Loading />}>
           <main className="flex-grow">
-            <div className="container mx-auto px-4 py-8 min-h-screen">
-              <div className="w-full lg:hidden mx-auto border rounded-3xl shadow-apple-lg bg-white dark:bg-gray-800 ">
-                <ScrollArea className="w-full">
-                  <div className="flex space-x-4 px-4 py-2 w-max">
+            <div className="container  px-4 py-8 min-h-screen">
+              <div>
+                <ScrollArea className="lg:hidden w-full px-2 rounded-3xl bg-white">
+                  <div className="flex mx-auto space-x-4 px-4 py-2 w-max">
                     <SidebarNav items={sidebarNavItems} />
                   </div>
                   <ScrollBar orientation="horizontal" className="hidden" />

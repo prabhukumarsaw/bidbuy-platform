@@ -294,7 +294,7 @@ export default function SellerManagementTable() {
       <CardContent>
         {statsCards}
 
-        <div className="mt-6">
+        <div className="mt-6 flex-1 max-sm:w-80">
           <Tabs value={activeTab} onValueChange={setActiveTab}>
             <TabsList>
               <TabsTrigger value="all">All Sellers</TabsTrigger>

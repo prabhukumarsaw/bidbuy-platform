@@ -48,7 +48,6 @@ export function LiveAuction({ auctions }: AuctionProps) {
 
   // Map active auctions to UpcomingAuctionItem structure
   const ActiveAuctionItems = activeAuctions.map(mapAuctionToActiveItem);
-  console.log(ActiveAuctionItems, 'egeknejn');
 
   const showMore = () => {
     setVisibleItems((prevVisible) =>
@@ -76,7 +75,7 @@ export function LiveAuction({ auctions }: AuctionProps) {
           className="flex flex-col md:flex-row items-center justify-between mb-12"
         >
           <div>
-            <h1 className="text-4xl font-bold mb-2 flex items-center">
+            <h1 className="md:text-4xl sm:text-md font-bold mb-2 flex items-center">
               Live <TrendingUp className="ml-2 text-red-500" />
               <span className="italic font-normal ml-2">Bids</span>
             </h1>

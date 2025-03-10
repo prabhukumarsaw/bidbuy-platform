@@ -32,12 +32,12 @@ const quickLinks = [
 ];
 
 const departments = [
-  { name: '1', href: '/departments/orthopedics' },
-  { name: '2', href: '/departments/neurology' },
-  { name: '3', href: '/departments/nephrology' },
-  { name: '4', href: '/departments/cardiology' },
-  { name: '5', href: '/departments/physiotherapy' },
-  { name: '6', href: '/departments' },
+  { name: '1', href: '#' },
+  { name: '2', href: '#' },
+  { name: '3', href: '#' },
+  { name: '4', href: '#' },
+  { name: '5', href: '#' },
+  { name: '6', href: '#' },
 ];
 
 const FooterSection = ({

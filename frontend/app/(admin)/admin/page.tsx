@@ -11,6 +11,7 @@ import { BidActivity } from './dashboard/bid-activity';
 import { MetricCard } from './dashboard/metric-card';
 import { RecentTransactions } from './dashboard/recent-transactions';
 import { TopBidders } from './dashboard/top-bidders';
+import { useQuery } from '@tanstack/react-query';
 
 import { PerformanceOverview } from './dashboard/performance-overview';
 import {
@@ -23,6 +24,7 @@ import {
   BarChart,
   FileText,
 } from 'lucide-react';
+import { sellerApi } from '@/lib/api/seller';
 import { DateRange } from 'react-day-picker';
 
 export default function Dashboard() {
@@ -33,8 +35,21 @@ export default function Dashboard() {
     to: new Date(),
   });
 
+  // const { data: auctions, isLoading } = useQuery({
+  //   queryKey: ['auctions'],
+  //   queryFn: () =>
+  //     sellerApi.getAllAuctions({ status: 'active', page: 1, limit: 10 }),
+  // });
+
+  const { data: categories } = useQuery({
+    queryKey: ['categories'],
+    queryFn: () => sellerApi.getAllCategories(),
+  });
+
+  console.log('all category', categories);
+
   return (
-    <div className="flex-1 space-y-8 p-8 pt-6">
+    <div className="flex-1  space-y-8 p-1 md:p-8 pt-6">
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
         <MetricCard
           title="Total Revenue"
@@ -70,7 +85,9 @@ export default function Dashboard() {
         <Card className="col-span-4">
           <CardHeader>
             <div className="flex items-center justify-between">
-              <CardTitle>Revenue Overview</CardTitle>
+              <CardTitle className=" text-sm md:text-md">
+                Revenue Overview
+              </CardTitle>
               <CalendarDateRangePicker
                 date={selectedDateRange}
                 setDate={setSelectedDateRange}
@@ -81,7 +98,7 @@ export default function Dashboard() {
             <MainChart />
           </CardContent>
         </Card>
-        <Card className="col-span-3">
+        <Card className="md:col-span-3 col-span-4">
           <CardHeader>
             <CardTitle>Active Listings</CardTitle>
           </CardHeader>
@@ -100,7 +117,7 @@ export default function Dashboard() {
             <RecentTransactions />
           </CardContent>
         </Card>
-        <Card className="col-span-3">
+        <Card className="md:col-span-3 col-span-4">
           <CardHeader>
             <CardTitle>Top Bidders</CardTitle>
           </CardHeader>

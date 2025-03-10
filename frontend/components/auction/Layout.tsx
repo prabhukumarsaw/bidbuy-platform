@@ -2,6 +2,11 @@ import HeaderBanner from './HeaderBanner';
 import FilterSidebar from './FilterSidebar';
 import { ReactNode } from 'react';
 import { AuctionItem, Category } from '@/types/types';
+import {
+  SidebarProvider,
+  SidebarInset,
+  SidebarTrigger,
+} from '@/components/ui/sidebar';
 
 interface LayoutProps {
   children: ReactNode;
@@ -9,19 +14,23 @@ interface LayoutProps {
   conditions: string[];
   sellers: Array<{ id: number; name: string; rating: number }>;
   onFilterChange?: (filters: any) => void;
+  onSidebarToggle?: () => void;
 }
 
 export default function Layout({ children, onFilterChange }: LayoutProps) {
   return (
-    <div className="flex min-h-screen bg-gray-50">
-      <div className="hidden lg:block w-80 fixed left-0 top-0 bottom-0 h-screen overflow-hidden border-r border-gray-200 z-30">
-        <FilterSidebar onFilterChange={onFilterChange} />
-      </div>
-      <main className="flex lg:ml-80 border-2 w-full">
-        <div className="container mx-auto px-4 py-4 pb-24 lg:pb-8 min-h-screen">
+    <SidebarProvider>
+      <FilterSidebar onFilterChange={onFilterChange} />
+      <SidebarInset className="flex-1 px-4">
+        <HeaderBanner
+          title={'Browse Assets'}
+          subtitle={'Find the perfect asset for your next project'}
+          bgImage={'hello'}
+        />
+        <main className="container mx-auto  py-4 pb-24 lg:pb-8 min-h-screen">
           {children}
-        </div>
-      </main>
-    </div>
+        </main>
+      </SidebarInset>
+    </SidebarProvider>
   );
 }

@@ -72,9 +72,7 @@ export default function Home() {
           onSort={handleSort}
         />
         <MobileActionBar
-          categories={categories}
           onFilterChange={handleFilterChange}
-          sellers={sellers}
           onSort={handleSort}
         />
       </Layout>

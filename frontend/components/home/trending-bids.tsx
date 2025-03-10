@@ -128,7 +128,7 @@ export function TrendingAuction({ auctions }: AuctionProps) {
           className="flex flex-col md:flex-row items-center justify-between mb-12"
         >
           <div>
-            <h1 className="text-4xl font-bold mb-2 flex items-center">
+            <h1 className="md:text-4xl sm:text-md font-bold mb-2 flex items-center">
               Trending <TrendingUp className="ml-2 text-red-500" />
               <span className="italic font-normal ml-2">Bids</span>
             </h1>

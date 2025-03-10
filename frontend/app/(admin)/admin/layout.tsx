@@ -10,6 +10,8 @@ import { ThemeToggle } from './dashboard/theme-toggle';
 import { NotificationCenter } from './dashboard/notification-center';
 import { QuickActions } from './dashboard/quick-actions';
 import AuthGuard from '@/lib/auth/AuthGaurd';
+import { Suspense } from 'react';
+import Loading from './loading';
 
 export default function AdminLayout({
   children,
@@ -37,8 +39,9 @@ export default function AdminLayout({
               <QuickActions />
             </div>
           </header>
-
-          <main className="p-4 ">{children}</main>
+          <Suspense fallback={<Loading />}>
+            <main className="p-4 ">{children}</main>
+          </Suspense>
         </SidebarInset>
       </SidebarProvider>
     </AuthGuard>

@@ -8,7 +8,7 @@ class InboxService {
   async sendMessage(data) {
     try {
       const message = await prisma.inboxMessage.create({
-        data
+        data,
       });
 
       await redis.del(`inbox:user:${data.userId}`);
@@ -28,8 +28,8 @@ class InboxService {
       const messages = await prisma.inboxMessage.findMany({
         where: { userId },
         orderBy: {
-          createdAt: 'desc'
-        }
+          createdAt: 'desc',
+        },
       });
 
       await redis.setex(cacheKey, 3600, JSON.stringify(messages));
@@ -45,11 +45,11 @@ class InboxService {
       const message = await prisma.inboxMessage.update({
         where: {
           id,
-          userId
+          userId,
         },
         data: {
-          read: true
-        }
+          read: true,
+        },
       });
 
       await redis.del(`inbox:user:${userId}`);

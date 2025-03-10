@@ -92,30 +92,104 @@ exports.getUserBids = async (req, res) => {
     data: bids,
   });
 };
-exports.getUserNotifications = async (req, res) => {
-  const notifications = await prisma.notification.findMany({
-    where: { userId: req.user.id },
-    orderBy: { createdAt: 'desc' },
-  });
-  res.status(200).json({
-    status: 'success',
-    data: notifications,
-  });
+// exports.getUserNotifications = async (req, res) => {
+//   const notifications = await prisma.notification.findMany({
+//     where: { userId: req.user.id },
+//     orderBy: { createdAt: 'desc' },
+//   });
+//   res.status(200).json({
+//     status: 'success',
+//     data: notifications,
+//   });
+// };
+
+exports.getUserNotifications = async (req, res, next) => {
+  try {
+    // Ensure the user is authenticated
+    if (!req.user || !req.user.id) {
+      return res
+        .status(401)
+        .json({ status: 'fail', message: 'Unauthorized access' });
+    }
+
+    const { page = 1, limit = 10 } = req.query;
+    const skip = (page - 1) * limit;
+
+    // Fetch only notifications belonging to the logged-in user
+    const notifications = await prisma.notification.findMany({
+      where: { userId: req.user.id },
+      orderBy: { createdAt: 'desc' },
+      take: Number(limit),
+      skip: Number(skip),
+    });
+
+    const totalCount = await prisma.notification.count({
+      where: { userId: req.user.id },
+    });
+
+    res.status(200).json({
+      status: 'success',
+      data: notifications,
+      pagination: {
+        total: totalCount,
+        page: Number(page),
+        limit: Number(limit),
+        totalPages: Math.ceil(totalCount / limit),
+      },
+    });
+  } catch (error) {
+    next(new AppError('Failed to fetch notifications', 500));
+  }
 };
 
-exports.markNotificationAsRead = async (req, res) => {
-  const notification = await prisma.notification.update({
-    where: {
-      id: req.params.id,
-      userId: req.user.id,
-    },
-    data: { read: true },
-  });
-  res.status(200).json({
-    status: 'success',
-    data: notification,
-  });
+exports.markNotificationAsRead = async (req, res, next) => {
+  try {
+    if (!req.user || !req.user.id) {
+      return res
+        .status(401)
+        .json({ status: 'fail', message: 'Unauthorized access' });
+    }
+
+    const { id } = req.params;
+
+    // Check if the notification belongs to the logged-in user
+    const notification = await prisma.notification.findUnique({
+      where: { id },
+    });
+
+    if (!notification || notification.userId !== req.user.id) {
+      return res
+        .status(404)
+        .json({ status: 'fail', message: 'Notification not found' });
+    }
+
+    const updatedNotification = await prisma.notification.update({
+      where: { id },
+      data: { read: true },
+    });
+
+    res.status(200).json({
+      status: 'success',
+      data: updatedNotification,
+    });
+  } catch (error) {
+    next(new AppError('Failed to mark notification as read', 500));
+  }
 };
+
+// exports.markNotificationAsRead = async (req, res) => {
+//   const notification = await prisma.notification.update({
+//     where: {
+//       id: req.params.id,
+//       userId: req.user.id,
+//     },
+//     data: { read: true },
+//   });
+//   res.status(200).json({
+//     status: 'success',
+//     data: notification,
+//   });
+// };
 exports.getUserInbox = async (req, res) => {
   const messages = await prisma.inboxMessage.findMany({
     where: { userId: req.user.id },

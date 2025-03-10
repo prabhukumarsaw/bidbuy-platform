@@ -50,14 +50,6 @@ export default function HeaderBanner({
         <div className="absolute inset-0 bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 animate-gradient-x" />
       )}
       <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-black/50 flex flex-col items-center justify-center text-center p-4">
-        {badge && (
-          <Badge
-            variant="secondary"
-            className="mb-4 bg-primary/20 text-primary-foreground"
-          >
-            {badge}
-          </Badge>
-        )}
         <h1
           className={cn(
             'text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-200 to-indigo-200 mb-4'
@@ -67,7 +59,7 @@ export default function HeaderBanner({
         </h1>
         <p
           className={cn(
-            'text-lg sm:text-xl md:text-2xl text-center mb-8 max-w-3xl mx-auto leading-relaxed text-gray-200'
+            'text-sm sm:text-md md:text-xl text-center mb-8 max-w-xl mx-auto leading-relaxed text-gray-200'
           )}
         >
           {subtitle}

@@ -11,7 +11,7 @@ import { Suspense } from 'react';
 import Loading from '../loading';
 
 export default function Home() {
-  const { auctionsResponse, isLoading } = useAdvancedFilters(1, 10); // Initial page and limit
+  const { auctionsResponse, isLoading } = useAdvancedFilters(1, 10);
 
   // Extract auctions from the response
   const auctions = auctionsResponse?.auctions || [];
@@ -20,18 +20,17 @@ export default function Home() {
   const activeAuctions = auctions.filter(
     (auction) => auction.status === 'ACTIVE'
   );
+
   const upcomingAuctions = auctions.filter(
     (auction) => new Date(auction.startTime).getTime() > new Date().getTime()
   );
+  
   const trendingAuctions = auctions.filter((auction) => auction.totalBids > 0);
 
   if (isLoading) {
-    return <Loading />; // Use the dedicated loading component
+    return <Loading />; 
   }
 
-  console.log('activeAuctions', activeAuctions);
-  console.log('trendingAuctions', trendingAuctions);
-  console.log('upcomingAuctions', upcomingAuctions);
 
   return (
     <>

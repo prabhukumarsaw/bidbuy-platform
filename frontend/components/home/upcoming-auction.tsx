@@ -43,7 +43,7 @@ export function UpcomingAuction({ auctions }: AuctionProps) {
     <div className="w-full max-w-7xl mx-auto px-4 py-8 sm:py-12">
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 sm:mb-8">
         <div>
-          <h1 className="text-3xl sm:text-4xl font-bold mb-2 flex items-center">
+          <h1 className="md:text-4xl sm:text-md font-bold mb-2 flex items-center">
             Upcoming <TrendingUp className="ml-2 text-red-500" />
             <span className="italic font-normal ml-2">Bids</span>
           </h1>

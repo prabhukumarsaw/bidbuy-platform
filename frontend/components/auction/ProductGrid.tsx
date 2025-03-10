@@ -147,17 +147,9 @@ export default function ProductGrid({
   return (
     <div>
       <div className="flex flex-col sm:flex-row justify-between items-center mb-6">
-        <span className="text-xl sm:text-xl font-bold mb-4 sm:mb-0 hidden md:block">
-          Showing {(currentPage - 1) * initialProducts.pagination.limit + 1}–
-          {Math.min(
-            currentPage * initialProducts.pagination.limit,
-            initialProducts.pagination.total
-          )}{' '}
-          of {initialProducts.pagination.total} results
-        </span>
         <div className="flex items-center justify-between w-full">
           {/* Left Part: Showing Results - Visible only on small screens */}
-          <span className="block sm:hidden font-medium">
+          <span className=" font-medium">
             Showing {(currentPage - 1) * initialProducts.pagination.limit + 1}–
             {Math.min(
               currentPage * initialProducts.pagination.limit,

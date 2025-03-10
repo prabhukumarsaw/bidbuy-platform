@@ -39,7 +39,7 @@ import type { AuctionItem } from '@/types/types';
 import { ViewAuctionDialog } from './ViewAuctionDialog';
 import { AuctionStatHeader } from './AuctionStatHeader';
 import { EditAuctionDialog } from './EditAuctionDialog';
-import useIsMobile from '@/hooks/use-mobile';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface FilterState {
   search: string;
@@ -353,7 +353,7 @@ export default function AuctionTable() {
                 className="w-full"
               />
             </div>
-            <div className="grid grid-cols-2 gap-2 lg:flex lg:space-x-2">
+            {/* <div className="grid grid-cols-2 gap-2 lg:flex lg:space-x-2">
               <Select
                 value={
                   Array.isArray(filters.status)
@@ -423,7 +423,7 @@ export default function AuctionTable() {
                   <Icons.arrowDown className="h-4 w-4" />
                 )}
               </Button>
-            </div>
+            </div> */}
           </div>
 
           {isLoading ? (
@@ -433,144 +433,128 @@ export default function AuctionTable() {
               ))}
             </div>
           ) : (
-            <div ref={parentRef} className="h-[600px] overflow-auto">
+            <div ref={parentRef} className="h-[80vh] overflow-auto">
               {isMobile ? (
-                <div
-                  className="relative"
-                  style={{
-                    height: `${rowVirtualizer.getTotalSize()}px`,
-                  }}
-                >
-                  {rowVirtualizer.getVirtualItems().map((virtualRow) => {
-                    const auction = auctionData?.data?.[virtualRow.index];
-                    return auction ? (
-                      <div
-                        key={virtualRow.index}
-                        className="absolute top-0 left-0 w-full"
-                        style={{
-                          height: `${virtualRow.size}px`,
-                          transform: `translateY(${virtualRow.start}px)`,
-                        }}
-                      >
-                        <Card className="mb-4 overflow-hidden">
-                          <CardContent className="p-4">
-                            <div className="flex items-start space-x-4">
-                              <div className="relative w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
-                                <img
-                                  src={auction.featuredImage}
-                                  alt={auction.title}
-                                  className="absolute inset-0 w-full h-full object-cover"
-                                  loading="lazy"
-                                />
-                              </div>
-                              <div className="flex-1 min-w-0">
-                                <div className="flex items-center justify-between mb-2">
-                                  <h3 className="font-medium truncate">
-                                    {auction.title}
-                                  </h3>
-                                  <Badge
-                                    variant={
-                                      auction.status === 'active'
-                                        ? 'success'
-                                        : auction.status === 'ended'
-                                        ? 'destructive'
-                                        : 'pending'
-                                    }
-                                    className="ml-2 capitalize"
-                                  >
-                                    {auction.status}
-                                  </Badge>
-                                </div>
-                                <div className="grid grid-cols-2 gap-2 text-sm text-gray-600">
-                                  <div className="flex items-center">
-                                    <Icons.tag className="w-4 h-4 mr-1" />
-                                    <span className="truncate">
-                                      {auction.category.name}
-                                    </span>
-                                  </div>
-                                  <div className="flex items-center justify-end font-medium tabular-nums">
-                                    <Icons.dollarSign className="w-4 h-4 mr-1" />
-                                    {auction.currentPrice.toLocaleString()}
-                                  </div>
-                                  <div className="flex items-center">
-                                    <Icons.clock className="w-4 h-4 mr-1" />
-                                    <span>
-                                      {format(new Date(auction.endTime), 'PP')}
-                                    </span>
-                                  </div>
-                                  <div className="flex items-center justify-end">
-                                    <Icons.users className="w-4 h-4 mr-1" />
-                                    {auction._count.bids} bids
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div className="mt-4 flex justify-end space-x-2">
-                              <Button
-                                variant="outline"
-                                size="sm"
-                                onClick={() => handleViewAuction(auction)}
-                              >
-                                <Icons.eye className="w-4 h-4 mr-1" />
-                                View
-                              </Button>
-                              <Button
-                                variant="outline"
-                                size="sm"
-                                onClick={() => handleEditAuction(auction)}
-                              >
-                                <Icons.edit className="w-4 h-4 mr-1" />
-                                Edit
-                              </Button>
-                              <Button
-                                variant="outline"
-                                size="sm"
-                                onClick={() =>
-                                  handleStatusUpdate(auction.id, 'SCHEDULED')
-                                }
-                                disabled={auction.status !== 'DRAFT' || loading}
-                              >
-                                <Icons.calendar className="w-4 h-4 mr-1" />
-                                {loading ? 'Scheduling...' : 'Schedule'}
-                              </Button>
-                              <Button
-                                variant="outline"
-                                size="sm"
-                                onClick={() =>
-                                  handleStatusUpdate(auction.id, 'ACTIVE')
-                                }
-                                disabled={
-                                  auction.status === 'ACTIVE' || loading
-                                }
-                              >
-                                <Icons.play className="w-4 h-4 mr-1" />
-                                {loading ? 'Updating...' : 'Active'}
-                              </Button>
+                <div className="relative">
+                  {auctionData.auctions.map((auction) => (
+                    <Card key={auction.id} className="mb-4 overflow-hidden">
+                      <CardContent className="p-4">
+                        <div className="grid gap-4 md:grid-cols-3">
+                          {/* Image Section */}
+                          <div className="relative w-full h-36 md:h-40 rounded-lg overflow-hidden">
+                            <img
+                              src={auction.featuredImage}
+                              alt={auction.title}
+                              className="absolute inset-0 w-full h-full object-cover"
+                              loading="lazy"
+                            />
+                          </div>
 
-                              <Button
-                                variant="outline"
-                                size="sm"
-                                onClick={() =>
-                                  handleStatusUpdate(auction.id, 'ENDED')
+                          {/* Auction Details */}
+                          <div className="flex flex-col justify-between flex-1 min-w-0 space-y-2">
+                            <div>
+                              <h3 className="font-medium truncate text-lg">
+                                {auction.title}
+                              </h3>
+                              <Badge
+                                variant={
+                                  auction.status === 'active'
+                                    ? 'success'
+                                    : auction.status === 'ended'
+                                    ? 'destructive'
+                                    : 'pending'
                                 }
-                                disabled={auction.status === 'ENDED' || loading}
+                                className="capitalize text-xs"
                               >
-                                <Icons.stop className="w-4 h-4 mr-1" />
-                                {loading ? 'Updating...' : 'End'}
-                              </Button>
-                              <Button
-                                variant="destructive"
-                                size="sm"
-                                onClick={() => handleDelete(auction.id)}
-                              >
-                                <Icons.trash className="w-4 h-4" />
-                              </Button>
+                                {auction.status}
+                              </Badge>
                             </div>
-                          </CardContent>
-                        </Card>
-                      </div>
-                    ) : null;
-                  })}
+
+                            <div className="space-y-1 text-sm text-gray-600">
+                              <div className="flex items-center">
+                                <Icons.tag className="w-4 h-4 mr-1" />
+                                <span className="truncate">
+                                  {auction.category.name}
+                                </span>
+                              </div>
+                              <div className="flex items-center">
+                                <Icons.dollarSign className="w-4 h-4 mr-1" />
+                                <span className="font-medium tabular-nums">
+                                  {auction.currentPrice.toLocaleString()}
+                                </span>
+                              </div>
+                              <div className="flex items-center">
+                                <Icons.clock className="w-4 h-4 mr-1" />
+                                <span>
+                                  {format(new Date(auction.endTime), 'PP')}
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* Action Buttons */}
+                          <div className="flex flex-wrap md:flex-col gap-2 justify-end items-center md:items-start">
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              onClick={() => handleViewAuction(auction)}
+                            >
+                              <Icons.eye className="w-4 h-4 mr-1" />
+                              View
+                            </Button>
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              onClick={() => handleEditAuction(auction)}
+                            >
+                              <Icons.edit className="w-4 h-4 mr-1" />
+                              Edit
+                            </Button>
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              onClick={() =>
+                                handleStatusUpdate(auction.id, 'SCHEDULED')
+                              }
+                              disabled={auction.status !== 'DRAFT' || loading}
+                            >
+                              <Icons.calendar className="w-4 h-4 mr-1" />
+                              {loading ? 'Scheduling...' : 'Schedule'}
+                            </Button>
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              onClick={() =>
+                                handleStatusUpdate(auction.id, 'ACTIVE')
+                              }
+                              disabled={auction.status === 'ACTIVE' || loading}
+                            >
+                              <Icons.play className="w-4 h-4 mr-1" />
+                              {loading ? 'Updating...' : 'Active'}
+                            </Button>
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              onClick={() =>
+                                handleStatusUpdate(auction.id, 'ENDED')
+                              }
+                              disabled={auction.status === 'ENDED' || loading}
+                            >
+                              <Icons.stop className="w-4 h-4 mr-1" />
+                              {loading ? 'Updating...' : 'End'}
+                            </Button>
+                            <Button
+                              variant="destructive"
+                              size="sm"
+                              onClick={() => handleDelete(auction.id)}
+                            >
+                              <Icons.trash className="w-4 h-4" />
+                            </Button>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
                 </div>
               ) : (
                 <DataTable

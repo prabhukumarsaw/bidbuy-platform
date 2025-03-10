@@ -86,7 +86,7 @@ export default function ProductCard({
             fill
             className="object-cover transition-transform duration-300 hover:scale-105"
           />
-          <div className="absolute top-2 left-2 flex space-x-2">
+          <div className="absolute top-2 left-2 flex space-x-1">
             <Badge variant="outline" className="bg-slate-400">
               {product.status}
             </Badge>
@@ -147,10 +147,10 @@ export default function ProductCard({
               </div>
               <CountdownTimer endTime={new Date(product.endTime)} />
             </div>
-            <div className="flex items-center justify-between mt-2 sm:mt-4">
+            {/* <div className="flex items-center justify-between mt-2 sm:mt-4">
               <div className="flex items-center gap-2">
                 <Avatar className="w-5 h-5 sm:w-6 sm:h-6">
-                  {/* <AvatarImage src={product.seller.avatar} /> */}
+                  <AvatarImage src={product.seller.avatar} />
                   <AvatarFallback>
                     {product?.seller?.businessName}
                   </AvatarFallback>
@@ -162,9 +162,9 @@ export default function ProductCard({
               <Badge variant="secondary">
                 {product?.seller?.status || 'N/A'}
               </Badge>
-            </div>
+            </div> */}
           </CardContent>
-          <CardFooter className="p-3 sm:p-4 pt-0 flex justify-between items-center">
+          <CardFooter className="flex justify-between items-center">
             <div className="flex space-x-2">
               <TooltipProvider>
                 <Tooltip>

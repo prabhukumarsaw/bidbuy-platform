@@ -19,6 +19,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { userApi } from '@/lib/api/userApi';
 import { socketService } from '@/lib/socketService';
 import { useAuthStore } from '@/lib/store/auth-store';
+import { useRouter } from 'next/navigation';
 
 // Debounce function to limit rapid API calls
 const debounce = (func: (...args: any[]) => void, delay: number) => {
@@ -36,6 +37,7 @@ export function UserNotifications() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const lastPageRef = useRef(0);
+  const router = useRouter();
 
   // Exponential backoff fetch function
   const fetchNotifications = async (
@@ -52,7 +54,8 @@ export function UserNotifications() {
 
       setNotifications((prev) => {
         const newNotifications = response.data.filter(
-          (n) => !prev.some((existing) => existing.id === n.id)
+          // (n) => !prev.some((existing) => existing.id === n.id)
+          (n) => !prev.some((existing) => existing.id === n.id) && !n.read
         );
         return [...prev, ...newNotifications];
       });
@@ -92,7 +95,6 @@ export function UserNotifications() {
   }, [isAuthenticated]);
 
   // WebSocket updates
-
   useEffect(() => {
     if (!isAuthenticated) return;
 
@@ -108,6 +110,7 @@ export function UserNotifications() {
     };
 
     // Attach event listener
+    socket.off('newNotification', handleNewNotification); 
     socket.on('newNotification', handleNewNotification);
 
     // Cleanup function to remove listener
@@ -115,6 +118,17 @@ export function UserNotifications() {
       socket.off('newNotification', handleNewNotification);
     };
   }, [isAuthenticated]); // Re-run effect when authentication status changes
+
+  const handleNotificationClick = async (notification: Notification) => {
+    try {
+      await userApi.markNotificationAsRead(notification.id);
+      setNotifications((prev) => prev.filter((n) => n.id !== notification.id));
+      setUnreadCount((prev) => prev - 1);
+      // router.push(notification.route); // Assuming notification has a route property
+    } catch (err) {
+      console.error('Error marking notification as read:', err);
+    }
+  };
 
   if (!isAuthenticated) {
     return (
@@ -125,7 +139,7 @@ export function UserNotifications() {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent
-          className="w-[320px] max-w-xs p-2 rounded-xl shadow-lg backdrop-blur-sm bg-background/80"
+          className="w-[320px]  max-w-xs p-2 rounded-xl shadow-lg backdrop-blur-sm bg-background/80"
           align="end"
         >
           <DropdownMenuLabel className="flex justify-between items-center">
@@ -148,21 +162,21 @@ export function UserNotifications() {
         <Button variant="ghost" size="icon" className="relative">
           <Bell className="h-5 w-5" />
           {unreadCount > 0 && (
-            <Badge className="absolute -top-1 -right-1 min-w-[1.5rem] h-5 px-1 flex items-center justify-center text-xs">
+            <Badge className="absolute -top-1 -right-1 min-w-[1.5rem] h-5 px-1 flex items-center justify-center text-xs text-red-600">
               {unreadCount}
             </Badge>
           )}
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent
-        className="w-[320px] max-w-xs p-2 rounded-xl shadow-lg backdrop-blur-sm bg-background/80"
-        align="end"
+        className="max-w-xs p-2 rounded-xl shadow-lg backdrop-blur-sm bg-background/80"
+        align="center"
       >
         <DropdownMenuLabel className="flex justify-between items-center">
           Notifications
           {unreadCount > 0 && (
             <Button
-              variant="ghost"
+              variant="outline"
               size="sm"
               onClick={() => fetchNotifications(1)}
             >
@@ -185,6 +199,7 @@ export function UserNotifications() {
             <DropdownMenuItem
               key={notification.id}
               className="flex flex-col space-y-1"
+              onClick={() => handleNotificationClick(notification)}
             >
               <div className="flex justify-between gap-8">
                 {!notification.read && (
