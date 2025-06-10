@@ -16,7 +16,7 @@ if (process.env.REDIS_URL) {
 } else {
   // Fall back to individual environment variables
   redis = new Redis({
-    host: process.env.REDISHOST',
+    host: process.env.REDISHOST,
     port: parseInt(process.env.REDISPORT),
     password: process.env.REDISPASSWORD || null,
     maxRetriesPerRequest: null,
